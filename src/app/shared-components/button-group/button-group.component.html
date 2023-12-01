@@ -1,0 +1,13 @@
+<div class="button-group-container">
+  <span
+    *ngFor="let item of items"
+    [class.disabled]="disabled"
+    role="button"
+    [class.isSelected]="item?.value === selectedItem()"
+    (click)="
+      item?.value !== selectedItem() && !disabled && selectItem(item?.value)
+    "
+  >
+    {{ (item?.label | translate) || item?.value }}
+  </span>
+</div>

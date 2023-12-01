@@ -1,0 +1,36 @@
+:host {
+  .button-group-container {
+    display: flex;
+    border: none;
+    align-items: center;
+    flex-wrap: wrap;
+
+    & > * {
+      border: 0.5px solid lightgrey;
+      height: 2.5rem;
+      padding: 0 0.5rem;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      color: #ffffffb3;
+
+      &:first-child {
+        border-radius: 5px 0 0 5px;
+      }
+      &:last-child {
+        border-radius: 0 5px 5px 0;
+      }
+      &.isSelected {
+        color: #000000c9;
+        background-color: #d2d0d0;
+        cursor: initial;
+      }
+    }
+
+    .disabled {
+      cursor: not-allowed;
+      background-color: transparent;
+      color: #000000c9;
+    }
+  }
+}

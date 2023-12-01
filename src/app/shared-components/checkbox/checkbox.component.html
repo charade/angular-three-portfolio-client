@@ -1,0 +1,4 @@
+<div class="checkbox-container">
+  <input #input type="checkbox" (change)="valueChanged.emit(input.checked)" />
+  <span *ngIf="label">{{ label }}</span>
+</div>
