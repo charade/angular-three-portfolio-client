@@ -1,11 +1,20 @@
 import { Routes } from '@angular/router';
-import { EntryComponent } from './routes/entry/entry.component';
+import { RouterPathEnum } from './utils/enums/RouterPaths.enum';
 
 export const AppRoutes: Routes = [
   {
-    path: '',
+    path: RouterPathEnum.Root,
     loadChildren: () =>
       import('./routes/entry/entry.module').then((m) => m.EntryModule),
   },
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  {
+    path: RouterPathEnum.SkillsPath,
+    loadChildren: () =>
+      import('./routes/skills/skills.module').then((m) => m.SkillsModule),
+  },
+  {
+    path: RouterPathEnum.NotFound,
+    redirectTo: RouterPathEnum.Root,
+    pathMatch: 'full',
+  },
 ];

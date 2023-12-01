@@ -11,6 +11,7 @@ import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 
 export enum FilesPathsEnum {
   LanguageSettings = '../assets/i18n/language-settings/',
+  Skills = '../assets.i18n/skills/',
 }
 
 // inject translation files dynamically per module

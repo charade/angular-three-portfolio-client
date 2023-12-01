@@ -9,13 +9,13 @@ import {
   TRANSLATE_FILES_LOADER,
   customTranslateConfig,
 } from 'src/app/utils/translate-config';
+import { RouterPathEnum } from 'src/app/utils/enums/RouterPaths.enum';
 
 const entryRoute: Routes = [
   {
-    path: '',
+    path: RouterPathEnum.Root,
     component: EntryComponent,
   },
-  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
