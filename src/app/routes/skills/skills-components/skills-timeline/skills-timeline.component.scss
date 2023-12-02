@@ -1,0 +1,15 @@
+:host {
+  svg {
+    margin: 2rem 0;
+    padding: 1rem;
+    width: 50vw;
+    line {
+      stroke: rgba(69, 68, 68, 0.227);
+      stroke-width: 1px;
+    }
+
+    circle {
+      fill: #000000ce;
+    }
+  }
+}

@@ -30,7 +30,7 @@ export class ScrollIconComponent implements AfterViewInit {
     const slider = this._slider.nativeElement;
     const label = this._label.nativeElement;
 
-    const scrollerAnimation = this.#animationTimeLine
+    this.#animationTimeLine
       .to(container, {
         left: '50%',
         top: '50%',
@@ -41,14 +41,14 @@ export class ScrollIconComponent implements AfterViewInit {
         border: '2px solid',
       })
       .to(container, {
-        left: '94.2%',
+        left: '5rem',
         top: '88%',
       })
-      .to(label, { y: 5, opacity: 1, duration: 1, ease: 'elastic' })
+      .to(label, { y: 27, opacity: 1, duration: 1, ease: 'elastic' })
       .to(slider, {
         opacity: 1,
-        repeat: 2,
-        keyframes: [{ y: 0.5 }, { y: 5 }],
+        keyframes: [{ y: -1 }, { y: 5 }, { y: -1}],
+        repeat: 1 
       });
   }
 }
