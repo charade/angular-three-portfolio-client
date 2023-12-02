@@ -22,11 +22,15 @@ export const skillsRoutes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forChild(skillsRoutes),
-    TranslateModule.forChild(customTranslateConfig),
     SkillsComponent,
+    TranslateModule.forChild(customTranslateConfig),
   ],
   providers: [
-    { provide: TRANSLATE_FILES_LOADER, useValue: [FilesPathsEnum.Skills] },
+    {
+      provide: TRANSLATE_FILES_LOADER,
+      useValue: [FilesPathsEnum.Skills],
+      multi: true,
+    },
   ],
 })
 export class SkillsModule {
