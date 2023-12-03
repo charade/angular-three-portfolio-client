@@ -106,9 +106,9 @@ export class EntryComponent implements AfterViewInit {
 
   // camera cinematic from top to initial position
   #cameraEnteringAnimation() {
-    gsap.fromTo(this.#camera.position, this.#DEFAULT_CAMERA_POS, {
-      ...this.#camera.position,
-      duration: 3.5,
+    gsap.from(this.#camera.position,{
+      ...this.#DEFAULT_CAMERA_POS,
+      duration: 3,
       ease: 'power2.inOut',
     });
   }

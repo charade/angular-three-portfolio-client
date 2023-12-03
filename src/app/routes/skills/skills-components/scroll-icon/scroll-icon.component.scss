@@ -1,10 +1,7 @@
 @import "../../../../../styles/colors.scss";
 
 :host {
-  display: block;
-  height: 100%;
-
-  .container {
+  .scroll-icon-container {
     position: absolute;
     top: 0;
     left: 0;
@@ -36,7 +33,7 @@
       }
     }
 
-    .label {
+    .scroll-icon-label {
       font-size: 1rem;
       opacity: 0;
       text-decoration: underline;

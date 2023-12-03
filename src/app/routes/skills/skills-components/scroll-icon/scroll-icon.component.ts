@@ -18,12 +18,8 @@ import gsap from 'gsap';
 export class ScrollIconComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     const animationTimeLine = gsap.timeline();
-    const container = document.querySelector('.container');
-    const slider = document.querySelector('.slider');
-    const label = document.querySelector('.label');
-
     animationTimeLine
-      .to(container, {
+      .to('.scroll-icon-container', {
         left: '50%',
         top: '50%',
         borderRadius: '3rem',
@@ -32,12 +28,18 @@ export class ScrollIconComponent implements AfterViewInit {
         ease: 'sin',
         border: '2px solid',
       })
-      .to(container, {
+      .to('.scroll-icon-container', {
         left: '3rem',
         top: '88%',
+        position: 'fixed',
       })
-      .to(label, { y: 27, opacity: 1, duration: 1, ease: 'elastic' })
-      .to(slider, {
+      .to('.scroll-icon-label', {
+        y: 27,
+        opacity: 1,
+        duration: 1,
+        ease: 'elastic',
+      })
+      .to('.slider', {
         opacity: 1,
         keyframes: [{ y: -1 }, { y: 5 }, { y: -1 }],
         repeat: 1,

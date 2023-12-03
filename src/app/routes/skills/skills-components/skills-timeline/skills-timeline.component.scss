@@ -1,8 +1,15 @@
 :host {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  z-index: 2;
+  transform: translateX(-50%);
+
   svg {
     margin: 1rem 0;
     padding: 1rem;
     width: 50vw;
+
     line {
       stroke: rgba(108, 107, 107, 0.227);
       stroke-width: 1px;

@@ -14,7 +14,7 @@ export class SkillsTimelineComponent implements AfterViewInit {
     const animationTimeLine = gsap.timeline({ delay: 0.3 });
 
     animationTimeLine
-      .fromTo(circles, { y: -100 }, { y: 0, stagger: { each: 0.2 } })
+      .from(circles, { y: -100, stagger: { each: 0.3 } })
       .to('line', {
         strokeDashoffset: 0,
         duration: 1,

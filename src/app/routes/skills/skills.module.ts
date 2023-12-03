@@ -9,7 +9,6 @@ import {
   customTranslateConfig,
 } from 'src/app/utils/translate-config';
 import { RouterPathEnum } from 'src/app/utils/enums/RouterPaths.enum';
-import { SkillsTimelineComponent } from './skills-components/skills-timeline/skills-timeline.component';
 
 export const skillsRoutes: Routes = [
   { path: RouterPathEnum.Root, loadComponent: () => SkillsComponent },
@@ -25,7 +24,6 @@ export const skillsRoutes: Routes = [
     RouterModule.forChild(skillsRoutes),
     TranslateModule.forChild(customTranslateConfig),
     SkillsComponent,
-    SkillsTimelineComponent,
   ],
   providers: [
     {

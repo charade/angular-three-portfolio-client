@@ -98,7 +98,7 @@ export class WorldService {
       controls.update(clock.getDelta());
 
       // on entering scene
-      if (clock.getElapsedTime() < 3.4 && clock.getElapsedTime() > 2.5) {
+      if (clock.getElapsedTime() < 3 && clock.getElapsedTime() > 1.5) {
         effectComposer.render();
       } else {
         renderer.render(world, camera);
