@@ -1,15 +1,17 @@
 :host {
   svg {
-    margin: 2rem 0;
+    margin: 1rem 0;
     padding: 1rem;
     width: 50vw;
     line {
-      stroke: rgba(69, 68, 68, 0.227);
+      stroke: rgba(108, 107, 107, 0.227);
       stroke-width: 1px;
+      stroke-dashoffset: 500;
+      stroke-dasharray: 500;
     }
 
     circle {
-      fill: #000000ce;
+      fill: #2f2f2fb5;
     }
   }
 }
