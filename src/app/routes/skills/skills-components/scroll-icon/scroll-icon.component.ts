@@ -20,18 +20,15 @@ export class ScrollIconComponent implements AfterViewInit {
     const animationTimeLine = gsap.timeline();
     animationTimeLine
       .to('.scroll-icon-container', {
-        left: '50%',
-        top: '50%',
+        position: 'fixed',
+        top: '88%',
+        left: '4rem',
         borderRadius: '3rem',
         width: '2rem',
         height: '4rem',
         ease: 'sin',
         border: '2px solid',
-      })
-      .to('.scroll-icon-container', {
-        left: '3rem',
-        top: '88%',
-        position: 'fixed',
+        duration: 1,
       })
       .to('.scroll-icon-label', {
         y: 27,

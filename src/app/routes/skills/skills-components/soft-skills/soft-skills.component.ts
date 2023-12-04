@@ -1,6 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SkillsTimelineComponent } from '../skills-timeline/skills-timeline.component';
 
 @Component({
@@ -11,10 +10,6 @@ import { SkillsTimelineComponent } from '../skills-timeline/skills-timeline.comp
   imports: [SkillsTimelineComponent],
 })
 export class SoftSkillsComponent implements AfterViewInit {
-  constructor() {
-    gsap.registerPlugin(ScrollTrigger);
-  }
-
   ngAfterViewInit(): void {
     const sections = Array.from(document.querySelectorAll('section'));
     this.#animateFirstContent();
@@ -58,12 +53,14 @@ export class SoftSkillsComponent implements AfterViewInit {
         opacity: 0,
         // alternate content entering viewport animation from top/bottom
         y: index % 2 ? 200 : -200,
-        duration: 3,
+        duration: 2,
         ease: 'elastic',
         scrollTrigger: {
-          containerAnimation: tweenScrollableContainer,
+          // animation triggered when parent section hits 70% of the viewport width
           trigger: content.parentElement,
-          start: `left 60%`,
+          scrub: 1,
+          containerAnimation: tweenScrollableContainer,
+          start: `left 50%`,
         },
       });
     });
