@@ -1,7 +1,10 @@
-<div class="scroll-wrapper">
-  <app-skills-timeline />
+<div #scrollable class="scroll-wrapper">
+  <app-skills-timeline
+    [scrollableWrapper]="scrollable"
+    [timelineAnimationTrigger]="timelineTrigger"
+  />
   <section>
-    <p class="first-entering-content">
+    <p #timelineTrigger class="first-animated-content">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora incidunt
       minima numquam labore, soluta officia? Pariatur, corporis! Quae sequi,
       totam nihil rem enim sapiente veritatis at numquam repellat explicabo!

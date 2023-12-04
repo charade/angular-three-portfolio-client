@@ -15,16 +15,15 @@
     section {
       position: relative;
       flex-shrink: 0;
-      width: 100vw;
+      width: 60vw;
       height: 100%;
 
       & > * {
         position: absolute;
         top: 5rem;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 47%;
         max-width: 50rem;
-        font-size: 2rem;
+        font-size: 1.7rem;
       }
     }
   }
