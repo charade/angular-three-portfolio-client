@@ -30,8 +30,6 @@ export class ButtonGroupComponent<T> implements OnInit {
   ngOnInit(): void {
     this.selectedItem.set(this.items[0]?.value);
     computed(() => this.valueChanged.emit(this.selectedItem()));
-
-    this.valueChanged.subscribe((data) => console.log(data));
   }
   selectItem(value: T) {
     this.selectedItem.set(value);

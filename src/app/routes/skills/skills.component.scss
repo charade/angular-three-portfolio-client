@@ -1,7 +1,9 @@
 :host {
+  display: block;
   height: 100%;
-  position: relative;
+  // start scroll trigger only on the last soft skills section end
+  // fix small devices scroll
   .main-container {
-    height: 100vw;
+    overflow: hidden;
   }
 }

@@ -14,19 +14,51 @@ export class SoftSkillsComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     gsap.registerPlugin(ScrollTrigger);
 
-    const timeline = gsap.timeline();
-    const sections = gsap.utils.toArray('section');
+    const sections = document.querySelectorAll('section');
+    const animationTimeLine = gsap.timeline();
+    // animate first section enter route
+    gsap.from('.enter-section', 0.8, {
+      delay: 1,
+      x: -80,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'elastic',
+    });
 
-    timeline.to(sections, {
+    const main = gsap.timeline().to(sections, {
       xPercent: -100 * (sections.length - 1),
-      ease: 'ease.inOut',
+      ease: 'none',
       scrollTrigger: {
         trigger: '.scroll-wrapper',
         pin: true,
         scrub: 1,
         snap: 1 / (sections.length - 1),
-        end: '+=3000',
+        // horizontal scroll ends on reaching the scroll wrapper end
+        end: '+=' + document.querySelector('.scroll-wrapper').clientWidth,
       },
     });
+
+    // sections.forEach((section) => {
+
+    // document.querySelectorAll('.animated-content').forEach((animatedC) => {
+      const animatedContentTimeline = gsap.timeline({ duration: 5 });
+
+      animatedContentTimeline.fromTo(
+        '.animated-content-03',
+
+        {
+          opacity: 0,
+          y: 100,
+          scrollTrigger: {
+            trigger: '.animated-content-03',
+            //   end: 'top 90%',
+            markers: true,
+          },
+        },
+        { opacity: 1, y: 0 }
+      );
+    // });
+
+    // });
   }
 }

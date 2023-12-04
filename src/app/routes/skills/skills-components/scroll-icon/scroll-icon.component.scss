@@ -21,6 +21,7 @@
       border-radius: 50%;
       opacity: 0;
 
+      // stick down the round slider icon
       &::before {
         content: "";
         position: absolute;
@@ -33,6 +34,7 @@
       }
     }
 
+    // SCROLL label
     .scroll-icon-label {
       font-size: 1rem;
       opacity: 0;
