@@ -2,13 +2,16 @@
   height: 100%;
   z-index: 1;
   display: block;
+
   .scroll-wrapper {
-    // position: relative;
+    position: relative;
+
     display: flex;
     width: 600%;
     flex-wrap: nowrap;
     height: 100vh;
     padding-top: 7rem;
+
     section {
       position: relative;
       flex-shrink: 0;
@@ -20,7 +23,7 @@
         top: 5rem;
         left: 50%;
         transform: translateX(-50%);
-        max-width: 30rem;
+        max-width: 50rem;
         font-size: 2rem;
       }
     }

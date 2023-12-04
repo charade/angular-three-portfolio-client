@@ -1,64 +1,71 @@
 import { AfterViewInit, Component } from '@angular/core';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SkillsTimelineComponent } from '../skills-timeline/skills-timeline.component';
 
 @Component({
   selector: 'app-soft-skills',
   templateUrl: './soft-skills.component.html',
   styleUrls: ['./soft-skills.component.scss'],
   standalone: true,
+  imports: [SkillsTimelineComponent],
 })
 export class SoftSkillsComponent implements AfterViewInit {
-  constructor() {}
+  constructor() {
+    gsap.registerPlugin(ScrollTrigger);
+  }
 
   ngAfterViewInit(): void {
-    gsap.registerPlugin(ScrollTrigger);
+    const sections = Array.from(document.querySelectorAll('section'));
+    this.#animateFirstContent();
+    const tweenScrollableContainer = this.#initScrollableContainer(sections);
+    this.#initAnimatedScrolledContent(tweenScrollableContainer);
+  }
 
-    const sections = document.querySelectorAll('section');
-    const animationTimeLine = gsap.timeline();
-    // animate first section enter route
-    gsap.from('.enter-section', 0.8, {
-      delay: 1,
-      x: -80,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'elastic',
-    });
-
-    const main = gsap.timeline().to(sections, {
-      xPercent: -100 * (sections.length - 1),
+  // set main wrapper horizontal scroll
+  #initScrollableContainer(scrolledSection: HTMLElement[]): gsap.core.Tween {
+    return gsap.to(scrolledSection, {
+      xPercent: -100 * (scrolledSection.length - 1),
       ease: 'none',
       scrollTrigger: {
         trigger: '.scroll-wrapper',
         pin: true,
         scrub: 1,
-        snap: 1 / (sections.length - 1),
-        // horizontal scroll ends on reaching the scroll wrapper end
-        end: '+=' + document.querySelector('.scroll-wrapper').clientWidth,
+        snap: 1 / (scrolledSection.length - 1),
+        // defining horizontal scroll to depend on scroll wrapper.scrollHeight
+        end: `+=${document.querySelector('.scroll-wrapper').clientWidth}`,
       },
     });
+  }
 
-    // sections.forEach((section) => {
+  // animate first content on entering route
+  #animateFirstContent(): void {
+    gsap.from('.first-entering-content', {
+      delay: 1,
+      x: -100,
+      opacity: 0,
+      duration: 1.5,
+      ease: 'sin',
+    });
+  }
 
-    // document.querySelectorAll('.animated-content').forEach((animatedC) => {
-      const animatedContentTimeline = gsap.timeline({ duration: 5 });
-
-      animatedContentTimeline.fromTo(
-        '.animated-content-03',
-
-        {
-          opacity: 0,
-          y: 100,
-          scrollTrigger: {
-            trigger: '.animated-content-03',
-            //   end: 'top 90%',
-            markers: true,
-          },
+  // animate content on scroll
+  #initAnimatedScrolledContent(
+    tweenScrollableContainer: gsap.core.Tween
+  ): void {
+    document.querySelectorAll('.animated-content').forEach((content, index) => {
+      gsap.from(content, {
+        opacity: 0,
+        // alternate content entering viewport animation from top/bottom
+        y: index % 2 ? 200 : -200,
+        duration: 3,
+        ease: 'elastic',
+        scrollTrigger: {
+          containerAnimation: tweenScrollableContainer,
+          trigger: content.parentElement,
+          start: `left 60%`,
         },
-        { opacity: 1, y: 0 }
-      );
-    // });
-
-    // });
+      });
+    });
   }
 }

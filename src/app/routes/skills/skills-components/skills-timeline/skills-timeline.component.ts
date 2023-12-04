@@ -13,12 +13,10 @@ export class SkillsTimelineComponent implements AfterViewInit {
     const circles = document.querySelectorAll('circle');
     const animationTimeLine = gsap.timeline({ delay: 0.3 });
 
-    animationTimeLine
-      .from(circles, { y: -100, stagger: { each: 0.3 } })
-      .to('line', {
-        strokeDashoffset: 0,
-        duration: 1,
-        ease: 'expo',
-      });
+    animationTimeLine.from(circles, { y: -100, stagger: 0.15 }).to('line', {
+      strokeDashoffset: 0,
+      duration: 1,
+      ease: 'expo',
+    });
   }
 }
