@@ -17,8 +17,8 @@ import { OverlayService } from 'src/app/shared-services/overlay/overlay.service'
 import { LanguageMenuComponent } from './entry-components/language-menu/language-menu.component';
 
 @Component({
-  selector: 'app-entry',
   standalone: true,
+  selector: 'app-entry',
   imports: [CommonModule, AppIconComponent],
   templateUrl: './entry.component.html',
   styleUrls: ['./entry.component.scss'],

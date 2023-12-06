@@ -12,7 +12,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass';
-import { THREE_ENUMS } from 'src/app/utils/enums/three.enum';
+import { THREE_ENUMS } from 'src/app/common-utils/enums/three.enum';
 
 interface LoadWorldType {
   world: Scene;

@@ -6,7 +6,7 @@ import { AppRoutes } from './app/app.routes';
 import { importProvidersFrom } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TRANSLATE_FILES_LOADER, customTranslateConfig } from './app/utils/translate-config';
+import { TRANSLATE_FILES_LOADER, customTranslateConfig } from './app/common-utils/translate-config';
 
 
 bootstrapApplication(AppComponent, {

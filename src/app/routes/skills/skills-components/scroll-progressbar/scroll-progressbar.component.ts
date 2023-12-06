@@ -1,20 +1,20 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import gsap from 'gsap';
+
 @Component({
-  selector: 'app-skills-timeline',
-  templateUrl: './skills-timeline.component.html',
-  styleUrls: ['./skills-timeline.component.scss'],
   standalone: true,
+  selector: 'app-scroll-progressbar',
+  templateUrl: './scroll-progressbar.component.html',
+  styleUrls: ['./scroll-progressbar.component.scss'],
 })
-export class SkillsTimelineComponent implements AfterViewInit {
+export class SkillsScrollProgressbar implements AfterViewInit {
   @Input({ required: true }) scrollableWrapper: HTMLElement;
   @Input({ required: true }) timelineAnimationTrigger: HTMLElement;
 
   ngAfterViewInit(): void {
-    const circles = document.querySelectorAll('circle');
-    const animationTimeLine = gsap.timeline({ delay: 0.3 });
-
-    animationTimeLine
+    const circles = document.querySelectorAll('.progress-check-point');
+    gsap
+      .timeline({ delay: 4.3 })
       .from(circles, { y: -100, stagger: 0.15 })
       .to('line.line-placeholder', {
         strokeDashoffset: 0,
@@ -23,21 +23,17 @@ export class SkillsTimelineComponent implements AfterViewInit {
       });
 
     const animatedLine = document.querySelector('.animated-line-on-scroll');
-
     gsap.to(animatedLine, {
       strokeDashoffset: 0,
-      // duration: this.scrollTriggerContainer?.element.offsetWidth,
-      // duration: 2,
-      ease: 'power1',
+      ease: 'none',
       scrollTrigger: {
         trigger: this.timelineAnimationTrigger,
-        start: 'bottom top',
+        start: 'top top',
         scrub: 1,
-        markers: true,
         /** adding inertia to progress line
          * Helps to reach the end when horizontal scroll is done
          */
-        end: () => this.scrollableWrapper.offsetWidth * 1.9,
+        end: () => this.scrollableWrapper.offsetWidth,
       },
     });
   }

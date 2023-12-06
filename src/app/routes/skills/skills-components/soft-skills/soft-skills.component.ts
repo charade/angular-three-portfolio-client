@@ -3,19 +3,23 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  WritableSignal,
   inject,
-  signal,
 } from '@angular/core';
 import gsap from 'gsap';
-import { SkillsTimelineComponent } from '../skills-timeline/skills-timeline.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { SkillsIntroAnimationComponent } from '../intro-animation/intro-animations.component';
+import { SkillsScrollProgressbar } from '../scroll-progressbar/scroll-progressbar.component';
 
 @Component({
+  standalone: true,
   selector: 'app-soft-skills',
   templateUrl: './soft-skills.component.html',
   styleUrls: ['./soft-skills.component.scss'],
-  standalone: true,
-  imports: [SkillsTimelineComponent],
+  imports: [
+    TranslateModule,
+    SkillsIntroAnimationComponent,
+    SkillsScrollProgressbar,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SoftSkillsComponent implements AfterViewInit {
@@ -27,19 +31,20 @@ export class SoftSkillsComponent implements AfterViewInit {
     this.#animateFirstContent();
     this.#initAnimatedScrolledContent(tweenScrollableContainer);
   }
-
   // set main wrapper horizontal scroll
-  #initScrollableContainer(scrolledSection: HTMLElement[]): gsap.core.Tween {
-    const scrollableContainer = gsap.to(scrolledSection, {
-      xPercent: -100 * (scrolledSection.length - 1),
+  #initScrollableContainer(scrolledSections: HTMLElement[]): gsap.core.Tween {
+    const scrollableWrapper: HTMLDivElement =
+      document.querySelector('.scroll-wrapper');
+
+    const scrollableContainer = gsap.to(scrolledSections, {
+      xPercent: -100 * (scrolledSections.length - 1),
       ease: 'none',
       scrollTrigger: {
-        trigger: '.scroll-wrapper',
+        trigger: scrollableWrapper,
         pin: true,
         scrub: 1,
-        snap: 1 / (scrolledSection.length - 1),
         // defining horizontal scroll to depend on scroll wrapper.scrollHeight
-        end: `+=${document.querySelector('.scroll-wrapper').clientWidth + 800}`,
+        end: () => `+=${scrollableWrapper.offsetWidth}`,
       },
     });
 
@@ -47,29 +52,27 @@ export class SoftSkillsComponent implements AfterViewInit {
 
     return scrollableContainer;
   }
-
   // animate first content on entering route
   #animateFirstContent(): void {
-    gsap.from('.first-animated-content', {
-      delay: 1,
+    gsap.from('.skills-intro', {
+      delay: 5,
       x: -100,
       opacity: 0,
       duration: 1.5,
-      ease: 'sin',
+      ease: 'elastic',
     });
   }
-
   // animate content on scroll
   #initAnimatedScrolledContent(
     tweenScrollableContainer: gsap.core.Tween
   ): void {
-    document.querySelectorAll('.animated-content').forEach((content) => {
+    document.querySelectorAll('.animated-content').forEach((content, index) => {
       gsap.from(content, {
         opacity: 0,
         // alternate content entering viewport animation from top/bottom
-        y: 70,
+        y: index % 2 ? -60 : 60,
         duration: 0.1,
-        ease: 'elastic',
+        ease: 'circ',
         scrollTrigger: {
           // animation triggered when parent section hits 70% of the viewport width
           trigger: content.parentElement,

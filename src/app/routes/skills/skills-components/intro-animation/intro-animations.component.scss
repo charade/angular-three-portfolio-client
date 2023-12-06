@@ -1,0 +1,83 @@
+@import "../../../../../styles/colors.scss";
+
+:host {
+  display: block;
+
+  .intro-animations-container {
+    position: absolute;
+    width: 99vw;
+    height: 80%;
+    // loader for first animation
+    & > * {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    svg {
+      width: 20rem;
+      height: 20rem;
+
+      .loader {
+        stroke: #000;
+        fill: transparent;
+        stroke-dasharray: 320;
+        stroke-dashoffset: 320;
+      }
+    }
+
+    .bubble{
+      height: 0;
+      width: 0;
+      border-radius: 50%;
+      opacity: 0;
+
+      &.transparent {
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid;
+        transform: translate(-2rem, -1rem);
+        transform-origin: right center;
+
+        // round icon in down left scroll icon
+        .slider {
+          position: relative;
+          width: 0.25rem;
+          height: 0.25rem;
+          border: 2px solid #393939;
+          border-radius: 50%;
+        }
+        // SCROLL DOWN label
+        .scroll-icon-label {
+          font-size: 0.8rem;
+          opacity: 0;
+          font-family: MontserratLight;
+          min-width: 7rem;
+          transform: translateX(15%);
+        }
+      }
+
+      &.colored {
+        z-index: 1;
+        background: linear-gradient(#e54040, #818ae4, #81e4ae, #e4dc81);
+        transform: translateY(-1.5rem);
+        transform-origin: left center;
+      }
+    }
+
+    .splash-img {
+      top: 19rem;
+      left: 8rem;
+      width: 40rem;
+      height: 40rem;
+      background-image: url("/assets/images/splash.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0;
+    }
+  }
+}

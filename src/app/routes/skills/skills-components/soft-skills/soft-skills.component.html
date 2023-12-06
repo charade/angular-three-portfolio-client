@@ -1,18 +1,23 @@
 <div #scrollable class="scroll-wrapper">
-  <app-skills-timeline
-    [scrollableWrapper]="scrollable"
+  <app-scroll-progressbar
     [timelineAnimationTrigger]="timelineTrigger"
+    [scrollableWrapper]="scrollable"
   />
+
+  <app-skills-intro-animation />
   <section>
-    <p #timelineTrigger class="first-animated-content">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora incidunt
-      minima numquam labore, soluta officia? Pariatur, corporis! Quae sequi,
-      totam nihil rem enim sapiente veritatis at numquam repellat explicabo!
-      Eveniet? Quasi ea eum ipsa expedita, dolore laudantium adipisci quod ipsam
-      facere eveniet unde omnis, modi excepturi minus? Similique laboriosam
-      dolore, totam, sed ratione saepe sit blanditiis consequuntur provident
-      deserunt fuga!
-    </p>
+    <div #timelineTrigger class="skills-intro">
+      <h1>{{ "skills.intro" | translate }}</h1>
+      <!-- <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
+        incidunt minima numquam labore, soluta officia? Pariatur, corporis! Quae
+        sequi, totam nihil rem enim sapiente veritatis at numquam repellat
+        explicabo! Eveniet? Quasi ea eum ipsa expedita, dolore laudantium
+        adipisci quod ipsam facere eveniet unde omnis, modi excepturi minus?
+        Similique laboriosam dolore, totam, sed ratione saepe sit blanditiis
+        consequuntur provident deserunt fuga!
+      </p> -->
+    </div>
   </section>
 
   <section>

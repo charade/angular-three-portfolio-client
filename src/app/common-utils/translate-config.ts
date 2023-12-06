@@ -8,11 +8,7 @@ import {
 } from '@ngx-translate/core';
 
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
-
-export enum FilesPathsEnum {
-  LanguageSettings = '../assets/i18n/language-settings/',
-  Skills = '../assets.i18n/skills/',
-}
+import { FilesPathsEnum } from './enums/translate-files-path.enum';
 
 // inject translation files dynamically per module
 export const TRANSLATE_FILES_LOADER = new InjectionToken<FilesPathsEnum[]>(
@@ -41,4 +37,5 @@ export const customTranslateConfig: TranslateModuleConfig = {
     useClass: CMissingTranslationHandler,
   },
   defaultLanguage: 'en',
+  isolate: true,
 };

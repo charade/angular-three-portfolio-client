@@ -6,7 +6,7 @@ import {
   faGlobeAfrica,
   faLanguage,
 } from '@fortawesome/free-solid-svg-icons';
-import { CustomMap } from 'src/app/utils/structures';
+import { CustomMap } from 'src/app/common-utils/structures';
 
 export enum IconEnum {
   Globe = 1,

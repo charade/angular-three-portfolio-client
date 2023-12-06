@@ -4,10 +4,10 @@ import { AppIconComponent } from '../icon/icon.component';
 import { IconEnum } from '../icon/icon.enums';
 
 @Component({
+  standalone: true,
   selector: 'app-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
-  standalone: true,
   imports: [NgIf, AppIconComponent],
 })
 export class CheckboxComponent {

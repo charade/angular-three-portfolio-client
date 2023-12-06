@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { RouterPathEnum } from './utils/enums/RouterPaths.enum';
+import { RouterPathEnum } from './common-utils/enums/RouterPaths.enum';
 
 export const AppRoutes: Routes = [
   {

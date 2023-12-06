@@ -5,25 +5,29 @@
 
   .scroll-wrapper {
     position: relative;
-
     display: flex;
-    width: 600%;
+    width: 400vw;
     flex-wrap: nowrap;
     height: 100vh;
     padding-top: 7rem;
 
     section {
-      position: relative;
       flex-shrink: 0;
-      width: 60vw;
+      width: 100vw;
       height: 100%;
 
-      & > * {
-        position: absolute;
-        top: 5rem;
-        left: 47%;
-        max-width: 50rem;
-        font-size: 1.7rem;
+      .skills-intro {
+        height: 100%;
+        padding: 0 3rem;
+
+        h1 {
+          padding: 0;
+          height: 30rem;
+          width: 40%;
+          font-size: 4rem;
+          font-family: MontserratBold;
+          text-wrap: pretty;
+        }
       }
     }
   }

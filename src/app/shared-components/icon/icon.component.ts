@@ -4,10 +4,10 @@ import { NgIf } from '@angular/common';
 import { IconEnum } from './icon.enums';
 
 @Component({
-  selector: 'app-icon',
-  templateUrl: './icon.component.html',
-  styleUrls: ['./icon.component.scss'],
   standalone: true,
+  templateUrl: './icon.component.html',
+  selector: 'app-icon',
+  styleUrls: ['./icon.component.scss'],
   imports: [FontAwesomeModule, NgIf],
 })
 export class AppIconComponent {
