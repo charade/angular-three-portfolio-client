@@ -10,6 +10,7 @@ import gsap from 'gsap';
   imports: [TranslateModule],
 })
 export class SkillsIntroAnimationComponent implements AfterViewInit {
+  @Input({ required: true }) fadeTrigger: HTMLElement;
   startScrollProgressbarIntro = 'scrollProgressbarIntro';
 
   #animationTimeLine = gsap.timeline({ defaults: { duration: 0.5 } });
@@ -23,13 +24,14 @@ export class SkillsIntroAnimationComponent implements AfterViewInit {
     this.putTransparentBubbleToPosition();
     this.putColoredBubbleToPosition();
     this.explodeColoredBubble();
+    this.fadeSplashOnScroll();
   }
 
   skillsAnimationsContainerLauncher(): void {
     this.#animationTimeLine
       .to('.loader', {
         // launch circular loader
-        duration: 1,
+        duration: 1.8,
         strokeDashoffset: 0,
         opacity: 0,
       })
@@ -55,8 +57,8 @@ export class SkillsIntroAnimationComponent implements AfterViewInit {
       .to(
         '.bubble.transparent',
         {
-          top: '89%',
-          left: '6rem',
+          top: '95%',
+          left: '85%',
           borderRadius: '3rem',
           width: '1.5rem',
           height: '3rem',
@@ -93,6 +95,7 @@ export class SkillsIntroAnimationComponent implements AfterViewInit {
         width: '15rem',
         height: '15rem',
         opacity: 0.5,
+        filter: 'drop-shadow(5px 0 2px rgba(0, 0, 0, 0.4))',
       },
       this.#positionBubblesAnimationStart
     );
@@ -102,10 +105,25 @@ export class SkillsIntroAnimationComponent implements AfterViewInit {
     this.#animationTimeLine
       .to('.bubble.colored', {
         scale: 2,
-        repeat: 1,
         ease: 'elastic',
       })
-      .to('.bubble.colored', { display: 'none' })
-      .to('.splash-img', { autoAlpha: 0.7, scale: 1.4, ease: 'elastic' });
+      .to('.bubble.colored', { display: 'none' }, '-=1')
+      .to(
+        '.splash-img',
+        { opacity: 0.4, scale: 1.4, ease: 'elastic' },
+        '-=0.56'
+      );
+  }
+
+  fadeSplashOnScroll() {
+    this.#animationTimeLine.to('.splash-img', {
+      x: -380,
+      scrollTrigger: {
+        trigger: this.fadeTrigger,
+        scrub: 3,
+        start: '10% top',
+        end: () => '+=' + this.fadeTrigger.offsetWidth,
+      },
+    });
   }
 }

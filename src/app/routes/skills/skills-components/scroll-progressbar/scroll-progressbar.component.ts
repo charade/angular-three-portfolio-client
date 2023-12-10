@@ -15,7 +15,7 @@ export class SkillsScrollProgressbar implements AfterViewInit {
     const circles = document.querySelectorAll('.progress-check-point');
     gsap
       .timeline({ delay: 4.3 })
-      .from(circles, { y: -100, stagger: 0.15 })
+      .from(circles, { y: -150, stagger: 0.15 })
       .to('line.line-placeholder', {
         strokeDashoffset: 0,
         duration: 1,

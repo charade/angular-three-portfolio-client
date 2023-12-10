@@ -43,7 +43,7 @@ export class WorldService {
           THREE_ENUMS.AnimationActions.IDLE
         );
         const idleAction = mixer.clipAction(idle_animation);
-        idleAction.play();
+        // idleAction.play();
         // set hello animation
         const hello_animation = AnimationClip.findByName(
           animations,
@@ -57,7 +57,7 @@ export class WorldService {
           THREE_ENUMS.AnimationActions.MOUTH
         );
         const mouthAction = mixer.clipAction(mouth_animation);
-        // mouthAction.play()
+        mouthAction.play()
 
         const speak_animation = AnimationClip.findByName(
           animations,
@@ -65,7 +65,7 @@ export class WorldService {
         );
 
         const speakAction = mixer.clipAction(speak_animation);
-        // speakAction.play()
+        speakAction.play()
         renderer.setAnimationLoop(() => {
           this.#animate(
             renderer,

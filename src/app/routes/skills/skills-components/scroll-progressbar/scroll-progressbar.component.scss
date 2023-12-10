@@ -7,12 +7,12 @@
     width: 50vw;
 
     line {
-      stroke-dasharray: 500;
-      stroke-dashoffset: 500;
+      stroke-dasharray: 1200;
+      stroke-dashoffset: 1200;
 
       &.line-placeholder {
         stroke: rgba(178, 177, 177, 0.702);
-        stroke-width: 1px;
+        stroke-width: 2px;
       }
 
       &.animated-line-on-scroll {

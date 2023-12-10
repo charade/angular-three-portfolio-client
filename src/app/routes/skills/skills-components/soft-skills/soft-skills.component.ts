@@ -3,12 +3,19 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  OnInit,
+  WritableSignal,
   inject,
+  signal,
 } from '@angular/core';
 import gsap from 'gsap';
 import { TranslateModule } from '@ngx-translate/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { NgClass } from '@angular/common';
+import { Subscription } from 'rxjs';
 import { SkillsIntroAnimationComponent } from '../intro-animation/intro-animations.component';
 import { SkillsScrollProgressbar } from '../scroll-progressbar/scroll-progressbar.component';
+import { ButterfliesComponent } from './three/butterflies.component';
 
 @Component({
   standalone: true,
@@ -19,11 +26,43 @@ import { SkillsScrollProgressbar } from '../scroll-progressbar/scroll-progressba
     TranslateModule,
     SkillsIntroAnimationComponent,
     SkillsScrollProgressbar,
+    NgClass,
+    ButterfliesComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SoftSkillsComponent implements AfterViewInit {
+export class SoftSkillsComponent implements AfterViewInit, OnInit {
+  isDeviceHandset: WritableSignal<boolean> = signal(false);
+  isDeviceS: WritableSignal<boolean> = signal(false);
+  isDeviceXS: WritableSignal<boolean> = signal(false);
+  isDeviceTabletLandscape: WritableSignal<boolean> = signal(false);
+  isDeviceSm: WritableSignal<boolean> = signal(false);
+  isDeviceM: WritableSignal<boolean> = signal(false);
+  isDeviceL: WritableSignal<boolean> = signal(false);
+
+  #mediaSizeObserver = inject(BreakpointObserver);
   #cd = inject(ChangeDetectorRef);
+  #subscriptions: Subscription[] = [];
+
+  ngOnInit(): void {
+    this.#subscriptions.push(
+      this.#mediaSizeObserver
+        .observe('(min-width: 375px)')
+        .subscribe((media) => this.isDeviceXS.set(media.matches)),
+      this.#mediaSizeObserver
+        .observe('(min-width: 390px)')
+        .subscribe((media) => this.isDeviceS.set(media.matches)),
+      this.#mediaSizeObserver
+        .observe('(min-width: 400px)')
+        .subscribe((media) => this.isDeviceSm.set(media.matches)),
+      this.#mediaSizeObserver
+        .observe('(min-width: 500px)')
+        .subscribe((media) => this.isDeviceM.set(media.matches)),
+      this.#mediaSizeObserver
+        .observe('(min-width: 768px)')
+        .subscribe((media) => this.isDeviceL.set(media.matches))
+    );
+  }
 
   ngAfterViewInit(): void {
     const sections = Array.from(document.querySelectorAll('section'));
@@ -72,7 +111,7 @@ export class SoftSkillsComponent implements AfterViewInit {
         // alternate content entering viewport animation from top/bottom
         y: index % 2 ? -60 : 60,
         duration: 0.1,
-        ease: 'circ',
+        ease: 'elastic',
         scrollTrigger: {
           // animation triggered when parent section hits 70% of the viewport width
           trigger: content.parentElement,

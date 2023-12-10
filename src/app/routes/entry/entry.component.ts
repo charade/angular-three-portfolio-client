@@ -34,8 +34,6 @@ export class EntryComponent implements AfterViewInit {
   #renderer = new THREE.WebGLRenderer({
     antialias: true,
   });
-  // defining camera position for entering scene animation
-  #DEFAULT_CAMERA_POS = { y: 25, z: -25 };
 
   #worldService = inject(WorldService);
   #lightsService = inject(LightsService);
@@ -45,7 +43,6 @@ export class EntryComponent implements AfterViewInit {
   #viewContainerRef = inject(ViewContainerRef);
 
   ngAfterViewInit(): void {
-    this.#renderer.shadowMap.enabled = true;
     this.#viewContainerElement.appendChild(this.#renderer.domElement);
     this.#configRenderer();
     this.#initScene();
@@ -100,16 +97,12 @@ export class EntryComponent implements AfterViewInit {
     this.#camera.position.set(0, 1.8, -3);
     this.#scene.add(this.#camera);
     this.#camera.lookAt(0, 1.5, 0);
-    // camera animation en entering scene
-    this.#cameraEnteringAnimation();
-  }
 
-  // camera cinematic from top to initial position
-  #cameraEnteringAnimation() {
-    gsap.from(this.#camera.position,{
-      ...this.#DEFAULT_CAMERA_POS,
+    // camera animation en entering scene
+    // camera cinematic from top to initial position
+    gsap.from(this.#camera.position, {
+      ...{ y: 25, z: -25 }, // setting default position
       duration: 3,
-      ease: 'power2.inOut',
     });
   }
 

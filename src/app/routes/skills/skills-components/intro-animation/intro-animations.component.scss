@@ -22,8 +22,8 @@
       .loader {
         stroke: #000;
         fill: transparent;
-        stroke-dasharray: 320;
-        stroke-dashoffset: 320;
+        stroke-dasharray: 400;
+        stroke-dashoffset: 400;
       }
     }
 
@@ -34,7 +34,7 @@
       opacity: 0;
 
       &.transparent {
-        z-index: 3;
+        z-index: 4;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -46,10 +46,10 @@
         // round icon in down left scroll icon
         .slider {
           position: relative;
-          width: 0.25rem;
-          height: 0.25rem;
-          border: 2px solid #393939;
+          width: 0.5rem;
+          height: 0.5rem;
           border-radius: 50%;
+          border: 1px solid #393939;
         }
         // SCROLL DOWN label
         .scroll-icon-label {
@@ -57,12 +57,12 @@
           opacity: 0;
           font-family: MontserratLight;
           min-width: 7rem;
-          transform: translateX(15%);
+          transform: translateX(17%);
         }
       }
 
       &.colored {
-        z-index: 1;
+        z-index: 3;
         background: linear-gradient(#e54040, #818ae4, #81e4ae, #e4dc81);
         transform: translateY(-1.5rem);
         transform-origin: left center;
@@ -70,8 +70,9 @@
     }
 
     .splash-img {
+      z-index: 4;
       top: 19rem;
-      left: 8rem;
+      left: 12rem;
       width: 40rem;
       height: 40rem;
       background-image: url("/assets/images/splash.png");

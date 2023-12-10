@@ -4,19 +4,23 @@
     [scrollableWrapper]="scrollable"
   />
 
-  <app-skills-intro-animation />
-  <section>
-    <div #timelineTrigger class="skills-intro">
-      <h1>{{ "skills.intro" | translate }}</h1>
-      <!-- <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
-        incidunt minima numquam labore, soluta officia? Pariatur, corporis! Quae
-        sequi, totam nihil rem enim sapiente veritatis at numquam repellat
-        explicabo! Eveniet? Quasi ea eum ipsa expedita, dolore laudantium
-        adipisci quod ipsam facere eveniet unde omnis, modi excepturi minus?
-        Similique laboriosam dolore, totam, sed ratione saepe sit blanditiis
-        consequuntur provident deserunt fuga!
-      </p> -->
+  <app-skills-intro-animation [fadeTrigger]="timelineTrigger" />
+  <section #introSection class="intro-section">
+    <app-butterflies />
+    <div
+      #timelineTrigger
+      class="skills-intro"
+      [ngClass]="{
+        'xs-device':isDeviceXS(),
+        's-device':isDeviceS(),
+        'sm-device':isDeviceSm(),
+        'm-device': isDeviceM(),
+        'l-device': isDeviceL(),
+      }"
+    >
+      <h1>{{ "skills.intro.title" | translate }}</h1>
+      <h3>{{ "skills.intro.hello" | translate }}</h3>
+      <h3>{{ "skills.intro.description" | translate }}</h3>
     </div>
   </section>
 
