@@ -94,7 +94,7 @@ export class SkillsIntroAnimationComponent implements AfterViewInit {
         left: '1rem',
         width: '15rem',
         height: '15rem',
-        opacity: 0.5,
+        opacity: 0.2,
         filter: 'drop-shadow(5px 0 2px rgba(0, 0, 0, 0.4))',
       },
       this.#positionBubblesAnimationStart
@@ -107,11 +107,11 @@ export class SkillsIntroAnimationComponent implements AfterViewInit {
         scale: 2,
         ease: 'elastic',
       })
-      .to('.bubble.colored', { display: 'none' }, '-=1')
+      .to('.bubble.colored', { display: 'none' }, '-=1.2')
       .to(
         '.splash-img',
         { opacity: 0.4, scale: 1.4, ease: 'elastic' },
-        '-=0.56'
+        '-=0.7'
       );
   }
 

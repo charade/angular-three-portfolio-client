@@ -11,15 +11,14 @@
       #timelineTrigger
       class="skills-intro"
       [ngClass]="{
-        'xs-device':isDeviceXS(),
         's-device':isDeviceS(),
         'sm-device':isDeviceSm(),
         'm-device': isDeviceM(),
         'l-device': isDeviceL(),
+        'xl-device': isDeviceXL(),
       }"
     >
       <h1>{{ "skills.intro.title" | translate }}</h1>
-      <h3>{{ "skills.intro.hello" | translate }}</h3>
       <h3>{{ "skills.intro.description" | translate }}</h3>
     </div>
   </section>

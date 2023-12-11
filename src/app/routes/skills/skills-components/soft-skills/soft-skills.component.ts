@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  OnDestroy,
   OnInit,
   WritableSignal,
   inject,
@@ -31,14 +32,14 @@ import { ButterfliesComponent } from './three/butterflies.component';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SoftSkillsComponent implements AfterViewInit, OnInit {
+export class SoftSkillsComponent implements AfterViewInit, OnInit, OnDestroy {
   isDeviceHandset: WritableSignal<boolean> = signal(false);
   isDeviceS: WritableSignal<boolean> = signal(false);
-  isDeviceXS: WritableSignal<boolean> = signal(false);
   isDeviceTabletLandscape: WritableSignal<boolean> = signal(false);
   isDeviceSm: WritableSignal<boolean> = signal(false);
   isDeviceM: WritableSignal<boolean> = signal(false);
   isDeviceL: WritableSignal<boolean> = signal(false);
+  isDeviceXL: WritableSignal<boolean> = signal(false);
 
   #mediaSizeObserver = inject(BreakpointObserver);
   #cd = inject(ChangeDetectorRef);
@@ -46,9 +47,6 @@ export class SoftSkillsComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.#subscriptions.push(
-      this.#mediaSizeObserver
-        .observe('(min-width: 375px)')
-        .subscribe((media) => this.isDeviceXS.set(media.matches)),
       this.#mediaSizeObserver
         .observe('(min-width: 390px)')
         .subscribe((media) => this.isDeviceS.set(media.matches)),
@@ -60,7 +58,10 @@ export class SoftSkillsComponent implements AfterViewInit, OnInit {
         .subscribe((media) => this.isDeviceM.set(media.matches)),
       this.#mediaSizeObserver
         .observe('(min-width: 768px)')
-        .subscribe((media) => this.isDeviceL.set(media.matches))
+        .subscribe((media) => this.isDeviceL.set(media.matches)),
+      this.#mediaSizeObserver
+        .observe('(min-width: 1024px)')
+        .subscribe((media) => this.isDeviceXL.set(media.matches))
     );
   }
 
@@ -69,6 +70,10 @@ export class SoftSkillsComponent implements AfterViewInit, OnInit {
     const tweenScrollableContainer = this.#initScrollableContainer(sections);
     this.#animateFirstContent();
     this.#initAnimatedScrolledContent(tweenScrollableContainer);
+  }
+
+  ngOnDestroy(): void {
+    this.#subscriptions.forEach((s) => s.unsubscribe());
   }
   // set main wrapper horizontal scroll
   #initScrollableContainer(scrolledSections: HTMLElement[]): gsap.core.Tween {
@@ -94,7 +99,7 @@ export class SoftSkillsComponent implements AfterViewInit, OnInit {
   // animate first content on entering route
   #animateFirstContent(): void {
     gsap.from('.skills-intro', {
-      delay: 5,
+      delay: 5.5,
       x: -100,
       opacity: 0,
       duration: 1.5,

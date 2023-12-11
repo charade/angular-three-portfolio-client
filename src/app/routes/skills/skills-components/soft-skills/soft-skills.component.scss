@@ -25,7 +25,11 @@
         display: flex;
         flex-direction: column;
         padding: 1rem;
-        z-index: 7; ///
+        z-index: 7;
+
+        & > * {
+          margin: 6rem 0;
+        }
 
         h1 {
           letter-spacing: 2px;
@@ -40,16 +44,11 @@
         h3 {
           font-size: 2rem;
           font-family: "Avenir Next";
-          font-weight: 300;
+          font-weight: 400;
           width: 27rem;
           text-wrap: wrap;
         }
 
-        &.xs-device {
-          h3 {
-            font-size: 1.8rem;
-          }
-        }
 
         &.s-device {
           padding: 0 1rem;
@@ -64,14 +63,13 @@
 
         &.sm-device {
           padding: 0 2rem;
-          & > * {
-            margin: 2rem 0;
-          }
+  
           h1 {
             font-size: 8rem;
           }
           h3 {
             font-size: 3.5rem;
+            width: 40rem;
           }
         }
 
@@ -85,13 +83,32 @@
         }
 
         &.l-device {
+
+          & > * {
+            margin: 8rem 0;
+          }
           padding-top: 5rem;
+
           h1 {
-            font-size: 9rem;
+            font-size: 10rem;
           }
           h3 {
-            font-size: 3rem;
+            font-size: 4rem;
             width: 60rem;
+          }
+        }
+
+        &.xl-device{
+          & > * {
+            margin: 4rem 0;
+          }
+
+          h1 {
+            font-size: 10rem;
+          }
+          h3 {
+            font-size: 2.5rem;
+            width: 50rem;
           }
         }
       }
