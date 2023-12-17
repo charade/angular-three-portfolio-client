@@ -49,7 +49,6 @@
           text-wrap: wrap;
         }
 
-
         &.s-device {
           padding: 0 1rem;
 
@@ -63,7 +62,7 @@
 
         &.sm-device {
           padding: 0 2rem;
-  
+
           h1 {
             font-size: 8rem;
           }
@@ -83,7 +82,6 @@
         }
 
         &.l-device {
-
           & > * {
             margin: 8rem 0;
           }
@@ -98,7 +96,7 @@
           }
         }
 
-        &.xl-device{
+        &.xl-device {
           & > * {
             margin: 4rem 0;
           }
@@ -110,6 +108,15 @@
             font-size: 2.5rem;
             width: 50rem;
           }
+        }
+      }
+
+      &.soft-skills {
+        h2 {
+          font-size: 3rem;
+          border: 1px solid red;
+          text-align: center;
+          font-weight: 400;
         }
       }
     }
