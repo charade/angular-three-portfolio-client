@@ -110,7 +110,7 @@ export class SkillsIntroAnimationComponent implements AfterViewInit {
       .to('.bubble.colored', { display: 'none' }, '-=1.2')
       .to(
         '.splash-img',
-        { opacity: 0.4, scale: 1.4, ease: 'elastic' },
+        { opacity: 0.45, scale: 1.4, ease: 'elastic' },
         '-=0.7'
       );
   }

@@ -9,11 +9,12 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import gsap from 'gsap';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { NgClass } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Subscription } from 'rxjs';
+import gsap from 'gsap';
+
 import { SkillsIntroAnimationComponent } from '../intro-animation/intro-animations.component';
 import { SkillsScrollProgressbar } from '../scroll-progressbar/scroll-progressbar.component';
 import { ButterfliesComponent } from './three/butterflies.component';
@@ -29,6 +30,7 @@ import { ButterfliesComponent } from './three/butterflies.component';
     SkillsScrollProgressbar,
     NgClass,
     ButterfliesComponent,
+    AsyncPipe,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -44,8 +46,11 @@ export class SoftSkillsComponent implements AfterViewInit, OnInit, OnDestroy {
   #mediaSizeObserver = inject(BreakpointObserver);
   #cd = inject(ChangeDetectorRef);
   #subscriptions: Subscription[] = [];
+  #translate = inject(TranslateService);
 
   ngOnInit(): void {
+    console.log(this.#translate.get('skills.agile.title'));
+
     this.#subscriptions.push(
       this.#mediaSizeObserver
         .observe('(min-width: 390px)')
@@ -68,8 +73,8 @@ export class SoftSkillsComponent implements AfterViewInit, OnInit, OnDestroy {
   ngAfterViewInit(): void {
     const sections = Array.from(document.querySelectorAll('section'));
     const tweenScrollableContainer = this.#initScrollableContainer(sections);
-    this.#animateFirstContent();
-    this.#initAnimatedScrolledContent(tweenScrollableContainer);
+    this.#animateIntroSection();
+    this.#initSofSkillsSection(tweenScrollableContainer);
   }
 
   ngOnDestroy(): void {
@@ -97,7 +102,7 @@ export class SoftSkillsComponent implements AfterViewInit, OnInit, OnDestroy {
     return scrollableContainer;
   }
   // animate first content on entering route
-  #animateFirstContent(): void {
+  #animateIntroSection(): void {
     gsap.from('.skills-intro', {
       delay: 5.5,
       x: -100,
@@ -106,25 +111,33 @@ export class SoftSkillsComponent implements AfterViewInit, OnInit, OnDestroy {
       ease: 'elastic',
     });
   }
-  // animate content on scroll
-  #initAnimatedScrolledContent(
-    tweenScrollableContainer: gsap.core.Tween
-  ): void {
-    document.querySelectorAll('.animated-content').forEach((content, index) => {
-      gsap.from(content, {
-        opacity: 0,
-        // alternate content entering viewport animation from top/bottom
-        y: index % 2 ? -60 : 60,
-        duration: 0.1,
-        ease: 'elastic',
-        scrollTrigger: {
-          // animation triggered when parent section hits 70% of the viewport width
-          trigger: content.parentElement,
-          scrub: 1,
-          containerAnimation: tweenScrollableContainer,
-          start: `left 60%`,
-        },
-      });
+
+  #initSofSkillsSection(tweenScrollableContainer: gsap.core.Tween): void {
+    gsap.from('.soft-skills-subtitle', {
+      width: 0,
+      duration: 0.9,
+      stagger: 0.5,
+      scrollTrigger: {
+        trigger: '.soft-skills',
+        scrub: true,
+        containerAnimation: tweenScrollableContainer,
+        start: 'left 45%',
+        end: '20% center',
+      },
+    });
+
+    gsap.from('.soft-skills-subtitle-content', {
+      y: 40,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.6,
+      scrollTrigger: {
+        trigger: '.soft-skills-subtitle-content',
+        scrub: true,
+        containerAnimation: tweenScrollableContainer,
+        start: 'left 48%',
+        end: '45% center',
+      },
     });
   }
 }

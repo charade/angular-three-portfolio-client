@@ -74,7 +74,7 @@ export class ButterfliesComponent implements AfterViewInit {
     const aspect =
       this.#viewContainer.offsetWidth / this.#viewContainer.offsetHeight;
     this.#camera.aspect = aspect;
-    this.#camera.lookAt(this.#scene.position);
+    // this.#camera.lookAt(this.#scene.position);
     this.#camera.updateProjectionMatrix();
     
     this.#configRenderer();

@@ -27,7 +27,7 @@
       }
     }
 
-    .bubble{
+    .bubble {
       height: 0;
       width: 0;
       border-radius: 50%;
@@ -46,10 +46,11 @@
         // round icon in down left scroll icon
         .slider {
           position: relative;
-          height: .75rem;
+          height: 0.5rem;
           border: 1px solid;
+          border-radius: 3px;
         }
-       
+
         .scroll-icon-label {
           font-size: 0.8rem;
           opacity: 0;
@@ -69,10 +70,10 @@
 
     .splash-img {
       z-index: 4;
-      top: 19rem;
+      top: 14rem;
       left: 12rem;
-      width: 30rem;
-      height: 30rem;
+      width: 23rem;
+      height: 23rem;
       background-image: url("/assets/images/splash.png");
       background-size: contain;
       background-repeat: no-repeat;

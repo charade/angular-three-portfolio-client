@@ -22,6 +22,7 @@ const translateMultipleHttpLoaderFactory = (
 
 class CMissingTranslationHandler implements MissingTranslationHandler {
   handle(params: MissingTranslationHandlerParams): string {
+    console.log(params)
     console.log('failed to load: ', params.interpolateParams);
     return '';
   }

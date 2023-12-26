@@ -3,8 +3,8 @@
     [timelineAnimationTrigger]="timelineTrigger"
     [scrollableWrapper]="scrollable"
   />
-
   <app-skills-intro-animation [fadeTrigger]="timelineTrigger" />
+
   <section #introSection class="intro-section">
     <app-butterflies />
     <div
@@ -24,15 +24,40 @@
   </section>
 
   <section class="soft-skills">
-    <div>
-      <h2>
-        {{ "skills.agile.certification.title" | translate }}
-      </h2>
-      <h3>{{ "skills.agile.certification.description" | translate }}</h3>
+    <div id="text" class="soft-skills-subtitle">
+      <h3 class="soft-skills-subtitle-content">
+        {{ "skills.agile" | translate }}
+      </h3>
     </div>
-    <div>
-      <h2>{{ "skills.softSkills.description.title" | translate }}</h2>
-      <h3>{{ "skills.softSkills.description.description" | translate }}</h3>
+    <!-- <h3>{{ "skills.agile.description" | translate }}</h3> -->
+
+    <div class="soft-skills-subtitle">
+      <h3 class="soft-skills-subtitle-content">
+        {{ "skills.empathetic" | translate }}
+      </h3>
+    </div>
+
+    <div class="soft-skills-subtitle">
+      <h3 class="soft-skills-subtitle-content">
+        {{ "skills.teamPlayer" | translate }}
+      </h3>
+    </div>
+
+    <div class="soft-skills-subtitle">
+      <h3 class="soft-skills-subtitle-content">
+        {{ "skills.patient" | translate }}
+      </h3>
+    </div>
+
+    <div class="soft-skills-subtitle">
+      <h3 class="soft-skills-subtitle-content">
+        {{ "skills.communication" | translate }}
+      </h3>
+    </div>
+    <div class="soft-skills-subtitle">
+      <h3 class="soft-skills-subtitle-content">
+        {{ "skills.creative" | translate }}
+      </h3>
     </div>
   </section>
   <section>
