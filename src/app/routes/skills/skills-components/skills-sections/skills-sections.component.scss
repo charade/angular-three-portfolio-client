@@ -1,7 +1,7 @@
 :host {
   height: 100%;
-  z-index: 3;
   display: block;
+  z-index: 3;
 
   .scroll-wrapper {
     position: relative;
@@ -149,6 +149,16 @@
             font-family: "Avenir Next";
             font-weight: 700;
           }
+        }
+      }
+
+      &.hard-skills {
+        h2.animated-chars-title {
+          font-size: 3.5rem;
+          font-weight: bolder;
+          color: #8786866a;
+          font-family: MontserratBold;
+          letter-spacing: 1px;
         }
       }
     }

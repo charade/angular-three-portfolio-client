@@ -23,8 +23,8 @@ import SplitType from 'split-type';
 @Component({
   standalone: true,
   selector: 'app-soft-skills',
-  templateUrl: './soft-skills.component.html',
-  styleUrls: ['./soft-skills.component.scss'],
+  templateUrl: './skills-sections.component.html',
+  styleUrls: ['./skills-sections.component.scss'],
   imports: [
     TranslateModule,
     SkillsIntroAnimationComponent,
@@ -35,7 +35,9 @@ import SplitType from 'split-type';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SoftSkillsComponent implements AfterViewInit, OnInit, OnDestroy {
+export class SkillsSectionsComponent
+  implements AfterViewInit, OnInit, OnDestroy
+{
   isDeviceHandset: WritableSignal<boolean> = signal(false);
   isDeviceS: WritableSignal<boolean> = signal(false);
   isDeviceTabletLandscape: WritableSignal<boolean> = signal(false);
@@ -93,8 +95,8 @@ export class SoftSkillsComponent implements AfterViewInit, OnInit, OnDestroy {
       scrollTrigger: {
         trigger: scrollableWrapper,
         pin: true,
-        scrub: 1,
-        // defining horizontal scroll to depend on scroll wrapper.scrollHeight
+        scrub: true,
+        // defining horizontal scroll end to depend on scroll wrapper.scrollHeight
         end: () => `+=${scrollableWrapper.offsetWidth}`,
       },
     });
@@ -147,22 +149,28 @@ export class SoftSkillsComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   #animateSkillSectionTitle(tweenScrollableContainer: gsap.core.Tween): void {
-    const splittedTitle = new SplitType('.animated-chars-title', {
-      types: 'chars',
-    });
+    const skillsSectionsTitle = document.querySelectorAll(
+      '.animated-chars-title'
+    );
 
-    gsap.to(splittedTitle.chars, {
-      color: '#000',
-      stagger: 0.8,
-      scale: 1.2,
-      duration: 0.8,
-      scrollTrigger: {
-        containerAnimation: tweenScrollableContainer,
-        trigger: '.char',
-        scrub: true,
-        start: 'left 48%',
-        end: 'end 20%',
-      },
+    skillsSectionsTitle.forEach((title) => {
+      console.log(title);
+      const splittedTitle = new SplitType(title as HTMLElement, {
+        types: 'chars,words',
+      });
+
+      gsap.to(splittedTitle.chars, {
+        color: '#000',
+        stagger: 0.9,
+        scale: 1.2,
+        scrollTrigger: {
+          containerAnimation: tweenScrollableContainer,
+          trigger: title,
+          scrub: true,
+          start: 'left 48%',
+          end: 'end 10%',
+        },
+      });
     });
   }
 }
