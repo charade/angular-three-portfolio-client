@@ -18,6 +18,7 @@ import gsap from 'gsap';
 import { SkillsIntroAnimationComponent } from '../intro-animation/intro-animations.component';
 import { SkillsScrollProgressbar } from '../scroll-progressbar/scroll-progressbar.component';
 import { ButterfliesComponent } from './three/butterflies.component';
+import SplitType from 'split-type';
 
 @Component({
   standalone: true,
@@ -75,6 +76,7 @@ export class SoftSkillsComponent implements AfterViewInit, OnInit, OnDestroy {
     const tweenScrollableContainer = this.#initScrollableContainer(sections);
     this.#animateIntroSection();
     this.#initSofSkillsSection(tweenScrollableContainer);
+    this.#animateSkillSectionTitle(tweenScrollableContainer);
   }
 
   ngOnDestroy(): void {
@@ -104,7 +106,7 @@ export class SoftSkillsComponent implements AfterViewInit, OnInit, OnDestroy {
   // animate first content on entering route
   #animateIntroSection(): void {
     gsap.from('.skills-intro', {
-      delay: 5.5,
+      delay: 4.75,
       x: -100,
       opacity: 0,
       duration: 1.5,
@@ -113,30 +115,53 @@ export class SoftSkillsComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   #initSofSkillsSection(tweenScrollableContainer: gsap.core.Tween): void {
-    gsap.from('.soft-skills-subtitle', {
-      width: 0,
-      duration: 0.9,
-      stagger: 0.5,
-      scrollTrigger: {
-        trigger: '.soft-skills',
-        scrub: true,
-        containerAnimation: tweenScrollableContainer,
-        start: 'left 45%',
-        end: '20% center',
-      },
+    gsap
+      .timeline()
+      .from('.soft-skills-subtitle', {
+        // animated underline
+        width: 0,
+        duration: 4,
+        stagger: 0.5,
+        scrollTrigger: {
+          trigger: '.soft-skills',
+          scrub: true,
+          containerAnimation: tweenScrollableContainer,
+          start: 'left 48%',
+          end: '45% center',
+        },
+      })
+      .from('.soft-skills-subtitle-content', {
+        // animated skill text content
+        y: 15,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.8,
+        scrollTrigger: {
+          trigger: '.soft-skills-subtitle-content',
+          scrub: true,
+          containerAnimation: tweenScrollableContainer,
+          start: 'left 48%',
+          end: '45% center',
+        },
+      });
+  }
+
+  #animateSkillSectionTitle(tweenScrollableContainer: gsap.core.Tween): void {
+    const splittedTitle = new SplitType('.animated-chars-title', {
+      types: 'chars',
     });
 
-    gsap.from('.soft-skills-subtitle-content', {
-      y: 40,
-      opacity: 0,
+    gsap.to(splittedTitle.chars, {
+      color: '#000',
+      stagger: 0.8,
+      scale: 1.2,
       duration: 0.8,
-      stagger: 0.6,
       scrollTrigger: {
-        trigger: '.soft-skills-subtitle-content',
-        scrub: true,
         containerAnimation: tweenScrollableContainer,
+        trigger: '.char',
+        scrub: true,
         start: 'left 48%',
-        end: '45% center',
+        end: 'end 20%',
       },
     });
   }

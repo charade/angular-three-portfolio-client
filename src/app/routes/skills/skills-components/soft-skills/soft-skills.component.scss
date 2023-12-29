@@ -115,25 +115,33 @@
       &.soft-skills {
         display: flex;
         flex-direction: column;
-        padding-top: 7rem;
+        padding-top: 1rem;
 
+        h2.animated-chars-title {
+          font-size: 3.5rem;
+          font-weight: bolder;
+          color: #8786866a;
+          font-family: MontserratBold;
+          letter-spacing: 1px;
+        }
         .soft-skills-subtitle {
           position: relative;
           border-bottom: 2px solid #f0782ec8;
           width: 80%;
           color: #f0822e;
           height: 5.5rem;
-          // margin: 1rem 0;
 
-          &:before{
-            content: '';
+          &:before {
+            content: "";
             position: absolute;
             left: 100%;
             top: 100%;
-            transform: translateY(-50%);
-            width: 1rem;
-            height: 1rem;
+            transform: translateY(-30%);
+            width: 0.5rem;
+            height: 0.5rem;
             border-radius: 50%;
+            border: 1px solid;
+            background-color: #f0782ec8;
           }
           h3 {
             width: 30rem;

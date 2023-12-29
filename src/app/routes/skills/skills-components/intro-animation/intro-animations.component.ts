@@ -31,7 +31,7 @@ export class SkillsIntroAnimationComponent implements AfterViewInit {
     this.#animationTimeLine
       .to('.loader', {
         // launch circular loader
-        duration: 1.8,
+        duration: 1,
         strokeDashoffset: 0,
         opacity: 0,
       })
