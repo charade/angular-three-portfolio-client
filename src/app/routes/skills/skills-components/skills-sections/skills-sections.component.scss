@@ -112,18 +112,19 @@
         }
       }
 
+      h2.animated-section-title {
+        font-size: 3.5rem;
+        font-weight: bolder;
+        color: #8786866a;
+        font-family: MontserratBold;
+        letter-spacing: 1px;
+      }
+
       &.soft-skills {
         display: flex;
         flex-direction: column;
         padding-top: 1rem;
 
-        h2.animated-chars-title {
-          font-size: 3.5rem;
-          font-weight: bolder;
-          color: #8786866a;
-          font-family: MontserratBold;
-          letter-spacing: 1px;
-        }
         .soft-skills-subtitle {
           position: relative;
           border-bottom: 2px solid #f0782ec8;
@@ -153,13 +154,6 @@
       }
 
       &.hard-skills {
-        h2.animated-chars-title {
-          font-size: 3.5rem;
-          font-weight: bolder;
-          color: #8786866a;
-          font-family: MontserratBold;
-          letter-spacing: 1px;
-        }
       }
     }
   }

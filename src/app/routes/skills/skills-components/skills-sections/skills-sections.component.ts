@@ -150,7 +150,7 @@ export class SkillsSectionsComponent
 
   #animateSkillSectionTitle(tweenScrollableContainer: gsap.core.Tween): void {
     const skillsSectionsTitle = document.querySelectorAll(
-      '.animated-chars-title'
+      '.animated-section-title'
     );
 
     skillsSectionsTitle.forEach((title) => {
