@@ -3,6 +3,7 @@ import {
   faAudioDescription,
   faCheck,
   faCircleXmark,
+  faDiagramProject,
   faGlobeAfrica,
   faLanguage,
 } from '@fortawesome/free-solid-svg-icons';
@@ -14,6 +15,7 @@ export enum IconEnum {
   Language,
   Audio,
   Check,
+  Projects
 }
 
 export namespace IconEnum {
@@ -23,5 +25,6 @@ export namespace IconEnum {
     [IconEnum.Language, faLanguage],
     [IconEnum.Audio, faAudioDescription],
     [IconEnum.Check, faCheck],
+    [IconEnum.Projects, faDiagramProject]
   ]);
 }

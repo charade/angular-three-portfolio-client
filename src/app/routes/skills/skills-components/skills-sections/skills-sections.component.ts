@@ -19,6 +19,8 @@ import { SkillsIntroAnimationComponent } from '../intro-animation/intro-animatio
 import { SkillsScrollProgressbar } from '../scroll-progressbar/scroll-progressbar.component';
 import { ButterfliesComponent } from './three/butterflies.component';
 import SplitType from 'split-type';
+import { AppIconComponent } from 'src/app/shared-components/icon/icon.component';
+import { IconEnum } from 'src/app/shared-components/icon/icon.enums';
 
 @Component({
   standalone: true,
@@ -32,6 +34,7 @@ import SplitType from 'split-type';
     NgClass,
     ButterfliesComponent,
     AsyncPipe,
+    AppIconComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -45,6 +48,8 @@ export class SkillsSectionsComponent
   isDeviceM: WritableSignal<boolean> = signal(false);
   isDeviceL: WritableSignal<boolean> = signal(false);
   isDeviceXL: WritableSignal<boolean> = signal(false);
+
+  IconEnum = IconEnum;
 
   #mediaSizeObserver = inject(BreakpointObserver);
   #cd = inject(ChangeDetectorRef);
@@ -178,29 +183,31 @@ export class SkillsSectionsComponent
   #animateHardSkillsContent(tweenScrollableContainer: gsap.core.Tween): void {
     gsap
       .timeline({
-        ease: 'elastic',
+        stagger: 0.5,
         scrollTrigger: {
           trigger: '.hard-skills-content',
           containerAnimation: tweenScrollableContainer,
           scrub: true,
           start: 'left 50%',
-          end: '30% center',
+          end: '40% center',
         },
       })
       .to('.hard-skills-content', {
-        borderBottom: '1px solid',
         borderRadius: '50%',
+        borderBottom: '1px solid',
       })
       .to('.stack', {
-        opacity: 1,
         borderRight: '1px solid #f0782ec8',
         transform: 'translate(-2rem, -10rem)',
+        opacity: 1,
       })
 
       .to('.workflow', {
-        opacity: 1,
         borderLeft: '1px solid #f0782ec8',
         transform: 'translate(3rem, 15rem)',
-      });
+        opacity: 1,
+        // ease: 'elastic',
+      })
+      // .from('.projects', { y: 100 });
   }
 }
