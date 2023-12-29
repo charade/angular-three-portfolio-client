@@ -79,6 +79,7 @@ export class SkillsSectionsComponent
     this.#animateIntroSection();
     this.#initSofSkillsSection(tweenScrollableContainer);
     this.#animateSkillSectionTitle(tweenScrollableContainer);
+    this.#animateHardSkillsContent(tweenScrollableContainer);
   }
 
   ngOnDestroy(): void {
@@ -150,7 +151,7 @@ export class SkillsSectionsComponent
 
   #animateSkillSectionTitle(tweenScrollableContainer: gsap.core.Tween): void {
     const skillsSectionsTitle = document.querySelectorAll(
-      '.animated-section-title'
+      '.opacity-animated-title'
     );
 
     skillsSectionsTitle.forEach((title) => {
@@ -167,10 +168,39 @@ export class SkillsSectionsComponent
           containerAnimation: tweenScrollableContainer,
           trigger: title,
           scrub: true,
-          start: 'left 48%',
-          end: 'end 10%',
+          start: 'left 70%',
+          end: 'end 15%',
         },
       });
     });
+  }
+
+  #animateHardSkillsContent(tweenScrollableContainer: gsap.core.Tween): void {
+    gsap
+      .timeline({
+        ease: 'elastic',
+        scrollTrigger: {
+          trigger: '.hard-skills-content',
+          containerAnimation: tweenScrollableContainer,
+          scrub: true,
+          start: 'left 50%',
+          end: '30% center',
+        },
+      })
+      .to('.hard-skills-content', {
+        borderBottom: '1px solid',
+        borderRadius: '50%',
+      })
+      .to('.stack', {
+        opacity: 1,
+        borderRight: '1px solid #f0782ec8',
+        transform: 'translate(-2rem, -10rem)',
+      })
+
+      .to('.workflow', {
+        opacity: 1,
+        borderLeft: '1px solid #f0782ec8',
+        transform: 'translate(3rem, 15rem)',
+      });
   }
 }
