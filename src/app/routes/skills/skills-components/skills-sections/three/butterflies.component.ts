@@ -1,7 +1,6 @@
 import {
   AfterViewInit,
   Component,
-  Input,
   ViewContainerRef,
   inject,
 } from '@angular/core';
@@ -11,20 +10,13 @@ import {
   AmbientLight,
   AnimationClip,
   AnimationMixer,
-  BoxGeometry,
   Clock,
-  HemisphereLight,
-  Mesh,
-  MeshBasicMaterial,
   PerspectiveCamera,
-  PointLight,
   Scene,
   WebGLRenderer,
 } from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 
 @Component({
   standalone: true,
@@ -34,26 +26,26 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 })
 export class ButterfliesComponent implements AfterViewInit {
   #viewContainer: HTMLElement = inject(ViewContainerRef).element.nativeElement;
-
   #render = new WebGLRenderer({ antialias: true });
   #clock = new Clock();
   #camera = new PerspectiveCamera();
-
   #scene = new Scene();
-  #bloomEffect = new BloomPass();
-  #effectComposer: EffectComposer;
 
   ngAfterViewInit(): void {
     this.#viewContainer.appendChild(this.#render.domElement);
-
     this.#scene.position.set(-0.5, -0.7, 0);
 
     this.#configRenderer();
     this.#mountCamera();
     this.#mountLights();
     this.#loadButterFliesAnimation();
+    // this.#mountControls();
 
     window.addEventListener('resize', () => this.#onResizeWindow());
+
+    window.addEventListener('mousemove', (event) => {
+      gsap.to(this.#scene.rotation, { y: event.clientX / 500 });
+    });
   }
 
   #mountCamera() {
@@ -65,18 +57,29 @@ export class ButterfliesComponent implements AfterViewInit {
     // camera animation en entering scene
     // camera cinematic from top to initial position
     gsap.from(this.#camera.position, {
-      ...{ y: 25, z: -25 }, // setting default position
-      duration: 3,
+      y: 25,
+      z: -25, // setting default position
+      duration: 2,
+      delay: 4,
     });
+  }
+
+  #mountControls() {
+    const orbitControls = new OrbitControls(
+      this.#camera,
+      this.#render.domElement
+    );
+    orbitControls.addEventListener('change', () =>
+      this.#render.render(this.#scene, this.#camera)
+    );
   }
 
   #onResizeWindow() {
     const aspect =
       this.#viewContainer.offsetWidth / this.#viewContainer.offsetHeight;
     this.#camera.aspect = aspect;
-    // this.#camera.lookAt(this.#scene.position);
     this.#camera.updateProjectionMatrix();
-    
+
     this.#configRenderer();
     this.#render.render(this.#scene, this.#camera);
   }
@@ -107,7 +110,7 @@ export class ButterfliesComponent implements AfterViewInit {
         animation.play();
         this.#render.setAnimationLoop(() => {
           if (mixer) {
-            this.#render.setClearColor(0xFFFFFF);
+            this.#render.setClearColor(0xffffff);
             mixer.update(this.#clock.getDelta());
             this.#render.render(this.#scene, this.#camera);
           }

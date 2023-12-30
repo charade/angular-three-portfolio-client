@@ -34,13 +34,13 @@
         }
 
         h1 {
-          letter-spacing: 2px;
-          font-size: 7rem;
+          font-size: 5rem;
           font-weight: 100;
-          font-family: "Fleur de leah";
-          line-height: 6rem;
+          font-family: MontserratMedium;
+          line-height: 5rem;
           height: 15rem;
-          width: 95%;
+          width: 35rem;
+          color: #000000d4;
         }
 
         h3 {
@@ -54,9 +54,6 @@
         &.s-device {
           padding: 0 1rem;
 
-          h1 {
-            font-size: 6rem;
-          }
           h3 {
             width: 3rem;
           }
@@ -65,9 +62,6 @@
         &.sm-device {
           padding: 0 2rem;
 
-          h1 {
-            font-size: 8rem;
-          }
           h3 {
             font-size: 3.5rem;
             width: 40rem;
@@ -89,9 +83,6 @@
           }
           padding-top: 5rem;
 
-          h1 {
-            font-size: 10rem;
-          }
           h3 {
             font-size: 4rem;
             width: 60rem;
@@ -103,9 +94,6 @@
             margin: 4rem 0;
           }
 
-          h1 {
-            font-size: 10rem;
-          }
           h3 {
             font-size: 2.5rem;
             width: 50rem;
@@ -114,17 +102,20 @@
       }
 
       .opacity-animated-title {
-        font-size: 3.5rem;
+        font-size: 4rem;
         font-weight: bolder;
-        color: #8786866a;
+        color: #c9c8c835;
         font-family: MontserratBold;
-        letter-spacing: 1px;
       }
 
       &.soft-skills {
         display: flex;
         flex-direction: column;
         padding-top: 1rem;
+
+        .opacity-animated-title {
+          margin-bottom: 5rem;
+        }
 
         .soft-skills-subtitle {
           position: relative;
@@ -147,7 +138,7 @@
           }
           h3 {
             width: 30rem;
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-family: "Avenir Next";
             font-weight: 700;
           }
@@ -155,43 +146,51 @@
       }
 
       &.hard-skills {
+        display: flex;
+        flex-direction: column;
         position: relative;
 
-        .hard-skills-content {
-          width: 23rem;
-          height: 23rem;
-          position: absolute;
-          left: 10%;
-          top: 25%;
-          font-family: "Avenir Next";
-          opacity: 0;
-          padding: 1.8rem;
-          border: none;
-        }
+        .hard-skills-lists {
+          display: flex;
+          align-items: center;
 
-        h3 {
-          font-size: 2rem;
-          position: relative;
+          .hard-skills-content {
+            display: flex;
+            flex-direction: column;
+            width: 23rem;
+            height: 23rem;
+            font-family: "Avenir Next";
+            padding: 1.8rem;
 
-          &:before {
-            position: absolute;
-            content: "";
-            top: 100%;
-            width: 4rem;
-            height: 0;
-            border-bottom: 2px solid #f0782ec8;
+            ul {
+              padding: 0;
+              font-size: 1.5rem;
+            }
           }
-        }
 
-        p {
-          font-size: 2rem;
-          transform: translateX(2rem);
-          word-spacing: 4px;
+          h3 {
+            font-size: 2rem;
+            position: relative;
+
+            &:before {
+              position: absolute;
+              content: "";
+              top: 100%;
+              width: 4rem;
+              height: 0;
+              border-bottom: 2px solid #f0782ec8;
+            }
+          }
+
+          p {
+            font-size: 2rem;
+            transform: translateX(2rem);
+            word-spacing: 4px;
+          }
         }
 
         .projects {
           display: flex;
-          // opacity: 0;
           position: absolute;
           align-items: center;
           left: 1.5rem;
@@ -202,7 +201,8 @@
           }
 
           h4 {
-            font-size: 2rem;
+            font-size: 1.5rem;
+            font-family: "Avenir Next";
           }
         }
       }

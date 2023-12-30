@@ -160,15 +160,13 @@ export class SkillsSectionsComponent
     );
 
     skillsSectionsTitle.forEach((title) => {
-      console.log(title);
       const splittedTitle = new SplitType(title as HTMLElement, {
         types: 'chars,words',
       });
 
       gsap.to(splittedTitle.chars, {
-        color: '#000',
-        stagger: 0.9,
-        scale: 1.2,
+        color: '#000000de',
+        stagger: 0.5,
         scrollTrigger: {
           containerAnimation: tweenScrollableContainer,
           trigger: title,
@@ -188,26 +186,12 @@ export class SkillsSectionsComponent
           trigger: '.hard-skills-content',
           containerAnimation: tweenScrollableContainer,
           scrub: true,
-          start: 'left 50%',
-          end: '40% center',
+          start: 'left 60%',
+          end: '90% 48%',
         },
       })
-      .to('.hard-skills-content', {
-        borderRadius: '50%',
-        borderBottom: '1px solid',
-      })
-      .to('.stack', {
-        borderRight: '1px solid #f0782ec8',
-        transform: 'translate(-2rem, -10rem)',
-        opacity: 1,
-      })
-
-      .to('.workflow', {
-        borderLeft: '1px solid #f0782ec8',
-        transform: 'translate(3rem, 15rem)',
-        opacity: 1,
-        // ease: 'elastic',
-      })
-      // .from('.projects', { y: 100 });
+      .from('.workflow', { y: -50, opacity: 0 })
+      .from('.stack', { y: 100, opacity: 0 })
+      .from('.projects', { y: 100, opacity: 0 });
   }
 }
