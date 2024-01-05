@@ -10,7 +10,7 @@ export const AppRoutes: Routes = [
   {
     path: RouterPathEnum.SkillsPath,
     loadChildren: () =>
-      import('./routes/skills/skills.module').then((m) => m.SkillsModule),
+      import('./routes/main/main.module').then((m) => m.SkillsModule),
   },
   {
     path: RouterPathEnum.NotFound,
