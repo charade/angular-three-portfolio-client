@@ -83,7 +83,7 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
             duration: 2,
           })
           .to(this.#scene.rotation, {
-            y: '+=2.5',
+            y: '+=2',
             scrollTrigger: {
               scrub: true,
               trigger: this.#viewContainerRef,
@@ -105,7 +105,7 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
     this.#camera.aspect = aspect;
 
     this.#camera = new PerspectiveCamera(75, aspect, 0.1, 100);
-    this.#camera.position.set(0, 0, -5);
+    this.#camera.position.set(0, 0.6, -5);
   }
 
   #onResizeWindow() {
