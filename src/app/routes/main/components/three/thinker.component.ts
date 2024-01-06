@@ -58,7 +58,7 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.#viewContainerRef.appendChild(this.#renderer.domElement);
-    this.#scene.position.set(0.35, -1, 0);
+    this.#scene.position.set(0.35, -0.6, 0);
     this.#renderer.shadowMap.enabled = true;
     this.#renderer.shadowMap.type = PCFSoftShadowMap;
 
@@ -83,7 +83,7 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
             duration: 2,
           })
           .to(this.#scene.rotation, {
-            y: '+=2',
+            y: '+=2.5',
             scrollTrigger: {
               scrub: true,
               trigger: this.#viewContainerRef,
@@ -119,10 +119,12 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
     const ground = new Mesh(
       new PlaneGeometry(100, 100),
       new MeshStandardMaterial({
+        color: 'rgb(254, 249, 245)',
         emissive: 'rgb(254, 249, 245)',
         emissiveIntensity: 0.08,
       })
     );
+
     ground.rotation.x = 80.1;
     ground.receiveShadow = true;
     ground.position.set(0.3, -0.1, -1);

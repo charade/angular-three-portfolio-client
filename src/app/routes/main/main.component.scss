@@ -1,7 +1,6 @@
 :host {
   height: 100%;
   display: block;
-  background-color: rgb(254, 249, 245);
 
   .loader-container {
     position: fixed;
@@ -44,6 +43,7 @@
     flex-direction: column;
     overflow: hidden;
     height: 200vh;
+    // background-color: rgb(255, 251, 245);
 
     & > * {
       height: 100vh;
