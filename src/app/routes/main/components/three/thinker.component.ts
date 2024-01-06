@@ -14,18 +14,23 @@ import { THREE_ENUMS } from 'src/app/common-utils/enums/three.enum';
 import {
   AmbientLight,
   BasicShadowMap,
+  Color,
   DirectionalLight,
   DirectionalLightHelper,
+  DoubleSide,
   HemisphereLight,
   Mesh,
   MeshBasicMaterial,
+  MeshPhongMaterial,
   MeshStandardMaterial,
   PCFSoftShadowMap,
   PerspectiveCamera,
   PlaneGeometry,
   Scene,
   SpotLight,
+  SpotLightHelper,
   Vector2,
+  Vector3,
   WebGLRenderer,
 } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
@@ -61,25 +66,11 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
     this.#mountLights();
     this.#addGround();
     this.#loadThinkerModel();
+    this.#configRenderer();
 
-    const effectComposer = new EffectComposer(this.#renderer);
-    const renderScene = new RenderPass(this.#scene, this.#camera);
-    const bloom = new UnrealBloomPass(
-      new Vector2(window.innerWidth, window.innerHeight),
-      1.6,
-      0.1,
-      0.1
-    );
-    effectComposer.addPass(renderScene);
-    effectComposer.addPass(bloom);
-
-    this.#configRenderer(effectComposer);
-
-    window.addEventListener('resize', () =>
-      this.#onResizeWindow(effectComposer)
-    );
+    window.addEventListener('resize', () => this.#onResizeWindow());
     window.addEventListener('mousemove', (event) => {
-      gsap.to(this.#scene.rotation, { y: event.clientX / 1000 });
+      gsap.to(this.#scene.rotation, { y: event.clientX / 1200 });
     });
 
     this.#subscription = this.onLoadThinkerComplete
@@ -88,15 +79,15 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
         this.animationTimeLine
           .to(this.#camera.position, {
             z: 3,
-            delay: 0.2,
-            duration: 1,
+            delay: 0.1,
+            duration: 2,
           })
           .to(this.#scene.rotation, {
             y: '+=2.5',
             scrollTrigger: {
               scrub: true,
               trigger: this.#viewContainerRef,
-              start: '60% center',
+              start: '51% center',
             },
           })
       );
@@ -117,53 +108,54 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
     this.#camera.position.set(0, 0, -5);
   }
 
-  #onResizeWindow(effectComposer: EffectComposer) {
+  #onResizeWindow() {
     this.#camera.aspect =
       this.#viewContainerRef.offsetWidth / this.#viewContainerRef.offsetHeight;
     this.#camera.updateProjectionMatrix();
-    this.#configRenderer(effectComposer);
+    this.#configRenderer();
   }
 
   #addGround() {
     const ground = new Mesh(
-      new PlaneGeometry(5, 5, 10, 10),
-      new MeshStandardMaterial({ color: 'rgb(254, 249, 245)' })
+      new PlaneGeometry(100, 100),
+      new MeshStandardMaterial({
+        emissive: 'rgb(254, 249, 245)',
+        emissiveIntensity: 0.08,
+      })
     );
-    ground.rotation.x = 80;
-    ground.castShadow = false;
+    ground.rotation.x = 80.1;
     ground.receiveShadow = true;
-
     ground.position.set(0.3, -0.1, -1);
     this.#scene.add(ground);
   }
 
   #mountLights() {
-    const ambientLight = new AmbientLight(0x101010);
-    // const frontDownPointLight = new SpotLight(0xffffff);
-    // const frontUpPointLight = new SpotLight(0xffff0);
-    // frontDownPointLight.castShadow = true;
-    // frontUpPointLight.castShadow = true;
-    const light = new DirectionalLight(0xffffff);
-    light.castShadow = true;
+    const ambientLight = new AmbientLight();
+    const shadowLight = new DirectionalLight();
+    const spotLight = new SpotLight();
 
-    light.position.set(-1, 2, 1); //default; light shining from top
-    // frontDownPointLight.position.set(0, 0, 2);
-    // frontUpPointLight.position.set(-0.5, 1, 2);
+    shadowLight.position.set(-2, 2, 1);
+    spotLight.position.set(-2, 2, this.#scene.position.z);
+    spotLight.target.position.set(2, 0.5, -2);
+    shadowLight.target.position.set(0.03, -0.4, -0.2);
 
-    light.shadow.mapSize = new Vector2(512, 512);
-    light.shadow.camera.near = 0;
-    light.shadow.camera.far = 100;
-    // this.#scene.add(frontDownPointLight);
-    // this.#scene.add(frontUpPointLight);
+    shadowLight.castShadow = true;
+    spotLight.castShadow = true;
+
+    shadowLight.shadow.bias = -0.001;
+    shadowLight.shadow.mapSize = new Vector2(512, 512);
+    shadowLight.shadow.camera.near = 0;
+    shadowLight.shadow.camera.far = 100;
+
     this.#scene.add(ambientLight);
-    this.#scene.add(light);
-    this.#scene.add(new DirectionalLightHelper(light, 3, 0xfff));
+    this.#scene.add(shadowLight);
+    this.#scene.add(spotLight);
   }
 
-  #configRenderer(effectComposer: EffectComposer) {
+  #configRenderer() {
     this.#renderer.setSize(window.innerWidth, window.innerHeight);
     this.#renderer.setPixelRatio(devicePixelRatio);
-    effectComposer.render();
+    this.#renderer.render(this.#scene, this.#camera);
   }
 
   #loadThinkerModel() {
@@ -175,14 +167,25 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
         scene.traverse(function (node) {
           if (node.type === 'Mesh') {
             node.castShadow = true;
-            // node.receiveShadow = true;
+            node.receiveShadow = true;
           }
         });
 
-        this.#renderer.setClearColor('rgb(254, 249, 245)');
+        this.#renderer.setClearColor('#fff');
+
+        const effectComposer = new EffectComposer(this.#renderer);
+        const renderScene = new RenderPass(this.#scene, this.#camera);
+        const bloom = new UnrealBloomPass(
+          new Vector2(window.innerWidth, window.innerHeight),
+          0.24,
+          0.01,
+          0.04
+        );
+        effectComposer.addPass(renderScene);
+        effectComposer.addPass(bloom);
         this.#renderer.setAnimationLoop(() => {
-          this.#renderer.render(this.#scene, this.#camera);
-          this.onLoadThinkerComplete.emit(true);
+          effectComposer.render();
+          this.onLoadThinkerComplete.emit(true); // set model loading fully complete
         });
       },
       (event) => {
