@@ -78,16 +78,15 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
       .subscribe(() =>
         this.animationTimeLine
           .to(this.#camera.position, {
-            z: 3,
-            delay: 0.1,
-            duration: 2,
-          })
+            z: 2.5,
+            duration: 0.2,
+          }, '>-0.5')
           .to(this.#scene.rotation, {
-            y: '+=2.5',
+            y: '+=2',
             scrollTrigger: {
               scrub: true,
               trigger: this.#viewContainerRef,
-              start: '51% center',
+              start: '50% center',
             },
           })
       );
@@ -105,7 +104,7 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
     this.#camera.aspect = aspect;
 
     this.#camera = new PerspectiveCamera(75, aspect, 0.1, 100);
-    this.#camera.position.set(0, 0.6, -5);
+    this.#camera.position.set(0, 0.8, 8);
   }
 
   #onResizeWindow() {
@@ -155,7 +154,7 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
   }
 
   #configRenderer() {
-    this.#renderer.setSize(window.innerWidth, window.innerHeight);
+    this.#renderer.setSize(this.#viewContainerRef.offsetWidth, this.#viewContainerRef.offsetHeight);
     this.#renderer.setPixelRatio(devicePixelRatio);
     this.#renderer.render(this.#scene, this.#camera);
   }

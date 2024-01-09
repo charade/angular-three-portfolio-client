@@ -1,7 +1,6 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
@@ -16,7 +15,7 @@ import { Subscription } from 'rxjs';
 import gsap from 'gsap';
 import SplitType from 'split-type';
 
-import { SkillsScrollProgressbar } from './components/scroll-progressbar/scroll-progressbar.component';
+import { ScrollProgressbar } from './components/scroll-progressbar/scroll-progressbar.component';
 import { ThinkerModelComponent } from './components/three/thinker.component';
 import { AppIconComponent } from 'src/app/shared-components/icon/icon.component';
 import { IconEnum } from 'src/app/shared-components/icon/icon.enums';
@@ -29,7 +28,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
   styleUrls: ['./main.component.scss'],
   imports: [
     TranslateModule,
-    SkillsScrollProgressbar,
+    ScrollProgressbar,
     NgClass,
     ThinkerModelComponent,
     AsyncPipe,
@@ -51,7 +50,6 @@ export class MainComponent implements AfterViewInit, OnInit, OnDestroy {
   animationTimeLine = gsap.timeline();
 
   #mediaSizeObserver = inject(BreakpointObserver);
-  #cd = inject(ChangeDetectorRef);
   #subscriptions: Subscription[] = [];
 
   ngOnInit(): void {
@@ -77,7 +75,6 @@ export class MainComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.#initHorizontalScrollableContainer();
     this.#initSofSkillsSection();
     this.#animateSkillSectionTitle();
     this.#animateHardSkillsContent();
@@ -93,42 +90,12 @@ export class MainComponent implements AfterViewInit, OnInit, OnDestroy {
 
   onLoadingThinkerModelComplete(complete: boolean): void {
     if (complete) {
-      gsap
-        .timeline()
-        .to('.loader-container', { opacity: 0, duration: 0.5 })
-        .to('.loader-container', { x: -300 })
-        .from('.intro-text', {
-          stagger: 0.2,
-          x: 20,
-          scale: 5,
-          opacity: 0,
-          duration: 0.8,
-        });
+      this.animationTimeLine.to('.loader-container', {
+        width: 0,
+        opacity: 0,
+        duration: 0.8,
+      });
     }
-  }
-
-  // set main wrapper horizontal scroll
-  #initHorizontalScrollableContainer(): void {
-    const scrolledSections: HTMLElement[] = Array.from(
-      document.querySelectorAll('section')
-    );
-
-    const scrollableWrapper: HTMLDivElement =
-      document.querySelector('.scroll-wrapper');
-
-    gsap.to(scrolledSections, {
-      xPercent: -100 * (scrolledSections.length - 1),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: scrollableWrapper,
-        pin: true,
-        scrub: true,
-        markers: true,
-        start: 'top top',
-        // defining horizontal scroll end to depend on scroll wrapper.scrollHeight
-        end: () => `+=${scrollableWrapper.offsetWidth}`,
-      },
-    });
   }
 
   #initSofSkillsSection(): void {
@@ -142,9 +109,8 @@ export class MainComponent implements AfterViewInit, OnInit, OnDestroy {
         scrollTrigger: {
           trigger: '.soft-skills-subtitle-content',
           scrub: true,
-          // containerAnimation: this.animationTimeLine,
-          start: '70% top',
-          end: '80% top',
+          start: 'top 90%',
+          // end: '80% top',
         },
       })
       .from('.soft-skills-subtitle', {
@@ -156,8 +122,8 @@ export class MainComponent implements AfterViewInit, OnInit, OnDestroy {
           trigger: '.soft-skills',
           scrub: true,
           containerAnimation: this.animationTimeLine,
-          start: '70% top',
-          end: '80% top',
+          start: 'top 90%',
+          // end: '80% top',
         },
       });
   }
@@ -179,7 +145,7 @@ export class MainComponent implements AfterViewInit, OnInit, OnDestroy {
           containerAnimation: this.animationTimeLine,
           trigger: title,
           scrub: true,
-          start: '70% top',
+          start: 'top 90%',
           end: 'end 15%',
         },
       });
