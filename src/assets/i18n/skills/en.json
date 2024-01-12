@@ -1,11 +1,12 @@
 {
-  "skills.action.scroll": "Scroll down",
-  "skills.intro.title": "Let's bring your ideas to life.",
-  "skills.intro.description": "Let's build an accessible, secure solution and a unique user experience.",
-  "skills.agile": "Agile Certified",
-  "skills.empathetic": "Empathetic",
-  "skills.teamPlayer": "Team player",
-  "skills.communication": "Communication",
-  "skills.creative": "Creativity",
-  "skills.projects": "Projects"
+  "main.action.scroll": "Scroll down",
+  "main.intro.title": "Let's bring your ideas to life.",
+  "main.intro.description": "Let's build an accessible, secure solution and a unique user experience.",
+  "main.agile": "Agile Certified",
+  "main.empathetic": "Empathetic",
+  "main.teamPlayer": "Team player",
+  "main.communication": "Communication",
+  "main.creative": "Creativity",
+  "main.projects": "Projects",
+  "main.contact": "Get in touch"
 }

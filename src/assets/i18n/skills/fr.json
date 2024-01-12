@@ -1,11 +1,12 @@
 {
-  "skills.action.scroll": "Faire défiler",
-  "skills.intro.title": "Donnons vie à vos idées",
-  "skills.intro.description": "Construisons une solution accessible, sécure, et une expérience utilisateur unique.",
-  "skills.agile": "Certifié Agile",
-  "skills.empathetic": "Empathique",
-  "skills.teamPlayer": "Esprit d'équipe",
-  "skills.communication": "Communication",
-  "skills.creative": "Créatif",
-  "skills.projects": "Projets"
+  "main.action.scroll": "Faire défiler",
+  "main.intro.title": "Donnons vie à vos idées",
+  "main.intro.description": "Construisons une solution accessible, sécure, et une expérience utilisateur unique.",
+  "main.agile": "Certifié Agile",
+  "main.empathetic": "Empathique",
+  "main.teamPlayer": "Esprit d'équipe",
+  "main.communication": "Communication",
+  "main.creative": "Créatif",
+  "main.projects": "Projets",
+  "main.contact": "Contactez-moi"
 }

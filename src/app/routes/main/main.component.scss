@@ -11,14 +11,11 @@
     align-items: center;
     justify-content: center;
     background-color: $peach;
-    height: 100vh;
+    height: 102vh;
     width: 105%;
 
-    & > * {
-    }
-
     h4 {
-      font-family: Michroma;
+      font-family: MontserratExtraLight;
       font-size: 1.5rem;
       color: #807e7ed1;
       word-spacing: 4px;
@@ -45,7 +42,6 @@
   .main-wrapper {
     display: flex;
     flex-direction: column;
-    // background-color: $peach;
 
     .intro-container {
       position: relative;
@@ -78,25 +74,12 @@
     }
 
     section {
-      flex-shrink: 0;
-      width: 100%;
+      position: relative;
       height: 100vh;
-
-      .opacity-animated-title {
-        font-size: 4rem;
-        font-weight: bolder;
-        color: #c9c8c835;
-        font-family: MontserratBold;
-      }
 
       &.soft-skills {
         display: flex;
         flex-direction: column;
-        padding-top: 1rem;
-
-        .opacity-animated-title {
-          margin-bottom: 5rem;
-        }
 
         .soft-skills-subtitle {
           position: relative;
@@ -179,6 +162,10 @@
             font-family: "Avenir Next";
           }
         }
+      }
+
+      .projects{
+        background-color: red;
       }
     }
   }

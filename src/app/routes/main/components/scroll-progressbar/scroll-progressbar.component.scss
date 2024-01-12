@@ -1,28 +1,78 @@
 :host {
   position: fixed;
-  top: 50%;
-  left: 1.8rem;
+  top: 63%;
+  left: 1.5rem;
   z-index: 50;
+
   .scroll-container {
     position: relative;
     display: flex;
     align-items: center;
+    width: 3rem;
+    height: 20rem;
 
-    .thin-line {
-      width: 1px;
-      height: 30rem;
-      border-right: 1px solid #6a686855;
-    }
-
-    .scrolled-line {
+    &::before {
+      content: "";
       position: absolute;
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 8px;
-      height: 5rem;
-      border-radius: 3px;
-      background-color: rgb(98, 14, 14);
+      border: 1px solid;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 1px solid;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+
+      & > * {
+        stroke-linecap: round;
+      }
+
+      .thin-line {
+        stroke: #6a686855;
+        stroke-width: 1px;
+      }
+
+      .filled-line {
+        stroke: rgb(98, 14, 14);
+        stroke-width: 4px;
+      }
+    }
+
+    .section-title {
+      position: absolute;
+      font-size: 1rem;
+      font-family: Michroma;
+      left: 2.25rem;
+      width: 15rem;
+
+      &.soft-skills {
+        top: 1rem;
+      }
+      &.hard-skills {
+        top: 6rem;
+      }
+      &.projects {
+        top: 11rem;
+      }
+      &.contact {
+        top: 16rem;
+      }
     }
   }
 }

@@ -78,11 +78,11 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
       .subscribe(() =>
         this.animationTimeLine
           .to(this.#camera.position, {
-            z: 2.5,
-            duration: 0.2,
-          }, '>-0.5')
+            z: 3,
+            duration: 1,
+          })
           .to(this.#scene.rotation, {
-            y: '+=2',
+            y: '+=1.5',
             scrollTrigger: {
               scrub: true,
               trigger: this.#viewContainerRef,

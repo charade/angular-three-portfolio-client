@@ -76,7 +76,6 @@ export class MainComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.#initSofSkillsSection();
-    this.#animateSkillSectionTitle();
     this.#animateHardSkillsContent();
   }
 
@@ -91,9 +90,9 @@ export class MainComponent implements AfterViewInit, OnInit, OnDestroy {
   onLoadingThinkerModelComplete(complete: boolean): void {
     if (complete) {
       this.animationTimeLine.to('.loader-container', {
-        width: 0,
+        height: 0,
         opacity: 0,
-        duration: 0.8,
+        duration: 0.03,
       });
     }
   }
@@ -128,44 +127,20 @@ export class MainComponent implements AfterViewInit, OnInit, OnDestroy {
       });
   }
 
-  #animateSkillSectionTitle(): void {
-    const skillsSectionsTitle = document.querySelectorAll(
-      '.opacity-animated-title'
-    );
-
-    skillsSectionsTitle.forEach((title) => {
-      const splittedTitle = new SplitType(title as HTMLElement, {
-        types: 'chars,words',
-      });
-
-      this.animationTimeLine.to(splittedTitle.chars, {
-        color: 'rgba(0, 0, 0, 0.7)',
-        stagger: 0.5,
-        scrollTrigger: {
-          containerAnimation: this.animationTimeLine,
-          trigger: title,
-          scrub: true,
-          start: 'top 90%',
-          end: 'end 15%',
-        },
-      });
-    });
-  }
-
   #animateHardSkillsContent(): void {
-    gsap
-      .timeline({
-        stagger: 0.5,
-        scrollTrigger: {
-          trigger: '.hard-skills-content',
-          containerAnimation: this.animationTimeLine,
-          scrub: true,
-          start: 'left 60%',
-          end: '90% 48%',
-        },
-      })
-      .from('.workflow', { y: -50, opacity: 0 })
-      .from('.stack', { y: 100, opacity: 0 })
-      .from('.projects', { y: 100, opacity: 0 });
+    // gsap
+    //   .timeline({
+    //     stagger: 0.5,
+    //     scrollTrigger: {
+    //       trigger: '.hard-skills-content',
+    //       containerAnimation: this.animationTimeLine,
+    //       scrub: true,
+    //       start: 'left 60%',
+    //       end: '90% 48%',
+    //     },
+    //   })
+    //   .from('.workflow', { y: -50, opacity: 0 })
+    //   .from('.stack', { y: 100, opacity: 0 })
+    //   .from('.projects', { y: 100, opacity: 0 });
   }
 }
