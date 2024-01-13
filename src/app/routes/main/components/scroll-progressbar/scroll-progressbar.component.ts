@@ -11,17 +11,19 @@ import gsap from 'gsap';
 })
 export class ScrollProgressbar implements AfterViewInit {
   ngAfterViewInit(): void {
-    const sections = document.querySelectorAll('section');
+    const firstSection = document.querySelector('section');
+    const sectionsWrapper: HTMLElement =
+      document.querySelector('.sections-wrapper');
 
-    sections.forEach((section, i) => {
-      gsap.to('.scrolled-line', {
-        top: `+=${11}rem`,
-        scrollTrigger: {
-          trigger: section,
-          scrub: true,
-          start: () => `+=top top`,
-        },
-      });
+    gsap.to('.filled-line', {
+      strokeDashoffset: 0,
+      scrollTrigger: {
+        trigger: firstSection,
+        scrub: true,
+        start: 'top 75%',
+        end: `${sectionsWrapper.clientHeight * 2.3}`,
+        markers: true,
+      },
     });
   }
 }

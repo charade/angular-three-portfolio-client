@@ -1,7 +1,7 @@
 :host {
   position: fixed;
   top: 63%;
-  left: 1.5rem;
+  left: 1rem;
   z-index: 50;
 
   .scroll-container {
@@ -51,6 +51,8 @@
       .filled-line {
         stroke: rgb(98, 14, 14);
         stroke-width: 4px;
+        stroke-dasharray: 300;
+        stroke-dashoffset: 300;
       }
     }
 

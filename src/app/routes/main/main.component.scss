@@ -76,7 +76,7 @@
     section {
       position: relative;
       height: 100vh;
-
+border: 1px solid;
       &.soft-skills {
         display: flex;
         flex-direction: column;
@@ -164,7 +164,7 @@
         }
       }
 
-      .projects{
+      .projects {
         background-color: red;
       }
     }
