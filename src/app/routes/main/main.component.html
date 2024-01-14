@@ -1,19 +1,22 @@
 <div class="loader-container">
-  <h4 class="progress-indicator">{{ loaderProgress() + " %" }}</h4>
+  <h4 class="progress-indicator">{{ loadingProgress() + " %" }}</h4>
   <svg class="loader">
-    <line class="filled" x1="0" y1="25" x2="480" y2="25" />
+    <line class="filled" x1="5" y1="25" x2="260" y2="25" />
     <line
       class="filling"
-      x1="0"
+      x1="5"
       y1="25"
-      x2="480"
+      x2="260"
       y2="25"
-      [style.strokeDashoffset]="300 - loaderProgress() * 3"
+      [style.strokeDashoffset]="300 - loadingProgress() * 3"
     />
   </svg>
 </div>
 
-<app-scroll-progressbar />
+<app-scroll-progressbar
+  [mainTimelineAnimation]="animationTimeLine"
+  [loadingComplete]="loadingComplete()"
+/>
 
 <div class="main-wrapper">
   <div #introSection class="intro-container">
@@ -27,7 +30,8 @@
   </div>
 
   <div class="sections-wrapper">
-    <section class="soft-skills">
+    <section class="section_0 soft-skills">
+      <!-- <soft-skills-section /> -->
       <div id="text" class="soft-skills-subtitle">
         <h3 class="soft-skills-subtitle-content">
           {{ "main.agile" | translate }}
@@ -58,7 +62,7 @@
       </div>
     </section>
 
-    <section class="hard-skills">
+    <section class="section_1 hard-skills">
       <div class="hard-skills-lists">
         <div class="hard-skills-content workflow">
           <h3>Workflow</h3>
@@ -93,7 +97,7 @@
       </div>
     </section>
 
-    <section class="hard-skills">
+    <section class="section_2 hard-skills">
       <div class="hard-skills-lists">
         <div class="hard-skills-content workflow">
           <h3>Workflow</h3>
@@ -128,7 +132,7 @@
       </div>
     </section>
     <!-- get in touch -->
-    <section class="hard-skills last-section">
+    <section class="section_3 hard-skills last-section">
       <div class="hard-skills-lists">
         <div class="hard-skills-content workflow">
           <h3>Workflow</h3>

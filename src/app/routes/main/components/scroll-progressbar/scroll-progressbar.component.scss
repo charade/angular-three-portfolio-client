@@ -1,7 +1,8 @@
+@import "../../../../../styles/colors.scss";
+
 :host {
   position: fixed;
-  top: 63%;
-  left: 1rem;
+  top: 60%;
   z-index: 50;
 
   .scroll-container {
@@ -44,24 +45,25 @@
       }
 
       .thin-line {
-        stroke: #6a686855;
+        stroke: $light-dark;
         stroke-width: 1px;
       }
 
-      .filled-line {
-        stroke: rgb(98, 14, 14);
+      .scroll-progress-line {
+        stroke: $dark-red;
         stroke-width: 4px;
         stroke-dasharray: 300;
         stroke-dashoffset: 300;
       }
     }
 
-    .section-title {
+    h4 {
       position: absolute;
       font-size: 1rem;
       font-family: Michroma;
       left: 2.25rem;
-      width: 15rem;
+      width: 10rem;
+      color: #33333377;
 
       &.soft-skills {
         top: 1rem;
@@ -77,4 +79,7 @@
       }
     }
   }
+}
+.current {
+  color: rgb(182, 5, 5) !important;
 }

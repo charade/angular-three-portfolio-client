@@ -77,16 +77,21 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
       .pipe(skip(1), distinctUntilChanged())
       .subscribe(() =>
         this.animationTimeLine
-          .to(this.#camera.position, {
-            z: 3,
-            duration: 1,
-          })
+          .to(
+            this.#camera.position,
+            {
+              z: 3,
+              duration: 1,
+            },
+            '>-2'
+          )
           .to(this.#scene.rotation, {
             y: '+=1.5',
             scrollTrigger: {
               scrub: true,
               trigger: this.#viewContainerRef,
               start: '50% center',
+              end: '90% 50%',
             },
           })
       );
@@ -154,7 +159,10 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
   }
 
   #configRenderer() {
-    this.#renderer.setSize(this.#viewContainerRef.offsetWidth, this.#viewContainerRef.offsetHeight);
+    this.#renderer.setSize(
+      this.#viewContainerRef.offsetWidth,
+      this.#viewContainerRef.offsetHeight
+    );
     this.#renderer.setPixelRatio(devicePixelRatio);
     this.#renderer.render(this.#scene, this.#camera);
   }

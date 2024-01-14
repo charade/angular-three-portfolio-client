@@ -44,7 +44,8 @@ export class MainComponent implements AfterViewInit, OnInit, OnDestroy {
   isDeviceM: WritableSignal<boolean> = signal(false);
   isDeviceL: WritableSignal<boolean> = signal(false);
   isDeviceXL: WritableSignal<boolean> = signal(false);
-  loaderProgress: WritableSignal<number> = signal(0);
+  loadingProgress: WritableSignal<number> = signal(0);
+  loadingComplete: WritableSignal<boolean> = signal(false);
 
   IconEnum = IconEnum;
   animationTimeLine = gsap.timeline();
@@ -84,7 +85,7 @@ export class MainComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   onLoadingThinkerModel(progress: number): void {
-    this.loaderProgress.set(progress);
+    this.loadingProgress.set(progress);
   }
 
   onLoadingThinkerModelComplete(complete: boolean): void {
@@ -95,6 +96,8 @@ export class MainComponent implements AfterViewInit, OnInit, OnDestroy {
         duration: 0.03,
       });
     }
+
+    this.loadingComplete.set(true);
   }
 
   #initSofSkillsSection(): void {
