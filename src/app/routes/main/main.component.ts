@@ -13,13 +13,13 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { Subscription } from 'rxjs';
 import gsap from 'gsap';
-import SplitType from 'split-type';
 
 import { ScrollProgressbar } from './components/scroll-progressbar/scroll-progressbar.component';
 import { ThinkerModelComponent } from './components/three/thinker.component';
 import { AppIconComponent } from 'src/app/shared-components/icon/icon.component';
 import { IconEnum } from 'src/app/shared-components/icon/icon.enums';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SoftSkills } from './components/soft-skills/soft-skills.component';
 
 @Component({
   standalone: true,
@@ -28,11 +28,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
   styleUrls: ['./main.component.scss'],
   imports: [
     TranslateModule,
-    ScrollProgressbar,
     NgClass,
-    ThinkerModelComponent,
     AsyncPipe,
+    ScrollProgressbar,
+    ThinkerModelComponent,
     AppIconComponent,
+    SoftSkills
+
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -76,7 +78,6 @@ export class MainComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.#initSofSkillsSection();
     this.#animateHardSkillsContent();
   }
 
@@ -98,36 +99,6 @@ export class MainComponent implements AfterViewInit, OnInit, OnDestroy {
     }
 
     this.loadingComplete.set(true);
-  }
-
-  #initSofSkillsSection(): void {
-    this.animationTimeLine
-      .from('.soft-skills-subtitle-content', {
-        // animated skill text content
-        y: 15,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.8,
-        scrollTrigger: {
-          trigger: '.soft-skills-subtitle-content',
-          scrub: true,
-          start: 'top 90%',
-          // end: '80% top',
-        },
-      })
-      .from('.soft-skills-subtitle', {
-        // animated underline
-        width: 0,
-        duration: 4,
-        stagger: 0.5,
-        scrollTrigger: {
-          trigger: '.soft-skills',
-          scrub: true,
-          containerAnimation: this.animationTimeLine,
-          start: 'top 90%',
-          // end: '80% top',
-        },
-      });
   }
 
   #animateHardSkillsContent(): void {

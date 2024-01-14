@@ -76,25 +76,9 @@
     section {
       position: relative;
       height: 100vh;
-border: 1px solid;
+
       &.soft-skills {
-        display: flex;
-        flex-direction: column;
-
-        .soft-skills-subtitle {
-          position: relative;
-          border-bottom: 2px dashed #6b6b6b68;
-          width: 30rem;
-          color: rgb(55, 85, 77);
-          height: 7rem;
-
-          h3.soft-skills-subtitle-content {
-            width: 30rem;
-            font-size: 3rem;
-            font-family: "Avenir Next";
-            font-weight: 700;
-          }
-        }
+        position: relative;
       }
 
       &.hard-skills {
