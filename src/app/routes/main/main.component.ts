@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   OnDestroy,
@@ -15,11 +14,12 @@ import { Subscription } from 'rxjs';
 import gsap from 'gsap';
 
 import { ScrollProgressbar } from './components/scroll-progressbar/scroll-progressbar.component';
-import { ThinkerModelComponent } from './components/three/thinker.component';
+import { CanvasComponent } from './three/canvas.component';
 import { AppIconComponent } from 'src/app/shared-components/icon/icon.component';
 import { IconEnum } from 'src/app/shared-components/icon/icon.enums';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SoftSkills } from './components/soft-skills/soft-skills.component';
+import { IntroComponent } from './components/intro/intro.component';
+import { RodinThinkerModelService } from './three/services/rodin-thinker';
 
 @Component({
   standalone: true,
@@ -31,14 +31,14 @@ import { SoftSkills } from './components/soft-skills/soft-skills.component';
     NgClass,
     AsyncPipe,
     ScrollProgressbar,
-    ThinkerModelComponent,
+    CanvasComponent,
     AppIconComponent,
-    SoftSkills
-
+    IntroComponent,
   ],
+  providers: [RodinThinkerModelService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainComponent implements AfterViewInit, OnInit, OnDestroy {
+export class MainComponent implements OnInit, OnDestroy {
   isDeviceHandset: WritableSignal<boolean> = signal(false);
   isDeviceS: WritableSignal<boolean> = signal(false);
   isDeviceTabletLandscape: WritableSignal<boolean> = signal(false);
@@ -77,10 +77,6 @@ export class MainComponent implements AfterViewInit, OnInit, OnDestroy {
     );
   }
 
-  ngAfterViewInit(): void {
-    this.#animateHardSkillsContent();
-  }
-
   ngOnDestroy(): void {
     this.#subscriptions.forEach((s) => s.unsubscribe());
   }
@@ -99,22 +95,5 @@ export class MainComponent implements AfterViewInit, OnInit, OnDestroy {
     }
 
     this.loadingComplete.set(true);
-  }
-
-  #animateHardSkillsContent(): void {
-    // gsap
-    //   .timeline({
-    //     stagger: 0.5,
-    //     scrollTrigger: {
-    //       trigger: '.hard-skills-content',
-    //       containerAnimation: this.animationTimeLine,
-    //       scrub: true,
-    //       start: 'left 60%',
-    //       end: '90% 48%',
-    //     },
-    //   })
-    //   .from('.workflow', { y: -50, opacity: 0 })
-    //   .from('.stack', { y: 100, opacity: 0 })
-    //   .from('.projects', { y: 100, opacity: 0 });
   }
 }

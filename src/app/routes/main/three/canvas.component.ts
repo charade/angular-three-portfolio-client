@@ -13,38 +13,31 @@ import { Subscription, distinctUntilChanged, skip } from 'rxjs';
 import { THREE_ENUMS } from 'src/app/common-utils/enums/three.enum';
 import {
   AmbientLight,
-  BasicShadowMap,
-  Color,
   DirectionalLight,
-  DirectionalLightHelper,
-  DoubleSide,
-  HemisphereLight,
   Mesh,
-  MeshBasicMaterial,
-  MeshPhongMaterial,
   MeshStandardMaterial,
   PCFSoftShadowMap,
   PerspectiveCamera,
   PlaneGeometry,
   Scene,
   SpotLight,
-  SpotLightHelper,
   Vector2,
-  Vector3,
   WebGLRenderer,
 } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
+import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass';
+import { RodinThinkerModelService } from './services/rodin-thinker';
 
 @Component({
   standalone: true,
-  selector: 'app-thinker',
-  templateUrl: './thinker.component.html',
-  styleUrls: ['./thinker.component.scss'],
+  selector: 'app-canvas',
+  templateUrl: './canvas.component.html',
+  styleUrls: ['./canvas.component.scss'],
 })
-export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
+export class CanvasComponent implements AfterViewInit, OnDestroy {
   @Input() animationTimeLine: gsap.core.Timeline;
 
   @Output() progressChange = new EventEmitter<number>();
@@ -55,17 +48,26 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
   #scene = new Scene();
   #subscription: Subscription;
   #viewContainerRef = inject(ViewContainerRef).element.nativeElement;
+  #rodinThinkerModelService = inject(RodinThinkerModelService);
 
   ngAfterViewInit(): void {
     this.#viewContainerRef.appendChild(this.#renderer.domElement);
-    this.#scene.position.set(0.35, -0.6, 0);
+    this.#scene.position.y = -0.8;
     this.#renderer.shadowMap.enabled = true;
     this.#renderer.shadowMap.type = PCFSoftShadowMap;
 
     this.#mountCamera();
     this.#mountLights();
     this.#addGround();
-    this.#loadThinkerModel();
+
+    this.#rodinThinkerModelService.load(
+      this.#renderer,
+      this.#scene,
+      this.#camera,
+      this.onLoadThinkerComplete,
+      this.progressChange
+    );
+
     this.#configRenderer();
 
     window.addEventListener('resize', () => this.#onResizeWindow());
@@ -80,18 +82,19 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
           .to(
             this.#camera.position,
             {
-              z: 3,
+              z: 2,
               duration: 1,
+              ease: 'sine',
             },
-            '>-2'
+            '>-2.5'
           )
           .to(this.#scene.rotation, {
-            y: '+=1.5',
+            y: '+=1.2',
             scrollTrigger: {
               scrub: true,
               trigger: this.#viewContainerRef,
               start: '50% center',
-              end: '90% 50%',
+              end: '95% 5%',
             },
           })
       );
@@ -123,9 +126,8 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
     const ground = new Mesh(
       new PlaneGeometry(100, 100),
       new MeshStandardMaterial({
-        color: 'rgb(254, 249, 245)',
         emissive: 'rgb(254, 249, 245)',
-        emissiveIntensity: 0.08,
+        emissiveIntensity: 0.01,
       })
     );
 
@@ -138,20 +140,20 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
   #mountLights() {
     const ambientLight = new AmbientLight();
     const shadowLight = new DirectionalLight();
-    const spotLight = new SpotLight();
+    const spotLight = new SpotLight(0xffffff, 0.5);
 
     shadowLight.position.set(-2, 2, 1);
-    spotLight.position.set(-2, 2, this.#scene.position.z);
+    spotLight.position.set(2, 2, -this.#scene.position.z);
     spotLight.target.position.set(2, 0.5, -2);
-    shadowLight.target.position.set(0.03, -0.4, -0.2);
+    shadowLight.target.position.set(0.02, -0.4, -0.2);
 
     shadowLight.castShadow = true;
     spotLight.castShadow = true;
 
     shadowLight.shadow.bias = -0.001;
-    shadowLight.shadow.mapSize = new Vector2(512, 512);
+    shadowLight.shadow.mapSize = new Vector2(2048, 2048);
     shadowLight.shadow.camera.near = 0;
-    shadowLight.shadow.camera.far = 100;
+    shadowLight.shadow.camera.far = 300;
 
     this.#scene.add(ambientLight);
     this.#scene.add(shadowLight);
@@ -167,40 +169,5 @@ export class ThinkerModelComponent implements AfterViewInit, OnDestroy {
     this.#renderer.render(this.#scene, this.#camera);
   }
 
-  #loadThinkerModel() {
-    new GLTFLoader().load(
-      THREE_ENUMS.MODELS.THINKER,
-      ({ scene }) => {
-        this.#scene.add(scene);
-
-        scene.traverse(function (node) {
-          if (node.type === 'Mesh') {
-            node.castShadow = true;
-            node.receiveShadow = true;
-          }
-        });
-
-        this.#renderer.setClearColor('#fff');
-
-        const effectComposer = new EffectComposer(this.#renderer);
-        const renderScene = new RenderPass(this.#scene, this.#camera);
-        const bloom = new UnrealBloomPass(
-          new Vector2(window.innerWidth, window.innerHeight),
-          0.24,
-          0.01,
-          0.04
-        );
-        effectComposer.addPass(renderScene);
-        effectComposer.addPass(bloom);
-        this.#renderer.setAnimationLoop(() => {
-          effectComposer.render();
-          this.onLoadThinkerComplete.emit(true); // set model loading fully complete
-        });
-      },
-      (event) => {
-        const progress = Math.floor((event.loaded * 100) / event.total);
-        this.progressChange.emit(progress);
-      }
-    );
-  }
+  #loadThinkerModel() {}
 }

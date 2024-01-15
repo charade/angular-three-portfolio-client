@@ -43,34 +43,11 @@
     display: flex;
     flex-direction: column;
 
-    .intro-container {
-      position: relative;
+    .canvas {
+      position: fixed;
+      z-index: 30;
       height: 100vh;
-
-      & > * {
-        position: absolute;
-      }
-
-      h1 {
-        left: 2rem;
-        top: 1rem;
-        font-size: 5rem;
-        font-family: Italiana;
-        line-height: 5rem;
-        max-width: 30rem;
-        text-wrap: wrap;
-        color: #b11313;
-      }
-
-      h2 {
-        top: 17rem;
-        left: 2.8rem;
-        font-size: 1.8rem;
-        font-family: MontserratLight;
-        font-weight: 400;
-        max-width: 32rem;
-        text-wrap: wrap;
-      }
+      display: block;
     }
 
     section {

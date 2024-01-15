@@ -19,48 +19,17 @@
 />
 
 <div class="main-wrapper">
-  <div #introSection class="intro-container">
-    <app-thinker
+  <div #introSection class="canvas">
+    <app-canvas
       [animationTimeLine]="animationTimeLine"
       (progressChange)="onLoadingThinkerModel($event)"
       (onLoadThinkerComplete)="onLoadingThinkerModelComplete($event)"
     />
-    <h1 class="intro-text">{{ "main.intro.title" | translate }}</h1>
-    <h2 class="intro-text">{{ "main.intro.description" | translate }}</h2>
+    <app-intro />
   </div>
 
   <div class="sections-wrapper">
-    <section class="section_0 soft-skills">
-      <soft-skills-section />
-      <!-- <div id="text" class="soft-skills-subtitle">
-        <h3 class="soft-skills-subtitle-content">
-          {{ "main.agile" | translate }}
-        </h3>
-      </div>
-
-      <div class="soft-skills-subtitle">
-        <h3 class="soft-skills-subtitle-content">
-          {{ "main.empathetic" | translate }}
-        </h3>
-      </div>
-
-      <div class="soft-skills-subtitle">
-        <h3 class="soft-skills-subtitle-content">
-          {{ "main.teamPlayer" | translate }}
-        </h3>
-      </div>
-
-      <div class="soft-skills-subtitle">
-        <h3 class="soft-skills-subtitle-content">
-          {{ "main.communication" | translate }}
-        </h3>
-      </div>
-      <div class="soft-skills-subtitle">
-        <h3 class="soft-skills-subtitle-content">
-          {{ "main.creative" | translate }}
-        </h3>
-      </div> -->
-    </section>
+    <section class="section_0 soft-skills"></section>
 
     <section class="section_1 hard-skills">
       <div class="hard-skills-lists">

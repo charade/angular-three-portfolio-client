@@ -10,5 +10,6 @@ export namespace THREE_ENUMS {
   export enum MODELS {
     AVATAR = './assets/three-scenes/animated_speaking_avatar.glb',
     THINKER = './assets/three-scenes/thinker.glb',
+    CELESTIAL = './assets/three-scenes/celestial.glb',
   }
 }
