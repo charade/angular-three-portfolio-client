@@ -23,15 +23,15 @@
     <app-canvas
       [animationTimeLine]="animationTimeLine"
       (progressChange)="onLoadingThinkerModel($event)"
-      (onLoadThinkerComplete)="onLoadingThinkerModelComplete($event)"
+      (onLoadModelsComplete)="onLoadModelsComplete($event)"
     />
     <app-intro />
   </div>
 
   <div class="sections-wrapper">
-    <section class="section_0 soft-skills"></section>
-
-    <section class="section_1 hard-skills">
+    <section class="fake_section"></section>
+    <section class="section_0 scrollable soft-skills"></section>
+    <section class="section_1 scrollable hard-skills">
       <div class="hard-skills-lists">
         <div class="hard-skills-content workflow">
           <h3>Workflow</h3>
@@ -66,7 +66,7 @@
       </div>
     </section>
 
-    <section class="section_2 hard-skills">
+    <section class="section_2 scrollable hard-skills">
       <div class="hard-skills-lists">
         <div class="hard-skills-content workflow">
           <h3>Workflow</h3>
@@ -101,7 +101,7 @@
       </div>
     </section>
     <!-- get in touch -->
-    <section class="section_3 hard-skills last-section">
+    <section class="section_3 scrollable hard-skills last-section">
       <div class="hard-skills-lists">
         <div class="hard-skills-content workflow">
           <h3>Workflow</h3>

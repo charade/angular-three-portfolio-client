@@ -18,27 +18,27 @@ export class ScrollProgressbar implements AfterViewInit {
           x: -20,
           opacity: 0,
           duration: 0.5,
-          delay: 0.2,
+          // delay: 0.8,
         })
         .from('.section-title', { x: 15, opacity: 0, stagger: 0.2 });
     }
   }
+
   ngAfterViewInit(): void {
-    const firstSection = document.querySelector('section');
     const sectionsWrapper: HTMLElement =
       document.querySelector('.sections-wrapper');
 
     gsap.to('.scroll-progress-line', {
       strokeDashoffset: 0,
       scrollTrigger: {
-        trigger: firstSection,
+        trigger: '.soft-skills',
         scrub: true,
         start: 'top 75%',
-        end: `${sectionsWrapper.clientHeight * 2.3}`,
+        end: `${sectionsWrapper.clientHeight * 2}`,
       },
     });
 
-    document.querySelectorAll('section').forEach((_, i) => {
+    document.querySelectorAll('section.scrollable').forEach((_, i) => {
       const currentSection = document.querySelector(`.scrolled-section_${i}`);
       gsap.to(currentSection, {
         scrollTrigger: {

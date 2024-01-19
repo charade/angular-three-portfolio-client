@@ -8,9 +8,7 @@ import {
   ViewContainerRef,
   inject,
 } from '@angular/core';
-import gsap from 'gsap';
 import { Subscription, distinctUntilChanged, skip } from 'rxjs';
-import { THREE_ENUMS } from 'src/app/common-utils/enums/three.enum';
 import {
   AmbientLight,
   DirectionalLight,
@@ -19,17 +17,17 @@ import {
   PCFSoftShadowMap,
   PerspectiveCamera,
   PlaneGeometry,
+  PointLight,
+  PointLightHelper,
   Scene,
   SpotLight,
   Vector2,
   WebGLRenderer,
 } from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
-import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass';
+
 import { RodinThinkerModelService } from './services/rodin-thinker';
+import { WomanOnStairsModelService } from './services/woman-on-stairs';
+import gsap from 'gsap';
 
 @Component({
   standalone: true,
@@ -41,21 +39,22 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   @Input() animationTimeLine: gsap.core.Timeline;
 
   @Output() progressChange = new EventEmitter<number>();
-  @Output() onLoadThinkerComplete = new EventEmitter<boolean>();
-
+  @Output() onLoadModelsComplete = new EventEmitter<boolean>();
+  #camera: PerspectiveCamera;
   #renderer = new WebGLRenderer();
-  #camera = new PerspectiveCamera();
   #scene = new Scene();
   #subscription: Subscription;
   #viewContainerRef = inject(ViewContainerRef).element.nativeElement;
   #rodinThinkerModelService = inject(RodinThinkerModelService);
+  #womanOnStairsModelService = inject(WomanOnStairsModelService);
 
   ngAfterViewInit(): void {
     this.#viewContainerRef.appendChild(this.#renderer.domElement);
     this.#scene.position.y = -0.8;
+    this.#scene.position.x = -0.4;
     this.#renderer.shadowMap.enabled = true;
     this.#renderer.shadowMap.type = PCFSoftShadowMap;
-
+    this.#renderer.setClearColor('rgb(255, 250, 243)');
     this.#mountCamera();
     this.#mountLights();
     this.#addGround();
@@ -64,40 +63,59 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
       this.#renderer,
       this.#scene,
       this.#camera,
-      this.onLoadThinkerComplete,
+      this.onLoadModelsComplete,
       this.progressChange
+    );
+
+    this.#womanOnStairsModelService.load(
+      this.#renderer,
+      this.#scene,
+      this.#camera
     );
 
     this.#configRenderer();
 
     window.addEventListener('resize', () => this.#onResizeWindow());
-    window.addEventListener('mousemove', (event) => {
-      gsap.to(this.#scene.rotation, { y: event.clientX / 1200 });
-    });
 
-    this.#subscription = this.onLoadThinkerComplete
+    this.#subscription = this.onLoadModelsComplete
       .pipe(skip(1), distinctUntilChanged())
-      .subscribe(() =>
-        this.animationTimeLine
+      .subscribe(() => {
+        this.animationTimeLine.from(
+          this.#scene.position,
+          {
+            z: -5,
+            duration: 1,
+            ease: 'sine',
+          },
+          '>-1.8'
+        );
+
+        gsap
+          .timeline({
+            ease: 'none',
+            scrollTrigger: {
+              trigger: 'section.soft-skills', // soft-skills section
+              start: 'top 70%',
+              end: 'top 60%',
+              scrub: 4,
+            },
+          })
           .to(
             this.#camera.position,
             {
-              z: 2,
-              duration: 1,
-              ease: 'sine',
+              z: this.#camera.position.z + 1,
             },
-            '>-2.5'
+            'enter-soft-skills'
           )
-          .to(this.#scene.rotation, {
-            y: '+=1.2',
-            scrollTrigger: {
-              scrub: true,
-              trigger: this.#viewContainerRef,
-              start: '50% center',
-              end: '95% 5%',
+          .to(
+            this.#camera.rotation,
+            {
+              y: '-=0.8',
+              // duration: 5,
             },
-          })
-      );
+            'enter-soft-skills'
+          );
+      });
   }
 
   ngOnDestroy(): void {
@@ -107,33 +125,30 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   }
 
   #mountCamera() {
-    const aspect =
-      this.#viewContainerRef.offsetWidth / this.#viewContainerRef.offsetHeight;
-    this.#camera.aspect = aspect;
-
-    this.#camera = new PerspectiveCamera(75, aspect, 0.1, 100);
-    this.#camera.position.set(0, 0.8, 8);
+    const aspect = window.innerWidth / window.innerHeight;
+    this.#camera = new PerspectiveCamera(35, aspect, 0.1, 100);
+    this.#camera.position.set(0, 0.5, 2)
   }
 
   #onResizeWindow() {
-    this.#camera.aspect =
-      this.#viewContainerRef.offsetWidth / this.#viewContainerRef.offsetHeight;
+    this.#camera.aspect = window.innerWidth / window.innerHeight;
     this.#camera.updateProjectionMatrix();
+    this.#camera.updateMatrixWorld();
     this.#configRenderer();
   }
 
   #addGround() {
-    const ground = new Mesh(
-      new PlaneGeometry(100, 100),
-      new MeshStandardMaterial({
-        emissive: 'rgb(254, 249, 245)',
-        emissiveIntensity: 0.01,
-      })
-    );
+    const planeGeometry = new PlaneGeometry(500, 500);
+    const planeMaterial = new MeshStandardMaterial({
+      emissiveIntensity: 0.007,
+    });
 
+    const ground = new Mesh(planeGeometry, planeMaterial);
+
+    ground.position.set(0.3, 0, 50);
     ground.rotation.x = 80.1;
     ground.receiveShadow = true;
-    ground.position.set(0.3, -0.1, -1);
+
     this.#scene.add(ground);
   }
 
@@ -141,11 +156,11 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     const ambientLight = new AmbientLight();
     const shadowLight = new DirectionalLight();
     const spotLight = new SpotLight(0xffffff, 0.5);
+    const pointLight = new PointLight(0xffffff);
 
     shadowLight.position.set(-2, 2, 1);
     spotLight.position.set(2, 2, -this.#scene.position.z);
-    spotLight.target.position.set(2, 0.5, -2);
-    shadowLight.target.position.set(0.02, -0.4, -0.2);
+    pointLight.position.set(-1, 3, -1);
 
     shadowLight.castShadow = true;
     spotLight.castShadow = true;
@@ -158,16 +173,13 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     this.#scene.add(ambientLight);
     this.#scene.add(shadowLight);
     this.#scene.add(spotLight);
+    this.#scene.add(pointLight);
+    this.#scene.add(new PointLightHelper(pointLight));
   }
 
   #configRenderer() {
-    this.#renderer.setSize(
-      this.#viewContainerRef.offsetWidth,
-      this.#viewContainerRef.offsetHeight
-    );
+    this.#renderer.setSize(window.innerWidth, window.innerHeight);
     this.#renderer.setPixelRatio(devicePixelRatio);
     this.#renderer.render(this.#scene, this.#camera);
   }
-
-  #loadThinkerModel() {}
 }

@@ -20,6 +20,7 @@ import { IconEnum } from 'src/app/shared-components/icon/icon.enums';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { IntroComponent } from './components/intro/intro.component';
 import { RodinThinkerModelService } from './three/services/rodin-thinker';
+import { WomanOnStairsModelService } from './three/services/woman-on-stairs';
 
 @Component({
   standalone: true,
@@ -35,7 +36,7 @@ import { RodinThinkerModelService } from './three/services/rodin-thinker';
     AppIconComponent,
     IntroComponent,
   ],
-  providers: [RodinThinkerModelService],
+  providers: [RodinThinkerModelService, WomanOnStairsModelService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainComponent implements OnInit, OnDestroy {
@@ -85,7 +86,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.loadingProgress.set(progress);
   }
 
-  onLoadingThinkerModelComplete(complete: boolean): void {
+  onLoadModelsComplete(complete: boolean): void {
     if (complete) {
       this.animationTimeLine.to('.loader-container', {
         height: 0,

@@ -47,21 +47,20 @@
       position: fixed;
       z-index: 30;
       height: 100vh;
-      display: block;
     }
 
     section {
       position: relative;
       height: 100vh;
+      // z-index: 40;
 
       &.soft-skills {
-        position: relative;
+        border: 1px solid;
       }
 
       &.hard-skills {
         display: flex;
         flex-direction: column;
-        position: relative;
 
         .hard-skills-lists {
           display: flex;

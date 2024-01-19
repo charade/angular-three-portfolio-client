@@ -2,8 +2,7 @@
 
 :host {
   position: fixed;
-  top: 60%;
-  left: -0.5rem;
+  top: 65%;
   z-index: 50;
 
   .scroll-container {
@@ -60,10 +59,10 @@
 
     h4 {
       position: absolute;
-      font-size: 1rem;
-      font-family: Michroma;
+      font-size: 1.5rem;
+      font-family: Italiana;
       left: 2.25rem;
-      width: 10rem;
+      width: 13rem;
       color: #33333377;
 
       &.soft-skills {
