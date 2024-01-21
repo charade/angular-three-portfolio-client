@@ -87,7 +87,7 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
             duration: 1,
             ease: 'sine',
           },
-          '>-1.8'
+          '>-1.5'
         );
 
         gsap
@@ -111,7 +111,6 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
             this.#camera.rotation,
             {
               y: '-=0.8',
-              // duration: 5,
             },
             'enter-soft-skills'
           );
@@ -140,7 +139,7 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   #addGround() {
     const planeGeometry = new PlaneGeometry(500, 500);
     const planeMaterial = new MeshStandardMaterial({
-      emissiveIntensity: 0.007,
+      emissiveIntensity: 0.004,
     });
 
     const ground = new Mesh(planeGeometry, planeMaterial);

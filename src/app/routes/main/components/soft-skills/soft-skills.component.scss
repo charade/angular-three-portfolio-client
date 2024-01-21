@@ -1,0 +1,48 @@
+:host {
+  position: absolute;
+  top: 2.5rem;
+  left: 2rem;
+
+  .soft-skills-catch-phrase-container {
+    display: flex;
+    flex-direction: column;
+    width: 35rem;
+    height: 5.25rem;
+    border-left: 4px solid rgba(111, 22, 26, 0.495);
+    padding: 0.25rem 0;
+
+    h2 {
+      font-size: 2rem;
+      color: rgb(148, 21, 27);
+      font-family: Italiana;
+      margin: 0 1rem;
+    }
+
+    .soft-skills-list {
+      margin: 5rem 0;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      list-style: none;
+      list-style-position: outside;
+
+      & > * {
+        position: relative;
+        margin-bottom: 1rem;
+        font-family: RobotoLight;
+        font-size: 1.8rem;
+        padding: 0 1rem;
+        transform-style: preserve-3d;
+
+        &::before {
+          content: "";
+          position: absolute;
+          height: 100%;
+          left: -0.5rem;
+          border-left: 4px solid #0000007a;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+}

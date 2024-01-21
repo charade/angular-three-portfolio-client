@@ -17,8 +17,7 @@ export class ScrollProgressbar implements AfterViewInit {
         .from('.scroll-progressbar', {
           x: -20,
           opacity: 0,
-          duration: 0.5,
-          // delay: 0.8,
+          duration: 0.3,
         })
         .from('.section-title', { x: 15, opacity: 0, stagger: 0.2 });
     }

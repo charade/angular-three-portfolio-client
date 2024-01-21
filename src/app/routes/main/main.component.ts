@@ -21,6 +21,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { IntroComponent } from './components/intro/intro.component';
 import { RodinThinkerModelService } from './three/services/rodin-thinker';
 import { WomanOnStairsModelService } from './three/services/woman-on-stairs';
+import { SoftSkillsComponent } from './components/soft-skills/soft-skills.component';
 
 @Component({
   standalone: true,
@@ -35,6 +36,7 @@ import { WomanOnStairsModelService } from './three/services/woman-on-stairs';
     CanvasComponent,
     AppIconComponent,
     IntroComponent,
+    SoftSkillsComponent,
   ],
   providers: [RodinThinkerModelService, WomanOnStairsModelService],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -88,11 +90,11 @@ export class MainComponent implements OnInit, OnDestroy {
 
   onLoadModelsComplete(complete: boolean): void {
     if (complete) {
-      this.animationTimeLine.to('.loader-container', {
-        height: 0,
-        opacity: 0,
-        duration: 0.03,
-      });
+      this.animationTimeLine
+        .to('.loader-container > *', {
+          opacity: 0,
+        })
+        .to('.loader-container', { height: 0, duration: 0.5 });
     }
 
     this.loadingComplete.set(true);

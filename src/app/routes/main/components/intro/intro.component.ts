@@ -14,11 +14,11 @@ export class IntroComponent implements AfterViewInit {
     gsap.to('.intro-text', {
       stagger: 0.3,
       opacity: 0,
-      y: -20,
+      y: -25,
       scrollTrigger: {
-        trigger: 'section.soft-skills', // soft-skills section
-        start: 'top center%',
-        end: 'top 40%',
+        trigger: 'section.soft-skills',
+        start: 'top 75%',
+        end: 'top 75%',
         scrub: 2,
       },
     });

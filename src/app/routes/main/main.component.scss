@@ -14,10 +14,14 @@
     height: 102vh;
     width: 105%;
 
+    & > * {
+      margin: -0.25rem 0;
+    }
+
     h4 {
-      font-family: MontserratExtraLight;
+      font-family: RobotoThin;
       font-size: 1.5rem;
-      color: #807e7ed1;
+      color: #807e7e;
       word-spacing: 4px;
     }
 
@@ -26,7 +30,7 @@
       height: 5rem;
 
       line.filled {
-        stroke: #c8c5c54a;
+        stroke: #c8c5c5af;
         stroke-width: 3px;
       }
 
@@ -34,7 +38,7 @@
         stroke: rgb(189, 26, 26);
         stroke-width: 2px;
         stroke-dasharray: 300;
-        filter: drop-shadow(0 3px 1px #9c9c9c);
+        filter: drop-shadow(0 1px 1px #9c9c9c);
       }
     }
   }
@@ -53,10 +57,6 @@
       position: relative;
       height: 100vh;
       // z-index: 40;
-
-      &.soft-skills {
-        border: 1px solid;
-      }
 
       &.hard-skills {
         display: flex;

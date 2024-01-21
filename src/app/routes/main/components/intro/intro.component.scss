@@ -1,25 +1,24 @@
 :host {
   & > * {
     position: absolute;
+    left: 1.5rem;
   }
   h1 {
-    left: 2rem;
     top: 1rem;
-    font-size: 5rem;
+    font-size: 4rem;
     font-family: Italiana;
-    line-height: 5rem;
+    line-height: 4.5rem;
     width: 30rem;
     text-wrap: wrap;
     color: #b11313;
   }
 
   h2 {
-    top: 17rem;
-    left: 2.8rem;
+    top: 20rem;
     font-size: 1.8rem;
-    font-family: Italiana;
+    font-family: RobotoLight;
     font-weight: 200;
-    width: 32rem;
+    width: 28rem;
     text-wrap: wrap;
   }
 }

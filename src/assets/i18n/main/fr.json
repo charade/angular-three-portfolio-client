@@ -8,5 +8,10 @@
   "main.communication": "Communication",
   "main.creative": "Créatif",
   "main.projects": "Projets",
-  "main.contact": "Contactez-moi"
+  "main.contact": "Contactez-moi",
+  "main.soft.skills.catchPhrase.you": "Vous avez des défis,",
+  "main.soft.skills.catchPhrase.me": "J'aime trouver des solutions...",
+  "main.soft.skills.solution.optimized": "Optimisées",
+  "main.soft.skills.solution.pragmatic": "Pragmatiques",
+  "main.soft.skills.solution.accessible": "Accessibles"
 }
