@@ -40,5 +40,15 @@ export class SoftSkillsComponent implements AfterViewInit {
         scrub: 2,
       },
     });
+
+    softSkillsAnimationTimeline.to('.soft-skills-catch-phrase-container', {
+      y: 50,
+      scrollTrigger: {
+        trigger: '.soft-skills',
+        start: 'top 5%',
+        end: 'top top',
+        scrub: 2,
+      },
+    });
   }
 }

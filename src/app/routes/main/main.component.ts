@@ -22,6 +22,7 @@ import { IntroComponent } from './components/intro/intro.component';
 import { RodinThinkerModelService } from './three/services/rodin-thinker';
 import { WomanOnStairsModelService } from './three/services/woman-on-stairs';
 import { SoftSkillsComponent } from './components/soft-skills/soft-skills.component';
+import { RedWallModelService } from './three/services/red-wall';
 
 @Component({
   standalone: true,
@@ -38,7 +39,11 @@ import { SoftSkillsComponent } from './components/soft-skills/soft-skills.compon
     IntroComponent,
     SoftSkillsComponent,
   ],
-  providers: [RodinThinkerModelService, WomanOnStairsModelService],
+  providers: [
+    RodinThinkerModelService,
+    WomanOnStairsModelService,
+    RedWallModelService,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainComponent implements OnInit, OnDestroy {

@@ -11,23 +11,25 @@ import {
 import { Subscription, distinctUntilChanged, skip } from 'rxjs';
 import {
   AmbientLight,
+  Color,
   DirectionalLight,
   Mesh,
-  MeshStandardMaterial,
+  MeshPhysicalMaterial,
   PCFSoftShadowMap,
   PerspectiveCamera,
   PlaneGeometry,
-  PointLight,
-  PointLightHelper,
   Scene,
   SpotLight,
   Vector2,
   WebGLRenderer,
+  SpotLightHelper,
+  DirectionalLightHelper,
 } from 'three';
 
 import { RodinThinkerModelService } from './services/rodin-thinker';
 import { WomanOnStairsModelService } from './services/woman-on-stairs';
 import gsap from 'gsap';
+import { RedWallModelService } from './services/red-wall';
 
 @Component({
   standalone: true,
@@ -47,6 +49,7 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   #viewContainerRef = inject(ViewContainerRef).element.nativeElement;
   #rodinThinkerModelService = inject(RodinThinkerModelService);
   #womanOnStairsModelService = inject(WomanOnStairsModelService);
+  #redWallModelService = inject(RedWallModelService);
 
   ngAfterViewInit(): void {
     this.#viewContainerRef.appendChild(this.#renderer.domElement);
@@ -73,6 +76,7 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
       this.#camera
     );
 
+    this.#redWallModelService.load(this.#renderer, this.#scene, this.#camera);
     this.#configRenderer();
 
     window.addEventListener('resize', () => this.#onResizeWindow());
@@ -125,8 +129,8 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
 
   #mountCamera() {
     const aspect = window.innerWidth / window.innerHeight;
-    this.#camera = new PerspectiveCamera(35, aspect, 0.1, 100);
-    this.#camera.position.set(0, 0.5, 2)
+    this.#camera = new PerspectiveCamera(35, aspect, 0.1, 1000);
+    this.#camera.position.set(0, 0.5, 2);
   }
 
   #onResizeWindow() {
@@ -137,9 +141,10 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   }
 
   #addGround() {
-    const planeGeometry = new PlaneGeometry(500, 500);
-    const planeMaterial = new MeshStandardMaterial({
+    const planeGeometry = new PlaneGeometry(1000, 1000);
+    const planeMaterial = new MeshPhysicalMaterial({
       emissiveIntensity: 0.004,
+      color: new Color('#F3F1F6'),
     });
 
     const ground = new Mesh(planeGeometry, planeMaterial);
@@ -155,25 +160,26 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     const ambientLight = new AmbientLight();
     const shadowLight = new DirectionalLight();
     const spotLight = new SpotLight(0xffffff, 0.5);
-    const pointLight = new PointLight(0xffffff);
+    const directionalLight = new DirectionalLight(0xffffff, 0.4);
 
     shadowLight.position.set(-2, 2, 1);
     spotLight.position.set(2, 2, -this.#scene.position.z);
-    pointLight.position.set(-1, 3, -1);
+    directionalLight.position.set(-2, 10, -120);
+    directionalLight.target.position.set(10, 4, 20);
 
     shadowLight.castShadow = true;
     spotLight.castShadow = true;
+    directionalLight.castShadow = true;
 
     shadowLight.shadow.bias = -0.001;
     shadowLight.shadow.mapSize = new Vector2(2048, 2048);
     shadowLight.shadow.camera.near = 0;
-    shadowLight.shadow.camera.far = 300;
+    shadowLight.shadow.camera.far = 100;
 
     this.#scene.add(ambientLight);
     this.#scene.add(shadowLight);
     this.#scene.add(spotLight);
-    this.#scene.add(pointLight);
-    this.#scene.add(new PointLightHelper(pointLight));
+    this.#scene.add(directionalLight);
   }
 
   #configRenderer() {
