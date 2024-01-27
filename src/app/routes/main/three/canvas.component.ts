@@ -22,8 +22,7 @@ import {
   SpotLight,
   Vector2,
   WebGLRenderer,
-  SpotLightHelper,
-  DirectionalLightHelper,
+  AxesHelper,
 } from 'three';
 
 import { RodinThinkerModelService } from './services/rodin-thinker';
@@ -46,6 +45,7 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   #renderer = new WebGLRenderer();
   #scene = new Scene();
   #subscription: Subscription;
+
   #viewContainerRef = inject(ViewContainerRef).element.nativeElement;
   #rodinThinkerModelService = inject(RodinThinkerModelService);
   #womanOnStairsModelService = inject(WomanOnStairsModelService);
@@ -81,43 +81,17 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
 
     window.addEventListener('resize', () => this.#onResizeWindow());
 
+    const axes = new AxesHelper(13);
+    axes.position.set(-0.5, 0, -5);
+    axes.setColors('red', 'blue', 'green');
+    this.#scene.add(axes); //
+
     this.#subscription = this.onLoadModelsComplete
       .pipe(skip(1), distinctUntilChanged())
       .subscribe(() => {
-        this.animationTimeLine.from(
-          this.#scene.position,
-          {
-            z: -5,
-            duration: 1,
-            ease: 'sine',
-          },
-          '>-1.5'
-        );
-
-        gsap
-          .timeline({
-            ease: 'none',
-            scrollTrigger: {
-              trigger: 'section.soft-skills', // soft-skills section
-              start: 'top 70%',
-              end: 'top 60%',
-              scrub: 4,
-            },
-          })
-          .to(
-            this.#camera.position,
-            {
-              z: this.#camera.position.z + 1,
-            },
-            'enter-soft-skills'
-          )
-          .to(
-            this.#camera.rotation,
-            {
-              y: '-=0.8',
-            },
-            'enter-soft-skills'
-          );
+        this.#animateOnSceneEntered();
+        this.#animateOnSoftSkillsEntered();
+        this.#animateOnHardSkillsEntered();
       });
   }
 
@@ -130,7 +104,7 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   #mountCamera() {
     const aspect = window.innerWidth / window.innerHeight;
     this.#camera = new PerspectiveCamera(35, aspect, 0.1, 1000);
-    this.#camera.position.set(0, 0.5, 2);
+    this.#camera.position.set(0, 0.3, 2);
   }
 
   #onResizeWindow() {
@@ -143,8 +117,8 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   #addGround() {
     const planeGeometry = new PlaneGeometry(1000, 1000);
     const planeMaterial = new MeshPhysicalMaterial({
-      emissiveIntensity: 0.004,
-      color: new Color('#F3F1F6'),
+      emissiveIntensity: 0.04,
+      emissive: new Color(0xffffff),
     });
 
     const ground = new Mesh(planeGeometry, planeMaterial);
@@ -160,16 +134,12 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     const ambientLight = new AmbientLight();
     const shadowLight = new DirectionalLight();
     const spotLight = new SpotLight(0xffffff, 0.5);
-    const directionalLight = new DirectionalLight(0xffffff, 0.4);
 
     shadowLight.position.set(-2, 2, 1);
     spotLight.position.set(2, 2, -this.#scene.position.z);
-    directionalLight.position.set(-2, 10, -120);
-    directionalLight.target.position.set(10, 4, 20);
 
     shadowLight.castShadow = true;
     spotLight.castShadow = true;
-    directionalLight.castShadow = true;
 
     shadowLight.shadow.bias = -0.001;
     shadowLight.shadow.mapSize = new Vector2(2048, 2048);
@@ -179,12 +149,63 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     this.#scene.add(ambientLight);
     this.#scene.add(shadowLight);
     this.#scene.add(spotLight);
-    this.#scene.add(directionalLight);
   }
 
   #configRenderer() {
     this.#renderer.setSize(window.innerWidth, window.innerHeight);
     this.#renderer.setPixelRatio(devicePixelRatio);
     this.#renderer.render(this.#scene, this.#camera);
+  }
+
+  #animateOnSceneEntered(): void {
+    this.animationTimeLine.from(
+      this.#scene.position,
+      {
+        z: -5,
+        duration: 1,
+        ease: 'sine',
+      },
+      '>-1.5'
+    );
+  }
+
+  #animateOnSoftSkillsEntered(): void {
+    gsap
+      .timeline({
+        ease: 'none',
+        immediateRender: false,
+        scrollTrigger: {
+          trigger: 'section.soft-skills', // soft-skills section
+          start: 'top 70%',
+          end: 'top 68%',
+          scrub: 3,
+        },
+      })
+      .to(this.#camera.rotation, {
+        y: '-=0.8',
+      })
+      .to(this.#camera.position, {
+        z: this.#camera.position.z + 1,
+        y: '+=1',
+      });
+  }
+
+  #animateOnHardSkillsEntered(): void {
+    gsap
+      .timeline({
+        ease: 'none',
+        scrollTrigger: {
+          trigger: 'section.hard-skills',
+          start: 'top 80%',
+          end: 'top 78%',
+          scrub: 3,
+        },
+      })
+      .to(this.#camera.rotation, { y: '-=0.66' })
+      .to(this.#camera.position, {
+        x: '+=2',
+        z: '-=1',
+      })
+      .to(this.#camera.position, { y: '+=13' });
   }
 }

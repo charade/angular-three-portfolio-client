@@ -16,7 +16,7 @@ export class WomanOnStairsModelService {
     new GLTFLoader().load(
       THREE_ENUMS.MODELS.WOMAN_ON_STAIRS,
       ({ scene: _scene }) => {
-        _scene.position.set(7, -1.3, -3);
+        _scene.position.set(7.2, -0.4, -3);
         _scene.rotation.y = -Math.PI / 2.8;
         scene.add(_scene);
 

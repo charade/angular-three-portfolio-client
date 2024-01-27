@@ -1,4 +1,9 @@
-import { AfterViewInit, Component } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ViewContainerRef,
+  inject,
+} from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import gsap from 'gsap';
 
@@ -10,28 +15,25 @@ import gsap from 'gsap';
   imports: [TranslateModule],
 })
 export class SoftSkillsComponent implements AfterViewInit {
+  #viewContainerRef = inject(ViewContainerRef).element.nativeElement;
+
   ngAfterViewInit(): void {
-    const softSkillsAnimationTimeline = gsap
+    const tl = gsap
       .timeline({
         scrollTrigger: {
           trigger: '.soft-skills',
           start: 'top 32%',
           end: 'top 32%',
-          scrub: 2,
+          scrub: 1.5,
         },
       })
       .from('.soft-skills-catch-phrase-container', { opacity: 0, height: 0 })
-      .from(
-        '.soft-skills-catch-phrase',
-        { opacity: 0, stagger: 0.3, y: 50 },
-        '+=0.3'
-      );
+      .from('.soft-skills-catch-phrase', { opacity: 0, stagger: 0.2, y: 50 });
 
-    softSkillsAnimationTimeline.from('.soft-skills-list li', {
+    tl.from('.soft-skills-list li', {
       opacity: 0,
       y: 30,
       stagger: 0.3,
-      ease: 'sine',
       transform: 'rotate(-15deg)',
       scrollTrigger: {
         trigger: '.soft-skills',
@@ -41,13 +43,14 @@ export class SoftSkillsComponent implements AfterViewInit {
       },
     });
 
-    softSkillsAnimationTimeline.to('.soft-skills-catch-phrase-container', {
-      y: 50,
+    gsap.to(this.#viewContainerRef, {
+      opacity: 0,
+      y: '-=50',
       scrollTrigger: {
-        trigger: '.soft-skills',
-        start: 'top 5%',
-        end: 'top top',
-        scrub: 2,
+        trigger: 'section.hard-skills',
+        start: 'top 85%',
+        end: 'top 80%',
+        scrub: 3,
       },
     });
   }

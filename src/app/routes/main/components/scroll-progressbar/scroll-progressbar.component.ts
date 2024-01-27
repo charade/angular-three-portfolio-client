@@ -27,19 +27,20 @@ export class ScrollProgressbar implements AfterViewInit {
     const sectionsWrapper: HTMLElement =
       document.querySelector('.sections-wrapper');
 
-    gsap.to('.scroll-progress-line', {
+    this.mainTimelineAnimation.to('.scroll-progress-line', {
       strokeDashoffset: 0,
+      immediateRender: false,
       scrollTrigger: {
         trigger: '.soft-skills',
-        scrub: true,
         start: 'top 75%',
-        end: `${sectionsWrapper.clientHeight * 2}`,
+        end: () => `${sectionsWrapper.clientHeight * 2}`,
+        scrub: true,
       },
     });
 
     document.querySelectorAll('section.scrollable').forEach((_, i) => {
       const currentSection = document.querySelector(`.scrolled-section_${i}`);
-      gsap.to(currentSection, {
+      this.mainTimelineAnimation.to(currentSection, {
         scrollTrigger: {
           trigger: `.section_${i}`,
           start: 'top 75%',

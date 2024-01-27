@@ -54,11 +54,11 @@ export class RodinThinkerModelService {
         const bloom = new UnrealBloomPass(
           new Vector2(window.innerWidth, window.innerHeight),
           0.2,
-          0.01,
-          0.01
+          0.1,
+          0.1
         );
         effectComposer.addPass(renderScene);
-        effectComposer.addPass(filmPass);
+        // effectComposer.addPass(filmPass);
         effectComposer.addPass(bloom);
 
         window.addEventListener('mousemove', (event) => {
