@@ -101,7 +101,7 @@ export class MainComponent implements OnInit, OnDestroy {
         .to('.loader-container > *', {
           opacity: 0,
         })
-        .to('.loader-container', { height: 0, duration: 0.5 });
+        .to('.loader-container', { width: 0, duration: 0.5 });
     }
 
     this.loadingComplete.set(true);

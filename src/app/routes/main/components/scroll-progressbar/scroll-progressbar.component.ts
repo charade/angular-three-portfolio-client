@@ -29,7 +29,6 @@ export class ScrollProgressbar implements AfterViewInit {
 
     this.mainTimelineAnimation.to('.scroll-progress-line', {
       strokeDashoffset: 0,
-      immediateRender: false,
       scrollTrigger: {
         trigger: '.soft-skills',
         start: 'top 75%',

@@ -1,12 +1,45 @@
 :host {
   position: absolute;
-  top: 6rem;
-  left: 50%;
+  top: 1.5rem;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .hard-skills-lists {
     display: flex;
+    justify-content: center;
+    width: 100%;
+
     & > * {
-      margin: 0 3rem;
+      margin: 0 2rem;
+    }
+
+    h3 {
+      color: rgb(134, 8, 8);
+      font-size: 2rem;
+      font-family: Italiana;
+      transform-style: preserve-3d;
+      transform-origin: top left;
+    }
+
+    .separator {
+      width: 4px;
+      height: 14rem;
+      border-radius: 3px;
+      background-color: rgb(128, 11, 11);
+      align-self: center;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0.25rem;
+
+      li {
+        font-size: 1.5rem;
+        font-family: RobotoThin;
+        margin: 0.5rem 0;
+      }
     }
   }
 }
