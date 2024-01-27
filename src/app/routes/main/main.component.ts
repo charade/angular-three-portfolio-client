@@ -23,6 +23,7 @@ import { RodinThinkerModelService } from './three/services/rodin-thinker';
 import { WomanOnStairsModelService } from './three/services/woman-on-stairs';
 import { SoftSkillsComponent } from './components/soft-skills/soft-skills.component';
 import { RedWallModelService } from './three/services/red-wall';
+import { HardSkillsComponent } from './components/hard-skills/hard-skills.component';
 
 @Component({
   standalone: true,
@@ -38,6 +39,7 @@ import { RedWallModelService } from './three/services/red-wall';
     AppIconComponent,
     IntroComponent,
     SoftSkillsComponent,
+    HardSkillsComponent,
   ],
   providers: [
     RodinThinkerModelService,

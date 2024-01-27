@@ -206,6 +206,6 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
         x: '+=2',
         z: '-=1',
       })
-      .to(this.#camera.position, { y: '+=13' });
+      .to(this.#camera.position, { y: '+=20' });
   }
 }
