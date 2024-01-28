@@ -12,5 +12,6 @@ export namespace THREE_ENUMS {
     THINKER = './assets/three-scenes/thinker.glb',
     WOMAN_ON_STAIRS = './assets/three-scenes/woman_on_stairs.glb',
     RED_WALL = './assets/three-scenes/red_wall.glb',
+    COLUMN = './assets/three-scenes/column.glb',
   }
 }

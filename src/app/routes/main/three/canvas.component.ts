@@ -29,6 +29,7 @@ import { RodinThinkerModelService } from './services/rodin-thinker';
 import { WomanOnStairsModelService } from './services/woman-on-stairs';
 import gsap from 'gsap';
 import { RedWallModelService } from './services/red-wall';
+import { ColumnModelService } from './services/column';
 
 @Component({
   standalone: true,
@@ -50,6 +51,7 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   #rodinThinkerModelService = inject(RodinThinkerModelService);
   #womanOnStairsModelService = inject(WomanOnStairsModelService);
   #redWallModelService = inject(RedWallModelService);
+  #columnService = inject(ColumnModelService);
 
   ngAfterViewInit(): void {
     this.#viewContainerRef.appendChild(this.#renderer.domElement);
@@ -78,6 +80,8 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
 
     this.#redWallModelService.load(this.#renderer, this.#scene, this.#camera);
     this.#configRenderer();
+
+    this.#columnService.load(this.#renderer, this.#scene, this.#camera);
 
     window.addEventListener('resize', () => this.#onResizeWindow());
 
