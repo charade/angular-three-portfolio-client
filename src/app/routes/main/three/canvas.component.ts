@@ -81,11 +81,6 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
 
     window.addEventListener('resize', () => this.#onResizeWindow());
 
-    const axes = new AxesHelper(13);
-    axes.position.set(-0.5, 0, -5);
-    axes.setColors('red', 'blue', 'green');
-    this.#scene.add(axes); //
-
     this.#subscription = this.onLoadModelsComplete
       .pipe(skip(1), distinctUntilChanged())
       .subscribe(() => {

@@ -1,5 +1,5 @@
 {
-  "main.action.scroll": "Scroll down",
+  "main.action.scroll": "Scroll",
   "main.intro.title": "Let's bring your ideas to life.",
   "main.intro.description": "Let's build an accessible, secure solution and a unique user experience.",
   "main.agile": "Agile Certified",
@@ -10,8 +10,9 @@
   "main.projects": "Projects",
   "main.contact": "Get in touch",
   "main.soft.skills.catchPhrase.you": "You have some challenges,",
-  "main.soft.skills.catchPhrase.me": "I like finding solutions...",
+  "main.soft.skills.catchPhrase.me": "I implement solutions...",
   "main.soft.skills.solution.optimized": "Optimized",
   "main.soft.skills.solution.pragmatic": "Pragmatic",
-  "main.soft.skills.solution.accessible": "Accessible"
+  "main.soft.skills.solution.accessible": "Accessible",
+  "main.soft.skills.solution.maintenable": "Maintenable"
 }

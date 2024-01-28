@@ -1,5 +1,7 @@
 import {
   IconDefinition,
+  faArrowDown,
+  faArrowUp,
   faAudioDescription,
   faCheck,
   faCircleXmark,
@@ -15,7 +17,9 @@ export enum IconEnum {
   Language,
   Audio,
   Check,
-  Projects
+  Projects,
+  ArrowUp,
+  ArrowDown,
 }
 
 export namespace IconEnum {
@@ -25,6 +29,8 @@ export namespace IconEnum {
     [IconEnum.Language, faLanguage],
     [IconEnum.Audio, faAudioDescription],
     [IconEnum.Check, faCheck],
-    [IconEnum.Projects, faDiagramProject]
+    [IconEnum.Projects, faDiagramProject],
+    [IconEnum.ArrowUp, faArrowUp],
+    [IconEnum.ArrowDown, faArrowDown],
   ]);
 }

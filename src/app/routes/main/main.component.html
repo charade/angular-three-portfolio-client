@@ -13,6 +13,14 @@
   </svg>
 </div>
 
+<div class="scroll-mention-container">
+  <div class="scroll-mention-content">
+    <app-icon [iconName]="IconEnum.ArrowUp" [clickable]="false" />
+    <h4>{{ "main.action.scroll" | translate }}</h4>
+    <app-icon [iconName]="IconEnum.ArrowDown" [clickable]="false" />
+  </div>
+</div>
+
 <app-scroll-progressbar
   [mainTimelineAnimation]="animationTimeLine"
   [loadingComplete]="loadingComplete()"
