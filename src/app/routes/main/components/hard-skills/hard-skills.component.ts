@@ -48,7 +48,7 @@ export class HardSkillsComponent implements AfterViewInit {
       height: 0,
       scrollTrigger: {
         trigger: 'section.hard-skills',
-        start: 'top 30.5%',
+        start: 'top 31%',
         end: 'bottom bottom',
         scrub: 3,
       },
