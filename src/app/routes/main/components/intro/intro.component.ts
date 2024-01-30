@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import gsap from 'gsap';
 
@@ -10,17 +10,21 @@ import gsap from 'gsap';
   imports: [TranslateModule],
 })
 export class IntroComponent implements AfterViewInit {
+  @Input() animationTimeLine: gsap.core.Timeline;
+
   ngAfterViewInit(): void {
-    gsap.to('.intro-text', {
-      stagger: 0.3,
-      opacity: 0,
-      y: -25,
-      scrollTrigger: {
-        trigger: 'section.soft-skills',
-        start: 'top 75%',
-        end: 'top 75%',
-        scrub: 2,
-      },
-    });
+    this.animationTimeLine.add(
+      gsap.timeline().to('.intro-text', {
+        stagger: 0.3,
+        opacity: 0,
+        y: -25,
+        scrollTrigger: {
+          trigger: 'section.soft-skills',
+          start: 'top 75%',
+          end: 'top 75%',
+          scrub: 2,
+        },
+      })
+    );
   }
 }

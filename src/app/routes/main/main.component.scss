@@ -44,7 +44,7 @@
 
   .scroll-mention-container {
     position: fixed;
-    top: 46%;
+    top: 45%;
     left: -0.5rem;
     z-index: 40;
     height: 6rem;
@@ -56,10 +56,12 @@
     & > * {
       color: rgb(161, 8, 8);
       font-size: 1rem;
+      margin: 0.25rem 0;
     }
 
     ul {
       font-family: Italiana;
+      padding: 0;
       padding-left: 0.5rem;
       list-style: none;
 

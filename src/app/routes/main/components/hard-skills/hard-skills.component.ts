@@ -1,4 +1,10 @@
-import { AfterViewInit, Component } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  ViewContainerRef,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import gsap from 'gsap';
 import SplitType from 'split-type';
@@ -11,16 +17,20 @@ import SplitType from 'split-type';
   styleUrls: ['./hard-skills.component.scss'],
 })
 export class HardSkillsComponent implements AfterViewInit {
+  @Input() animationTimeLine: gsap.core.Timeline;
+  #viewContainerRef = inject(ViewContainerRef).element.nativeElement;
+
   ngAfterViewInit(): void {
-    this.#animateHardSkillsWorkFlow();
-    this.#animateHardSkillsStacks();
-    this.#animateHardSkillsSubSectionsSeparator();
+    this.animationTimeLine.add(this.#animateHardSkillsWorkFlow());
+    this.animationTimeLine.add(this.#animateHardSkillsStacks());
+    this.animationTimeLine.add(this.#animateHardSkillsSubSectionsSeparator());
+    this.animationTimeLine.add(this.#animateHardSkillsQuit());
   }
 
-  #animateHardSkillsWorkFlow() {
+  #animateHardSkillsWorkFlow(): gsap.core.Timeline {
     const splitedTitle = new SplitType('.workflow > h3', { types: 'chars' });
 
-    gsap
+    return gsap
       .timeline({
         scrollTrigger: {
           trigger: 'section.hard-skills',
@@ -42,8 +52,8 @@ export class HardSkillsComponent implements AfterViewInit {
       });
   }
 
-  #animateHardSkillsSubSectionsSeparator() {
-    gsap.from('.separator', {
+  #animateHardSkillsSubSectionsSeparator(): gsap.core.Timeline {
+    return gsap.timeline().from('.separator', {
       opacity: 0,
       height: 0,
       scrollTrigger: {
@@ -55,10 +65,10 @@ export class HardSkillsComponent implements AfterViewInit {
     });
   }
 
-  #animateHardSkillsStacks() {
+  #animateHardSkillsStacks(): gsap.core.Timeline {
     const splitedTitle = new SplitType('.stack > h3', { types: 'chars' });
 
-    gsap
+    return gsap
       .timeline({
         scrollTrigger: {
           trigger: 'section.hard-skills',
@@ -72,12 +82,25 @@ export class HardSkillsComponent implements AfterViewInit {
         y: 70,
         transform: 'rotate(45deg)',
         scale: 3,
-        stagger: 0.5,
+        stagger: 0.8,
         x: -30,
       })
       .from('.stack > ul', {
         opacity: 0,
         y: 100,
       });
+  }
+
+  #animateHardSkillsQuit(): gsap.core.Timeline {
+    return gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: 'section.projects',
+          start: 'top 78%',
+          end: 'top 75%',
+          scrub: 3,
+        },
+      })
+      .to(this.#viewContainerRef, { opacity: 0, y: 100 });
   }
 }

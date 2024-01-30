@@ -10,10 +10,11 @@ import gsap from 'gsap';
   imports: [TranslateModule],
 })
 export class ScrollProgressbar implements AfterViewInit {
-  @Input() mainTimelineAnimation: gsap.core.Timeline;
+  @Input() animationTimeLine: gsap.core.Timeline;
+
   @Input() set loadingComplete(completed: boolean) {
     if (completed) {
-      this.mainTimelineAnimation
+      this.animationTimeLine
         .from('.scroll-progressbar', {
           x: -20,
           opacity: 0,
@@ -24,22 +25,12 @@ export class ScrollProgressbar implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const sectionsWrapper: HTMLElement =
-      document.querySelector('.sections-wrapper');
-
-    this.mainTimelineAnimation.to('.scroll-progress-line', {
-      strokeDashoffset: 0,
-      scrollTrigger: {
-        trigger: '.soft-skills',
-        start: 'top 75%',
-        end: () => `${sectionsWrapper.clientHeight * 2}`,
-        scrub: true,
-      },
-    });
+    this.animationTimeLine.add(this.#animateScrollProgressLine());
 
     document.querySelectorAll('section.scrollable').forEach((_, i) => {
       const currentSection = document.querySelector(`.scrolled-section_${i}`);
-      this.mainTimelineAnimation.to(currentSection, {
+      this.animationTimeLine.to(currentSection, {
+        immediateRender: false,
         scrollTrigger: {
           trigger: `.section_${i}`,
           start: 'top 75%',
@@ -51,6 +42,22 @@ export class ScrollProgressbar implements AfterViewInit {
           scrub: true,
         },
       });
+    });
+  }
+
+  #animateScrollProgressLine(): gsap.core.Timeline {
+    const sectionsWrapper: HTMLElement =
+      document.querySelector('.sections-wrapper');
+
+    return gsap.timeline().to('.scroll-progress-line', {
+      immediateRender: false,
+      strokeDashoffset: 0,
+      scrollTrigger: {
+        trigger: '.soft-skills',
+        start: 'top 75%',
+        end: () => `${sectionsWrapper.clientHeight * 2}`,
+        scrub: true,
+      },
     });
   }
 }

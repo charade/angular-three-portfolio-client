@@ -88,9 +88,10 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     this.#subscription = this.onLoadModelsComplete
       .pipe(skip(1), distinctUntilChanged())
       .subscribe(() => {
-        this.#animateOnSceneEntered();
-        this.#animateOnSoftSkillsEntered();
-        this.#animateOnHardSkillsEntered();
+        this.animationTimeLine.add(this.#animateOnSceneEntered());
+        this.animationTimeLine.add(this.#animateOnSoftSkillsEntered());
+        this.animationTimeLine.add(this.#animateOnHardSkillsEntered());
+        this.animationTimeLine.add(this.#animateOnProjectsSectionEntered());
       });
   }
 
@@ -114,7 +115,7 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   }
 
   #addGround() {
-    const planeGeometry = new PlaneGeometry(1000, 1000);
+    const planeGeometry = new PlaneGeometry(2000, 2000);
     const planeMaterial = new MeshPhysicalMaterial({
       emissiveIntensity: 0.04,
       emissive: new Color(0xffffff),
@@ -156,8 +157,8 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     this.#renderer.render(this.#scene, this.#camera);
   }
 
-  #animateOnSceneEntered(): void {
-    this.animationTimeLine.from(
+  #animateOnSceneEntered(): gsap.core.Timeline {
+    return gsap.timeline().from(
       this.#scene.position,
       {
         z: -5,
@@ -168,11 +169,10 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     );
   }
 
-  #animateOnSoftSkillsEntered(): void {
-    gsap
+  #animateOnSoftSkillsEntered(): gsap.core.Timeline {
+    return gsap
       .timeline({
         ease: 'none',
-        immediateRender: false,
         scrollTrigger: {
           trigger: 'section.soft-skills', // soft-skills section
           start: 'top 70%',
@@ -189,8 +189,8 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
       });
   }
 
-  #animateOnHardSkillsEntered(): void {
-    gsap
+  #animateOnHardSkillsEntered(): gsap.core.Timeline {
+    return gsap
       .timeline({
         ease: 'none',
         scrollTrigger: {
@@ -206,5 +206,29 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
         z: '-=1',
       })
       .to(this.#camera.position, { y: '+=21' });
+  }
+
+  #animateOnProjectsSectionEntered(): gsap.core.Timeline {
+    return gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: 'section.projects',
+          start: 'top 80%',
+          end: 'top 70%',
+          scrub: 3,
+        },
+      })
+      .to(this.#camera.rotation, {
+        y: this.#camera.rotation.y - 0.5,
+      })
+      .to(
+        this.#camera.position,
+        {
+          z: this.#camera.position.z - 190,
+          x: '+=68',
+          // y: this.#camera.position.y - 20,
+        },
+        '+=0.1'
+      );
   }
 }
