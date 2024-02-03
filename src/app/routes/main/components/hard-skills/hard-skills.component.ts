@@ -96,9 +96,9 @@ export class HardSkillsComponent implements AfterViewInit {
       .timeline({
         scrollTrigger: {
           trigger: 'section.projects',
-          start: 'top 78%',
-          end: 'top 75%',
-          scrub: 3,
+          start: 'top 90%',
+          end: 'top 83%',
+          scrub: 4,
         },
       })
       .to(this.#viewContainerRef, { opacity: 0, y: 100 });

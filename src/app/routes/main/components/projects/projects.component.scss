@@ -1,0 +1,23 @@
+:host {
+  .projects-container {
+    position: fixed;
+    left: 40%;
+    top: 16rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .project {
+      width: 16rem;
+      border: none;
+      border-bottom: 1px dashed #8f8d8db7;
+      padding-bottom: 0;
+      margin: 1rem 0;
+
+      h4 {
+        font-size: 1.5rem;
+        font-family: Italiana;
+      }
+    }
+  }
+}

@@ -3,6 +3,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  NgZone,
   OnDestroy,
   Output,
   ViewContainerRef,
@@ -11,7 +12,6 @@ import {
 import { Subscription, distinctUntilChanged, skip } from 'rxjs';
 import {
   AmbientLight,
-  Color,
   DirectionalLight,
   Mesh,
   MeshPhysicalMaterial,
@@ -19,10 +19,11 @@ import {
   PerspectiveCamera,
   PlaneGeometry,
   Scene,
-  SpotLight,
   Vector2,
   WebGLRenderer,
   AxesHelper,
+  DirectionalLightHelper,
+  Color,
 } from 'three';
 
 import { RodinThinkerModelService } from './services/rodin-thinker';
@@ -52,6 +53,7 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   #womanOnStairsModelService = inject(WomanOnStairsModelService);
   #redWallModelService = inject(RedWallModelService);
   #columnService = inject(ColumnModelService);
+  #ngZone = inject(NgZone);
 
   ngAfterViewInit(): void {
     this.#viewContainerRef.appendChild(this.#renderer.domElement);
@@ -64,24 +66,28 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     this.#mountLights();
     this.#addGround();
 
-    this.#rodinThinkerModelService.load(
-      this.#renderer,
-      this.#scene,
-      this.#camera,
-      this.onLoadModelsComplete,
-      this.progressChange
-    );
+    this.#ngZone.runOutsideAngular((arg) => {
+      console.log(arg);
 
-    this.#womanOnStairsModelService.load(
-      this.#renderer,
-      this.#scene,
-      this.#camera
-    );
+      this.#rodinThinkerModelService.load(
+        this.#renderer,
+        this.#scene,
+        this.#camera,
+        this.onLoadModelsComplete,
+        this.progressChange
+      );
 
-    this.#redWallModelService.load(this.#renderer, this.#scene, this.#camera);
+      this.#womanOnStairsModelService.load(
+        this.#renderer,
+        this.#scene,
+        this.#camera
+      );
+
+      this.#redWallModelService.load(this.#renderer, this.#scene, this.#camera);
+      this.#columnService.load(this.#renderer, this.#scene, this.#camera);
+    });
+
     this.#configRenderer();
-
-    this.#columnService.load(this.#renderer, this.#scene, this.#camera);
 
     window.addEventListener('resize', () => this.#onResizeWindow());
 
@@ -117,7 +123,7 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   #addGround() {
     const planeGeometry = new PlaneGeometry(2000, 2000);
     const planeMaterial = new MeshPhysicalMaterial({
-      emissiveIntensity: 0.04,
+      emissiveIntensity: 0.02,
       emissive: new Color(0xffffff),
     });
 
@@ -132,23 +138,37 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
 
   #mountLights() {
     const ambientLight = new AmbientLight();
-    const shadowLight = new DirectionalLight();
-    const spotLight = new SpotLight(0xffffff, 0.5);
+    const shadowLight_1 = new DirectionalLight();
+    const shadowLight_2 = new DirectionalLight(0xffffff, 1.5);
 
-    shadowLight.position.set(-2, 2, 1);
-    spotLight.position.set(2, 2, -this.#scene.position.z);
+    shadowLight_1.position.set(-2, 2, 1);
+    shadowLight_2.position.set(105, 5, -290);
 
-    shadowLight.castShadow = true;
-    spotLight.castShadow = true;
+    shadowLight_2.target.position.set(172, -1, -304);
 
-    shadowLight.shadow.bias = -0.001;
-    shadowLight.shadow.mapSize = new Vector2(2048, 2048);
-    shadowLight.shadow.camera.near = 0;
-    shadowLight.shadow.camera.far = 100;
+    // const axes = new AxesHelper(100);
+    // axes.setColors('red', 'green', 'blue');
+    // axes.position.set(80, 0, -300);
+    // this.#scene.add(axes);
+
+    shadowLight_1.castShadow = true;
+    shadowLight_2.castShadow = true;
+
+    shadowLight_1.shadow.bias = -0.001;
+    shadowLight_1.shadow.mapSize = new Vector2(2048, 2048);
+    shadowLight_1.shadow.camera.near = 0;
+    shadowLight_1.shadow.camera.far = 100;
+
+    // shadowLight_2.shadow.bias = -0.001;
+    shadowLight_2.shadow.mapSize = new Vector2(2048, 2048);
+    shadowLight_2.shadow.camera.near = 0;
+    shadowLight_2.shadow.camera.far = 300;
 
     this.#scene.add(ambientLight);
-    this.#scene.add(shadowLight);
-    this.#scene.add(spotLight);
+    this.#scene.add(shadowLight_1);
+    this.#scene.add(shadowLight_2);
+    this.#scene.add(shadowLight_2);
+    // this.#scene.add(new DirectionalLightHelper(shadowLight_2));
   }
 
   #configRenderer() {
@@ -213,22 +233,25 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
       .timeline({
         scrollTrigger: {
           trigger: 'section.projects',
-          start: 'top 80%',
+          start: 'top 75%',
           end: 'top 70%',
-          scrub: 3,
+          scrub: 4,
         },
-      })
-      .to(this.#camera.rotation, {
-        y: this.#camera.rotation.y - 0.5,
       })
       .to(
         this.#camera.position,
         {
           z: this.#camera.position.z - 190,
           x: '+=68',
-          // y: this.#camera.position.y - 20,
         },
         '+=0.1'
-      );
+      )
+      .to(this.#camera.rotation, {
+        y: this.#camera.rotation.y - 0.5,
+      })
+      .to(this.#camera.position, {
+        y: this.#camera.position.y + 25,
+      })
+      .to(this.#camera.rotation, { z: 0.12 });
   }
 }

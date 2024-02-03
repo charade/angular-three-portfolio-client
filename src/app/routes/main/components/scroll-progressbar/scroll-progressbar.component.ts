@@ -55,7 +55,7 @@ export class ScrollProgressbar implements AfterViewInit {
       scrollTrigger: {
         trigger: '.soft-skills',
         start: 'top 75%',
-        end: () => `${sectionsWrapper.clientHeight * 2}`,
+        end: () => `${sectionsWrapper.clientHeight * 1.8}`,
         scrub: true,
       },
     });

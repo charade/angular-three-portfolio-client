@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { THREE_ENUMS } from 'src/app/common-utils/enums/three.enum';
-import { PerspectiveCamera, Scene, WebGLRenderer } from 'three';
+import { PerspectiveCamera, Scene, Vector3, WebGLRenderer } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 @Injectable()
@@ -11,6 +11,10 @@ export class ColumnModelService {
       _scene.rotation.y = Math.PI / 3;
       scene.add(_scene);
 
+      _scene.traverse((node) => {
+        node.castShadow = true;
+        node.receiveShadow = true;
+      });
       renderer.setAnimationLoop(() => renderer.render(scene, camera));
     });
   }

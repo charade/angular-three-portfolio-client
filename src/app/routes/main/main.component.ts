@@ -12,20 +12,22 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { Subscription } from 'rxjs';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { ScrollProgressbar } from './components/scroll-progressbar/scroll-progressbar.component';
 import { CanvasComponent } from './three/canvas.component';
 import { AppIconComponent } from 'src/app/shared-components/icon/icon.component';
-import { IconEnum } from 'src/app/shared-components/icon/icon.enums';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { SoftSkillsComponent } from './components/soft-skills/soft-skills.component';
+import { HardSkillsComponent } from './components/hard-skills/hard-skills.component';
 import { IntroComponent } from './components/intro/intro.component';
+
 import { RodinThinkerModelService } from './three/services/rodin-thinker';
 import { WomanOnStairsModelService } from './three/services/woman-on-stairs';
-import { SoftSkillsComponent } from './components/soft-skills/soft-skills.component';
-import { RedWallModelService } from './three/services/red-wall';
-import { HardSkillsComponent } from './components/hard-skills/hard-skills.component';
 import { ColumnModelService } from './three/services/column';
+import { RedWallModelService } from './three/services/red-wall';
 
+import { IconEnum } from 'src/app/shared-components/icon/icon.enums';
 @Component({
   standalone: true,
   selector: 'app-main',
@@ -41,6 +43,7 @@ import { ColumnModelService } from './three/services/column';
     IntroComponent,
     SoftSkillsComponent,
     HardSkillsComponent,
+    ProjectsComponent,
   ],
   providers: [
     RodinThinkerModelService,
