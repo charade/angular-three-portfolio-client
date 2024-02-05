@@ -53,47 +53,15 @@ import { IconEnum } from 'src/app/shared-components/icon/icon.enums';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainComponent implements OnInit, OnDestroy {
-  isDeviceHandset: WritableSignal<boolean> = signal(false);
-  isDeviceS: WritableSignal<boolean> = signal(false);
-  isDeviceTabletLandscape: WritableSignal<boolean> = signal(false);
-  isDeviceSm: WritableSignal<boolean> = signal(false);
-  isDeviceM: WritableSignal<boolean> = signal(false);
-  isDeviceL: WritableSignal<boolean> = signal(false);
-  isDeviceXL: WritableSignal<boolean> = signal(false);
+export class MainComponent implements OnInit {
   loadingProgress: WritableSignal<number> = signal(0);
   loadingComplete: WritableSignal<boolean> = signal(false);
 
   IconEnum = IconEnum;
   animationTimeLine = gsap.timeline();
 
-  #mediaSizeObserver = inject(BreakpointObserver);
-  #subscriptions: Subscription[] = [];
-
   ngOnInit(): void {
     gsap.registerPlugin(ScrollTrigger);
-
-    this.#subscriptions.push(
-      this.#mediaSizeObserver
-        .observe('(min-width: 390px)')
-        .subscribe((media) => this.isDeviceS.set(media.matches)),
-      this.#mediaSizeObserver
-        .observe('(min-width: 400px)')
-        .subscribe((media) => this.isDeviceSm.set(media.matches)),
-      this.#mediaSizeObserver
-        .observe('(min-width: 500px)')
-        .subscribe((media) => this.isDeviceM.set(media.matches)),
-      this.#mediaSizeObserver
-        .observe('(min-width: 768px)')
-        .subscribe((media) => this.isDeviceL.set(media.matches)),
-      this.#mediaSizeObserver
-        .observe('(min-width: 1024px)')
-        .subscribe((media) => this.isDeviceXL.set(media.matches))
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.#subscriptions.forEach((s) => s.unsubscribe());
   }
 
   onLoadingThinkerModel(progress: number): void {

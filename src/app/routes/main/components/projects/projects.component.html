@@ -1,4 +1,7 @@
-<div class="projects-container">
+<div
+  class="projects-container"
+  [ngClass]="{ 'large-screen': isDeviceM() && !isDeviceXL() }"
+>
   <div class="project">
     <h4>project1</h4>
   </div>

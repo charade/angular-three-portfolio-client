@@ -66,9 +66,7 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     this.#mountLights();
     this.#addGround();
 
-    this.#ngZone.runOutsideAngular((arg) => {
-      console.log(arg);
-
+    this.#ngZone.runOutsideAngular(() => {
       this.#rodinThinkerModelService.load(
         this.#renderer,
         this.#scene,

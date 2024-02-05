@@ -19,5 +19,14 @@
         font-family: Italiana;
       }
     }
+
+    &.large-screen {
+      top: 28rem;
+
+      .project {
+        width: 30rem;
+        margin: 2rem 0;
+      }
+    }
   }
 }
