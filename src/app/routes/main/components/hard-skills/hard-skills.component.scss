@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 0.5rem;
 
   .hard-skills-lists {
     display: flex;
@@ -17,7 +18,7 @@
 
     h3 {
       color: rgb(134, 8, 8);
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-family: Italiana;
       transform-style: preserve-3d;
       transform-origin: top right;

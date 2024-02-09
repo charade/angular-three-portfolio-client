@@ -32,7 +32,7 @@ export class MediaBreakPointsObserver implements OnInit, OnDestroy {
         .observe('(min-width: 360px)')
         .subscribe((media) => this.isDeviceXS.set(media.matches)),
       this.#mediaSizeObserver
-        .observe('(min-width: 400px)')
+        .observe('(min-width: 389px)')
         .subscribe((media) => this.isDeviceS.set(media.matches)),
       this.#mediaSizeObserver
         .observe('(min-width: 500px)')

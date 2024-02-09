@@ -36,7 +36,7 @@ export class HardSkillsComponent implements AfterViewInit {
         opacity: 0,
         y: 70,
         x: -30,
-        scale: 3,
+        scale: 4,
         stagger: 0.5,
       })
       .from('.workflow > ul', {
@@ -65,9 +65,9 @@ export class HardSkillsComponent implements AfterViewInit {
       .timeline({
         scrollTrigger: {
           trigger: 'section.hard-skills',
-          start: 'top 38%',
-          end: 'top 38%',
-          scrub: 3,
+          start: 'top 60%',
+          end: 'top 60%',
+          scrub: 4,
         },
       })
       .from(splitedTitle.chars, {

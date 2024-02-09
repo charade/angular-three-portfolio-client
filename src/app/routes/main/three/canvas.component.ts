@@ -96,6 +96,7 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
         this.animationTimeLine.add(this.#animateOnSoftSkillsEntered());
         this.animationTimeLine.add(this.#animateOnHardSkillsEntered());
         this.animationTimeLine.add(this.#animateOnProjectsSectionEntered());
+        this.animationTimeLine.add(this.#animateOnContactSectionEntered());
       });
   }
 
@@ -251,5 +252,19 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
         y: this.#camera.position.y + 25,
       })
       .to(this.#camera.rotation, { z: 0.12 });
+  }
+
+  #animateOnContactSectionEntered(): gsap.core.Timeline {
+    return gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: 'section.contact',
+          start: 'top 80%',
+          end: 'top 80%',
+          scrub: 4,
+        },
+      })
+      .to(this.#camera.position, { z: '-=20', x: '+=13' })
+      .to(this.#camera.rotation, { z: 0 });
   }
 }

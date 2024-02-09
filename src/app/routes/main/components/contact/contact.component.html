@@ -1,4 +1,7 @@
-<div class="contact-container">
+<div
+  class="contact-container"
+  [ngClass]="{ 's-style': isDeviceXS() && !isDeviceSm() }"
+>
   <div class="outro-container">
     <h2>{{ "main.outro.me" | translate }}</h2>
     <h2>{{ "main.outro.getInTouch" | translate }}</h2>

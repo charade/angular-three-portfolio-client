@@ -30,18 +30,18 @@ export class SoftSkillsComponent implements AfterViewInit {
           scrub: 1.5,
         },
       })
-      .from('.soft-skills-catch-phrase-container', { opacity: 0, height: 0 })
+      .from('.soft-skills-catch-phrase-container', { opacity: 0, height: 0 }) // red border left animation
       .from('.soft-skills-catch-phrase', { opacity: 0, stagger: 0.2, y: 50 })
       .from('.soft-skills-list li', {
         opacity: 0,
         y: 30,
-        stagger: -0.3,
+        stagger: 0.4,
         transform: 'rotate(-15deg)',
         scrollTrigger: {
           trigger: '.soft-skills',
-          start: 'top 20%',
-          end: 'top 15%',
-          scrub: 2,
+          start: 'top 30%',
+          end: 'top 30%',
+          scrub: 3,
         },
       })
       .to(this.#viewContainerRef, {

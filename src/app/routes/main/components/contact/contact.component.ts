@@ -2,13 +2,13 @@ import { AfterViewInit, Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import gsap from 'gsap';
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe, NgClass, NgIf } from '@angular/common';
 import { MediaBreakPointsObserver } from 'src/app/shared-components/media-breakpoints-observer';
 
 @Component({
   selector: 'contact',
   standalone: true,
-  imports: [TranslateModule, FormsModule, NgIf, JsonPipe],
+  imports: [TranslateModule, FormsModule, NgIf, JsonPipe, NgClass],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
 })
