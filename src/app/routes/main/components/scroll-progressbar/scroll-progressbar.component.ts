@@ -1,17 +1,18 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import gsap from 'gsap';
+import { AppIconComponent } from 'src/app/shared-components/icon/icon.component';
+import { IconEnum } from 'src/app/shared-components/icon/icon.enums';
 
 @Component({
   standalone: true,
   selector: 'app-scroll-progressbar',
   templateUrl: './scroll-progressbar.component.html',
   styleUrls: ['./scroll-progressbar.component.scss'],
-  imports: [TranslateModule],
+  imports: [TranslateModule, AppIconComponent],
 })
 export class ScrollProgressbar implements AfterViewInit {
   @Input() animationTimeLine: gsap.core.Timeline;
-
   @Input() set loadingComplete(completed: boolean) {
     if (completed) {
       this.animationTimeLine
@@ -24,10 +25,13 @@ export class ScrollProgressbar implements AfterViewInit {
     }
   }
 
+  IconEnum = IconEnum;
+
   ngAfterViewInit(): void {
     this.animationTimeLine.add(this.#animateScrollProgressLine());
 
-    document.querySelectorAll('section.scrollable').forEach((_, i) => {
+    // coloring scrolled section title in red
+    document.querySelectorAll('section').forEach((_, i) => {
       const currentSection = document.querySelector(`.scrolled-section_${i}`);
       this.animationTimeLine.to(currentSection, {
         immediateRender: false,

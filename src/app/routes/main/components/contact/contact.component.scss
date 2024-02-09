@@ -1,0 +1,102 @@
+:host {
+  .contact-container {
+    position: fixed;
+    top: 4rem;
+    left: 13%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & > * {
+      margin: 1rem 0;
+    }
+
+    .outro-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      h2 {
+        margin: 0.25rem 0;
+        font-size: 2rem;
+        font-family: "DancingScript-Variable";
+        color: rgb(117, 11, 11);
+        font-weight: 400;
+        padding: 0;
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      input,
+      textarea {
+        margin: 0.5rem 0;
+        border-radius: 4px;
+        outline: none;
+        padding: 0.5rem 0.75rem;
+        font-family: RobotoLight;
+        color: rgb(255, 251, 245);
+        border: 1px solid #fff;
+        box-shadow: 0 0 1px #000;
+        background-color: #2222228b;
+        font-size: 1.25rem;
+
+        &::placeholder {
+          font-style: italic;
+          color: #fffbfb6d;
+          font-size: 1.25rem;
+        }
+      }
+
+      textarea {
+        resize: none;
+        width: 22rem;
+        overflow-y: scroll;
+        height: 26rem;
+      }
+
+      button {
+        position: relative;
+        height: 4rem;
+        max-width: 8rem;
+        background-color: #000000b0;
+        font-size: 1.5rem;
+        font-family: Italiana;
+        border: none;
+        align-self: flex-end;
+        cursor: pointer;
+        color: #fff;
+
+        &::before {
+          content: "";
+          position: absolute;
+          z-index: 2;
+          left: 0;
+          top: 0;
+          width: 0;
+          height: 100%;
+          background-color: rgba(6, 46, 92, 0.39);
+          transition: width 0.3s;
+        }
+
+        &:hover::before {
+          width: 100%;
+        }
+
+        &:hover {
+          color: #000000c4;
+        }
+      }
+
+      .error-msg {
+        color: rgb(232, 94, 44);
+        font-size: 1rem;
+        font-family: RobotoExtraLight;
+        margin-top: -0.25rem;
+      }
+    }
+  }
+}

@@ -29,7 +29,7 @@ export class MediaBreakPointsObserver implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.#subscriptions.push(
       this.#mediaSizeObserver
-        .observe('(min-width: 390px)')
+        .observe('(min-width: 360px)')
         .subscribe((media) => this.isDeviceXS.set(media.matches)),
       this.#mediaSizeObserver
         .observe('(min-width: 400px)')

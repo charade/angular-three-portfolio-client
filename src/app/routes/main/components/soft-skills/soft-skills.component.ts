@@ -35,12 +35,12 @@ export class SoftSkillsComponent implements AfterViewInit {
       .from('.soft-skills-list li', {
         opacity: 0,
         y: 30,
-        stagger: 0.3,
+        stagger: -0.3,
         transform: 'rotate(-15deg)',
         scrollTrigger: {
           trigger: '.soft-skills',
-          start: 'top 10%',
-          end: 'top 10%',
+          start: 'top 20%',
+          end: 'top 15%',
           scrub: 2,
         },
       })
@@ -48,9 +48,9 @@ export class SoftSkillsComponent implements AfterViewInit {
         opacity: 0,
         y: '-=50',
         scrollTrigger: {
-          trigger: 'section.hard-skills',
-          start: 'top 85%',
-          end: 'top 80%',
+          trigger: 'section.soft-skills',
+          start: 'top 10%',
+          end: 'top 10%',
           scrub: 3,
         },
       });

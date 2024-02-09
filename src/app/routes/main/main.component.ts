@@ -28,6 +28,7 @@ import { ColumnModelService } from './three/services/column';
 import { RedWallModelService } from './three/services/red-wall';
 
 import { IconEnum } from 'src/app/shared-components/icon/icon.enums';
+import { ContactComponent } from './components/contact/contact.component';
 @Component({
   standalone: true,
   selector: 'app-main',
@@ -44,6 +45,7 @@ import { IconEnum } from 'src/app/shared-components/icon/icon.enums';
     SoftSkillsComponent,
     HardSkillsComponent,
     ProjectsComponent,
+    ContactComponent,
   ],
   providers: [
     RodinThinkerModelService,

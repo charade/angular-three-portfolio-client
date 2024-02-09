@@ -33,5 +33,5 @@ export const skillsRoutes: Routes = [
   ],
 })
 export class SkillsModule {
-  #t = inject(TranslateService).use('fr');
+  #t = inject(TranslateService).use('en');
 }

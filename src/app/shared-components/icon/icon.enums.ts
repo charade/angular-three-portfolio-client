@@ -6,6 +6,7 @@ import {
   faCheck,
   faCircleXmark,
   faDiagramProject,
+  faDiamond,
   faGlobeAfrica,
   faLanguage,
 } from '@fortawesome/free-solid-svg-icons';
@@ -20,6 +21,7 @@ export enum IconEnum {
   Projects,
   ArrowUp,
   ArrowDown,
+  Diamond,
 }
 
 export namespace IconEnum {
@@ -32,5 +34,6 @@ export namespace IconEnum {
     [IconEnum.Projects, faDiagramProject],
     [IconEnum.ArrowUp, faArrowUp],
     [IconEnum.ArrowDown, faArrowDown],
+    [IconEnum.Diamond, faDiamond],
   ]);
 }

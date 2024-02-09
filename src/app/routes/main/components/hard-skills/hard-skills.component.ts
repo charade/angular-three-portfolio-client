@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  ViewContainerRef,
-  inject,
-} from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import gsap from 'gsap';
 import SplitType from 'split-type';
@@ -18,7 +12,6 @@ import SplitType from 'split-type';
 })
 export class HardSkillsComponent implements AfterViewInit {
   @Input() animationTimeLine: gsap.core.Timeline;
-  #viewContainerRef = inject(ViewContainerRef).element.nativeElement;
 
   ngAfterViewInit(): void {
     this.animationTimeLine.add(this.#animateHardSkillsWorkFlow());
@@ -34,8 +27,8 @@ export class HardSkillsComponent implements AfterViewInit {
       .timeline({
         scrollTrigger: {
           trigger: 'section.hard-skills',
-          start: 'top center',
-          end: 'top center',
+          start: 'top 80%',
+          end: 'top 80%',
           scrub: 3,
         },
       })
@@ -95,12 +88,12 @@ export class HardSkillsComponent implements AfterViewInit {
     return gsap
       .timeline({
         scrollTrigger: {
-          trigger: 'section.projects',
-          start: 'top 90%',
-          end: 'top 83%',
-          scrub: 4,
+          trigger: 'section.hard-skills',
+          start: 'top -2%',
+          end: 'top -2%',
+          scrub: 3,
         },
       })
-      .to(this.#viewContainerRef, { opacity: 0, y: 100 });
+      .to('.hard-skills-lists', { opacity: 0, y: 100 });
   }
 }

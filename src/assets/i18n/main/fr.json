@@ -13,5 +13,12 @@
   "main.soft.skills.solution.optimized": "Optimisées",
   "main.soft.skills.solution.pragmatic": "Pragmatiques",
   "main.soft.skills.solution.accessible": "Accessibles",
-  "main.soft.skills.solution.maintenable": "Maintenables"
+  "main.soft.skills.solution.maintenable": "Maintenables",
+  "main.outro.me": "Bonjour, Je suis Charles Ekomie .",
+  "main.outro.getInTouch": "Contactez-moi",
+  "main.sendMsg": "Envoyer",
+  "main.invalidEmail": "Veuillez entrer une adresse mail valide",
+  "main.emptyMsg": "Veuillez saisir votre message",
+  "main.email.placeholder": "example@gmail.com",
+  "main.textmsg.placehoder": "Votre message"
 }

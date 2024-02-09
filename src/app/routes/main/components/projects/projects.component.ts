@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, computed } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import gsap from 'gsap';
 import { MediaBreakPointsObserver } from 'src/app/shared-components/media-breakpoints-observer';
@@ -15,6 +15,7 @@ export class ProjectsComponent
   implements AfterViewInit
 {
   @Input() animationTimeLine: gsap.core.Timeline;
+
   ngAfterViewInit(): void {
     const projectTimeline = gsap
       .timeline({
@@ -27,7 +28,17 @@ export class ProjectsComponent
         },
       })
       .from('.project', { opacity: 0, width: 0 })
-      .from('.project > h4', { opacity: 0, y: 30, stagger: 0.4 });
+      .from('.project > h4', { opacity: 0, y: 30, stagger: 0.4 })
+      .to('.projects-container', {
+        x: -50,
+        opacity: 0,
+        scrollTrigger: {
+          trigger: 'section.projects',
+          start: 'top 10%',
+          end: 'top 10%',
+          scrub: 2,
+        },
+      });
 
     this.animationTimeLine.add(projectTimeline);
   }

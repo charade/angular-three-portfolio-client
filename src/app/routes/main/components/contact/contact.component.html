@@ -1,0 +1,44 @@
+<div class="contact-container">
+  <div class="outro-container">
+    <h2>{{ "main.outro.me" | translate }}</h2>
+    <h2>{{ "main.outro.getInTouch" | translate }}</h2>
+  </div>
+  <form #form="ngForm" (ngSubmit)="onsubmit(form, emailInput?.errors?.pattern)">
+    <input
+      #emailInput="ngModel"
+      [(ngModel)]="email"
+      type="email"
+      name="email"
+      required
+      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+      [placeholder]="'main.email.placeholder' | translate"
+    />
+    <span
+      *ngIf="
+        form.submitted &&
+        (emailInput?.errors?.pattern || emailInput?.errors?.required)
+      "
+      class="error-msg"
+      >{{ "main.invalidEmail" | translate }}</span
+    >
+    <textarea
+      name="message"
+      ng-class="{ xs: isDeviceXS() && !isDeviceS() }"
+      cols="30"
+      rows="20"
+      required
+      #textMsg="ngModel"
+      [(ngModel)]="message"
+      [placeholder]="'main.textmsg.placehoder' | translate"
+    ></textarea>
+    <span
+      *ngIf="form.submitted && textMsg?.errors?.required"
+      class="error-msg"
+      >{{ "main.emptyMsg" | translate }}</span
+    >
+
+    <button type="submit">
+      <span>{{ "main.sendMsg" | translate }}</span>
+    </button>
+  </form>
+</div>
