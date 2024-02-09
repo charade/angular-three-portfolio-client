@@ -9,10 +9,20 @@
     width: 22rem;
     height: 33rem;
 
-    &.s-style {
+    &.s-device {
       left: 20%;
       width: 28rem;
       height: 50rem;
+    }
+
+    &.sm-device {
+      left: 30%;
+      width: 30rem;
+      height: 55rem;
+    }
+    &.m-device {
+      left: 35%;
+      width: 40rem;
     }
 
     & > * {

@@ -1,6 +1,10 @@
 <div
   class="contact-container"
-  [ngClass]="{ 's-style': isDeviceXS() && !isDeviceSm() }"
+  [ngClass]="{
+    's-device': isDeviceXS(),
+    'sm-device': isDeviceSm(),
+    'm-device': isDeviceM(),
+  }"
 >
   <div class="outro-container">
     <h2>{{ "main.outro.me" | translate }}</h2>
