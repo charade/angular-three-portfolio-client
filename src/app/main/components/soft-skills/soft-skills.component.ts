@@ -16,12 +16,10 @@ import gsap from 'gsap';
   imports: [TranslateModule],
 })
 export class SoftSkillsComponent implements AfterViewInit {
-  @Input() animationTimeLine: gsap.core.Timeline;
-
   #viewContainerRef = inject(ViewContainerRef).element.nativeElement;
 
   ngAfterViewInit(): void {
-    const tl = gsap
+    gsap
       .timeline({
         scrollTrigger: {
           trigger: '.soft-skills',
@@ -31,30 +29,30 @@ export class SoftSkillsComponent implements AfterViewInit {
         },
       })
       .from('.soft-skills-catch-phrase-container', { opacity: 0, height: 0 }) // red border left animation
-      .from('.soft-skills-catch-phrase', { opacity: 0, stagger: 0.2, y: 50 })
-      .from('.soft-skills-list li', {
-        opacity: 0,
-        y: 30,
-        stagger: 0.4,
-        transform: 'rotate(-15deg)',
-        scrollTrigger: {
-          trigger: '.soft-skills',
-          start: 'top 30%',
-          end: 'top 30%',
-          scrub: 3,
-        },
-      })
-      .to(this.#viewContainerRef, {
-        opacity: 0,
-        y: '-=50',
-        scrollTrigger: {
-          trigger: 'section.soft-skills',
-          start: 'top 10%',
-          end: 'top 10%',
-          scrub: 3,
-        },
-      });
+      .from('.soft-skills-catch-phrase', { opacity: 0, stagger: 0.2, y: 50 });
 
-    this.animationTimeLine.add(tl);
+    gsap.from('.soft-skills-list li', {
+      opacity: 0,
+      y: 30,
+      stagger: 0.4,
+      transform: 'rotate(-15deg)',
+      scrollTrigger: {
+        trigger: '.soft-skills',
+        start: 'top 30%',
+        end: 'top 30%',
+        scrub: 3,
+      },
+    });
+
+    gsap.to(this.#viewContainerRef, {
+      opacity: 0,
+      y: '-=50',
+      scrollTrigger: {
+        trigger: 'section.soft-skills',
+        start: 'top 10%',
+        end: 'top 10%',
+        scrub: 3,
+      },
+    });
   }
 }

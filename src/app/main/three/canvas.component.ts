@@ -21,8 +21,6 @@ import {
   Scene,
   Vector2,
   WebGLRenderer,
-  AxesHelper,
-  DirectionalLightHelper,
   Color,
 } from 'three';
 
@@ -39,7 +37,7 @@ import { ColumnModelService } from './services/column';
   styleUrls: ['./canvas.component.scss'],
 })
 export class CanvasComponent implements AfterViewInit, OnDestroy {
-  @Input() animationTimeLine: gsap.core.Timeline;
+  @Input() animationTimeline: gsap.core.Timeline;
 
   @Output() progressChange = new EventEmitter<number>();
   @Output() onLoadModelsComplete = new EventEmitter<boolean>();
@@ -92,11 +90,13 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     this.#subscription = this.onLoadModelsComplete
       .pipe(skip(1), distinctUntilChanged())
       .subscribe(() => {
-        this.animationTimeLine.add(this.#animateOnSceneEntered());
-        this.animationTimeLine.add(this.#animateOnSoftSkillsEntered());
-        this.animationTimeLine.add(this.#animateOnHardSkillsEntered());
-        this.animationTimeLine.add(this.#animateOnProjectsSectionEntered());
-        this.animationTimeLine.add(this.#animateOnContactSectionEntered());
+        // animate rodin thinker right after loading
+        this.animationTimeline.add(this.#animateOnSceneEntered());
+
+        this.#animateOnSoftSkillsEntered();
+        this.#animateOnHardSkillsEntered();
+        this.#animateOnProjectsSectionEntered();
+        this.#animateOnContactSectionEntered();
       });
   }
 
@@ -145,11 +145,6 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
 
     shadowLight_2.target.position.set(172, -1, -304);
 
-    // const axes = new AxesHelper(100);
-    // axes.setColors('red', 'green', 'blue');
-    // axes.position.set(80, 0, -300);
-    // this.#scene.add(axes);
-
     shadowLight_1.castShadow = true;
     shadowLight_2.castShadow = true;
 
@@ -158,7 +153,6 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     shadowLight_1.shadow.camera.near = 0;
     shadowLight_1.shadow.camera.far = 100;
 
-    // shadowLight_2.shadow.bias = -0.001;
     shadowLight_2.shadow.mapSize = new Vector2(2048, 2048);
     shadowLight_2.shadow.camera.near = 0;
     shadowLight_2.shadow.camera.far = 300;
@@ -167,7 +161,6 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     this.#scene.add(shadowLight_1);
     this.#scene.add(shadowLight_2);
     this.#scene.add(shadowLight_2);
-    // this.#scene.add(new DirectionalLightHelper(shadowLight_2));
   }
 
   #configRenderer() {

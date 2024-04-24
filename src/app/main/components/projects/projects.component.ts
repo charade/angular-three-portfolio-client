@@ -14,10 +14,8 @@ export class ProjectsComponent
   extends MediaBreakPointsObserver
   implements AfterViewInit
 {
-  @Input() animationTimeLine: gsap.core.Timeline;
-
   ngAfterViewInit(): void {
-    const projectTimeline = gsap
+    gsap
       .timeline({
         immediateRender: false,
         scrollTrigger: {
@@ -28,18 +26,17 @@ export class ProjectsComponent
         },
       })
       .from('.project', { opacity: 0, width: 0 })
-      .from('.project > h4', { opacity: 0, y: 30, stagger: 0.4 })
-      .to('.projects-container', {
-        x: -50,
-        opacity: 0,
-        scrollTrigger: {
-          trigger: 'section.projects',
-          start: 'top 10%',
-          end: 'top 10%',
-          scrub: 2,
-        },
-      });
+      .from('.project > h4', { opacity: 0, y: 30, stagger: 0.4 });
 
-    this.animationTimeLine.add(projectTimeline);
+    gsap.to('.projects-container', {
+      x: -50,
+      opacity: 0,
+      scrollTrigger: {
+        trigger: 'section.projects',
+        start: 'top 10%',
+        end: 'top 10%',
+        scrub: 2,
+      },
+    });
   }
 }

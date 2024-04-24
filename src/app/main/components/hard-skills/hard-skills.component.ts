@@ -11,13 +11,11 @@ import SplitType from 'split-type';
   styleUrls: ['./hard-skills.component.scss'],
 })
 export class HardSkillsComponent implements AfterViewInit {
-  @Input() animationTimeLine: gsap.core.Timeline;
-
   ngAfterViewInit(): void {
-    this.animationTimeLine.add(this.#animateHardSkillsWorkFlow());
-    this.animationTimeLine.add(this.#animateHardSkillsStacks());
-    this.animationTimeLine.add(this.#animateHardSkillsSubSectionsSeparator());
-    this.animationTimeLine.add(this.#animateHardSkillsQuit());
+    this.#animateHardSkillsWorkFlow();
+    this.#animateHardSkillsStacks();
+    this.#animateHardSkillsSubSectionsSeparator();
+    this.#animateHardSkillsQuit();
   }
 
   #animateHardSkillsWorkFlow(): gsap.core.Timeline {

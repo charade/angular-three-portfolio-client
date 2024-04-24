@@ -34,15 +34,15 @@
 <div class="main-wrapper">
   <div #introSection class="canvas">
     <app-canvas
-      [animationTimeLine]="animationTimeLine"
+      [animationTimeline]="animationTimeLine"
       (progressChange)="onLoadingThinkerModel($event)"
       (onLoadModelsComplete)="onLoadModelsComplete($event)"
     />
-    <app-intro [animationTimeLine]="animationTimeLine" />
-    <soft-skills [animationTimeLine]="animationTimeLine" />
-    <hard-skills [animationTimeLine]="animationTimeLine" />
-    <projects [animationTimeLine]="animationTimeLine" />
-    <contact [animationTimeLine]="animationTimeLine" />
+    <app-intro />
+    <soft-skills />
+    <hard-skills />
+    <projects />
+    <contact />
   </div>
 
   <div class="sections-wrapper">

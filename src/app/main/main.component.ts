@@ -1,16 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnDestroy,
   OnInit,
   WritableSignal,
-  inject,
   signal,
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { AsyncPipe, NgClass } from '@angular/common';
-import { Subscription } from 'rxjs';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 

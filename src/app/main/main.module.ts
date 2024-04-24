@@ -1,36 +1,37 @@
-import { NgModule, importProvidersFrom, inject } from '@angular/core';
-import { EntryComponent } from './entry.component';
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule, inject } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
-import { RouterModule, Routes } from '@angular/router';
-import { LanguageMenuComponent } from './entry-components/language-menu/language-menu.component';
 import {
   TRANSLATE_FILES_LOADER,
   customTranslateConfig,
 } from 'src/app/common-utils/translate-config';
 import { RouterPathEnum } from 'src/app/common-utils/enums/RouterPaths.enum';
 import { FilesPathsEnum } from 'src/app/common-utils/enums/translate-files-path.enum';
+import { MainComponent } from './main.component';
 
-const entryRoute: Routes = [
+export const skillsRoutes: Routes = [
+  { path: RouterPathEnum.Root, loadComponent: () => MainComponent },
   {
-    path: RouterPathEnum.Root,
-    component: EntryComponent,
+    path: RouterPathEnum.NotFound,
+    redirectTo: RouterPathEnum.Root,
+    pathMatch: 'full',
   },
 ];
 
 @NgModule({
   imports: [
-    LanguageMenuComponent,
-    RouterModule.forChild(entryRoute),
+    RouterModule.forChild(skillsRoutes),
     TranslateModule.forChild(customTranslateConfig),
+    MainComponent,
   ],
   providers: [
     {
       provide: TRANSLATE_FILES_LOADER,
-      useValue: [FilesPathsEnum.LanguageSettings],
+      useValue: [FilesPathsEnum.Skills],
     },
   ],
 })
-export class EntryModule {
+export class MainModule {
   #t = inject(TranslateService).use('en');
 }

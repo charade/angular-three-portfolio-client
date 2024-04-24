@@ -16,13 +16,11 @@ export class ContactComponent
   extends MediaBreakPointsObserver
   implements AfterViewInit
 {
-  @Input() animationTimeLine: gsap.core.Timeline;
-
   email = '';
   message = '';
 
   ngAfterViewInit(): void {
-    const contactTimelineAnimation = gsap
+    gsap
       .timeline({
         immediateRender: false,
         scrollTrigger: {
@@ -41,8 +39,6 @@ export class ContactComponent
         opacity: 0,
       })
       .from('form', { opacity: 0 });
-
-    this.animationTimeLine.add(contactTimelineAnimation);
   }
 
   onsubmit(form: NgForm, v: any) {
