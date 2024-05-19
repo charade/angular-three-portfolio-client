@@ -11,12 +11,17 @@ export type LanguageResolverType = {
 };
 
 export namespace LanguageEnum {
-  const supportedLang = [LanguageEnum.Fr, LanguageEnum.En];
+  export const supportedLang = [LanguageEnum.Fr, LanguageEnum.En];
   const langKey = 'languageSettings.languages.';
 
-  const stringify = new CustomMap<LanguageEnum, string>([
+  export const stringify = new CustomMap<LanguageEnum, string>([
     [LanguageEnum.En, langKey + 'en'],
     [LanguageEnum.Fr, langKey + 'fr'],
+  ]);
+
+  export const getLang = new CustomMap<LanguageEnum, string>([
+    [LanguageEnum.En, 'en'],
+    [LanguageEnum.Fr, 'fr'],
   ]);
 
   export const languageResolver: LanguageResolverType[] = supportedLang.map(

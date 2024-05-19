@@ -90,9 +90,6 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     this.#subscription = this.onLoadModelsComplete
       .pipe(skip(1), distinctUntilChanged())
       .subscribe(() => {
-        // animate rodin thinker right after loading
-        this.animationTimeline.add(this.#animateOnSceneEntered());
-
         this.#animateOnSoftSkillsEntered();
         this.#animateOnHardSkillsEntered();
         this.#animateOnProjectsSectionEntered();
@@ -169,18 +166,6 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     this.#renderer.render(this.#scene, this.#camera);
   }
 
-  #animateOnSceneEntered(): gsap.core.Timeline {
-    return gsap.timeline().from(
-      this.#scene.position,
-      {
-        z: -5,
-        duration: 1,
-        ease: 'sine',
-      },
-      '>-1.5'
-    );
-  }
-
   #animateOnSoftSkillsEntered(): gsap.core.Timeline {
     return gsap
       .timeline({
@@ -188,8 +173,8 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
         scrollTrigger: {
           trigger: 'section.soft-skills', // soft-skills section
           start: 'top 70%',
-          end: 'top 68%',
-          scrub: 3,
+          end: 'top 65%',
+          scrub: 2,
         },
       })
       .to(this.#camera.rotation, {
@@ -209,7 +194,7 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
           trigger: 'section.hard-skills',
           start: 'top 80%',
           end: 'top 78%',
-          scrub: 3,
+          scrub: 2,
         },
       })
       .to(this.#camera.rotation, { y: '-=0.66' })

@@ -20,6 +20,7 @@ export class IntroComponent implements AfterViewInit {
         start: 'top 75%',
         end: 'top 75%',
         scrub: 2,
+        markers: true,
       },
     });
   }

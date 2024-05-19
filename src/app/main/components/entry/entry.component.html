@@ -1,0 +1,12 @@
+<div class="entry-container">
+  <h2>Please choose a language</h2>
+  <div class="lang-btn-container">
+    <button
+      *ngFor="let lang of LanguageEnum.supportedLang; track: lang"
+      aria-roledescription="language choice"
+      (click)="onSelectLanguage(lang)"
+    >
+      {{ LanguageEnum.stringify.value(lang) | translate }}
+    </button>
+  </div>
+</div>

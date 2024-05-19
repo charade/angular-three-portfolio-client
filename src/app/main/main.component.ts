@@ -25,6 +25,7 @@ import { RedWallModelService } from './three/services/red-wall';
 
 import { IconEnum } from 'src/app/shared-components/icon/icon.enums';
 import { ContactComponent } from './components/contact/contact.component';
+
 @Component({
   standalone: true,
   selector: 'app-main',
@@ -51,16 +52,12 @@ import { ContactComponent } from './components/contact/contact.component';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
   loadingProgress: WritableSignal<number> = signal(0);
   loadingComplete: WritableSignal<boolean> = signal(false);
 
   IconEnum = IconEnum;
   animationTimeLine = gsap.timeline();
-
-  ngOnInit(): void {
-    gsap.registerPlugin(ScrollTrigger);
-  }
 
   onLoadingThinkerModel(progress: number): void {
     this.loadingProgress.set(progress);
