@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   WritableSignal,
   signal,
 } from '@angular/core';
@@ -21,7 +20,6 @@ import { IntroComponent } from './components/intro/intro.component';
 import { RodinThinkerModelService } from './three/services/rodin-thinker';
 import { WomanOnStairsModelService } from './three/services/woman-on-stairs';
 import { ColumnModelService } from './three/services/column';
-import { RedWallModelService } from './three/services/red-wall';
 
 import { IconEnum } from 'src/app/shared-components/icon/icon.enums';
 import { ContactComponent } from './components/contact/contact.component';
@@ -47,7 +45,6 @@ import { ContactComponent } from './components/contact/contact.component';
   providers: [
     RodinThinkerModelService,
     WomanOnStairsModelService,
-    RedWallModelService,
     ColumnModelService,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,

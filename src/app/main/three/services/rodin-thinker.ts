@@ -5,13 +5,7 @@ import {
   signal,
 } from '@angular/core';
 import { THREE_ENUMS } from 'src/app/common-utils/enums/three.enum';
-import {
-  PerspectiveCamera,
-  Scene,
-  Vector2,
-  Vector3,
-  WebGLRenderer,
-} from 'three';
+import { PerspectiveCamera, Scene, Vector2, WebGLRenderer } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 @Component({
   selector: 'app-intro',
@@ -10,17 +11,19 @@ import gsap from 'gsap';
   imports: [TranslateModule],
 })
 export class IntroComponent implements AfterViewInit {
+  constructor() {
+    ScrollTrigger.refresh();
+  }
   ngAfterViewInit(): void {
     gsap.to('.intro-text', {
       stagger: 0.3,
       opacity: 0,
       y: -25,
       scrollTrigger: {
-        trigger: 'section.soft-skills',
-        start: 'top 75%',
-        end: 'top 75%',
+        trigger: '.fake-section',
+        start: 'top 20%',
+        end: 'top 20%',
         scrub: 2,
-        markers: true,
       },
     });
   }

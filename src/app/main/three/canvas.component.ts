@@ -27,7 +27,6 @@ import {
 import { RodinThinkerModelService } from './services/rodin-thinker';
 import { WomanOnStairsModelService } from './services/woman-on-stairs';
 import gsap from 'gsap';
-import { RedWallModelService } from './services/red-wall';
 import { ColumnModelService } from './services/column';
 
 @Component({
@@ -49,7 +48,6 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   #viewContainerRef = inject(ViewContainerRef).element.nativeElement;
   #rodinThinkerModelService = inject(RodinThinkerModelService);
   #womanOnStairsModelService = inject(WomanOnStairsModelService);
-  #redWallModelService = inject(RedWallModelService);
   #columnService = inject(ColumnModelService);
   #ngZone = inject(NgZone);
 
@@ -79,7 +77,6 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
         this.#camera
       );
 
-      this.#redWallModelService.load(this.#renderer, this.#scene, this.#camera);
       this.#columnService.load(this.#renderer, this.#scene, this.#camera);
     });
 
@@ -90,7 +87,6 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     this.#subscription = this.onLoadModelsComplete
       .pipe(skip(1), distinctUntilChanged())
       .subscribe(() => {
-        this.#animateOnSoftSkillsEntered();
         this.#animateOnHardSkillsEntered();
         this.#animateOnProjectsSectionEntered();
         this.#animateOnContactSectionEntered();
@@ -135,29 +131,18 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   #mountLights() {
     const ambientLight = new AmbientLight();
     const shadowLight_1 = new DirectionalLight();
-    const shadowLight_2 = new DirectionalLight(0xffffff, 1.5);
 
     shadowLight_1.position.set(-2, 2, 1);
-    shadowLight_2.position.set(105, 5, -290);
-
-    shadowLight_2.target.position.set(172, -1, -304);
 
     shadowLight_1.castShadow = true;
-    shadowLight_2.castShadow = true;
 
     shadowLight_1.shadow.bias = -0.001;
     shadowLight_1.shadow.mapSize = new Vector2(2048, 2048);
     shadowLight_1.shadow.camera.near = 0;
     shadowLight_1.shadow.camera.far = 100;
 
-    shadowLight_2.shadow.mapSize = new Vector2(2048, 2048);
-    shadowLight_2.shadow.camera.near = 0;
-    shadowLight_2.shadow.camera.far = 300;
-
     this.#scene.add(ambientLight);
     this.#scene.add(shadowLight_1);
-    this.#scene.add(shadowLight_2);
-    this.#scene.add(shadowLight_2);
   }
 
   #configRenderer() {
@@ -166,43 +151,24 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     this.#renderer.render(this.#scene, this.#camera);
   }
 
-  #animateOnSoftSkillsEntered(): gsap.core.Timeline {
-    return gsap
-      .timeline({
-        ease: 'none',
-        scrollTrigger: {
-          trigger: 'section.soft-skills', // soft-skills section
-          start: 'top 70%',
-          end: 'top 65%',
-          scrub: 2,
-        },
-      })
-      .to(this.#camera.rotation, {
-        y: '-=0.8',
-      })
-      .to(this.#camera.position, {
-        z: this.#camera.position.z + 1,
-        y: '+=1',
-      });
-  }
-
   #animateOnHardSkillsEntered(): gsap.core.Timeline {
     return gsap
       .timeline({
         ease: 'none',
         scrollTrigger: {
           trigger: 'section.hard-skills',
-          start: 'top 80%',
-          end: 'top 78%',
-          scrub: 2,
+          start: 'top 68%',
+          end: 'top 74%',
+          scrub: 1.5,
         },
       })
-      .to(this.#camera.rotation, { y: '-=0.66' })
-      .to(this.#camera.position, {
-        x: '+=2',
-        z: '-=1',
+      .to(this.#camera.rotation, {
+        y: 5.4,
+        z: 0,
       })
-      .to(this.#camera.position, { y: '+=21' });
+      .to(this.#camera.position, {
+        y: 0.5 - this.#womanOnStairsModelService.getPosition().y,
+      });
   }
 
   #animateOnProjectsSectionEntered(): gsap.core.Timeline {
@@ -212,24 +178,16 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
           trigger: 'section.projects',
           start: 'top 75%',
           end: 'top 70%',
-          scrub: 4,
+          scrub: 1.5,
         },
-      })
-      .to(
-        this.#camera.position,
-        {
-          z: this.#camera.position.z - 190,
-          x: '+=68',
-        },
-        '+=0.1'
-      )
-      .to(this.#camera.rotation, {
-        y: this.#camera.rotation.y - 0.5,
       })
       .to(this.#camera.position, {
-        y: this.#camera.position.y + 25,
+        z: 100 - this.#columnService.getPosition().z,
+        x: 13,
       })
-      .to(this.#camera.rotation, { z: 0.12 });
+      .to(this.#camera.rotation, {
+        z: 0.1,
+      });
   }
 
   #animateOnContactSectionEntered(): gsap.core.Timeline {
@@ -237,12 +195,12 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
       .timeline({
         scrollTrigger: {
           trigger: 'section.contact',
-          start: 'top 80%',
+          start: 'top 85%',
           end: 'top 80%',
-          scrub: 4,
+          scrub: 1.5,
         },
       })
-      .to(this.#camera.position, { z: '-=20', x: '+=13' })
-      .to(this.#camera.rotation, { z: 0 });
+      .to(this.#camera.rotation, { z: 0 })
+      .to(this.#camera.position, { z: '+=0.5' });
   }
 }

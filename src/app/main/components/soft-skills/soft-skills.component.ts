@@ -22,9 +22,9 @@ export class SoftSkillsComponent implements AfterViewInit {
     gsap
       .timeline({
         scrollTrigger: {
-          trigger: '.soft-skills',
-          start: 'top 32%',
-          end: 'top 32%',
+          trigger: 'section.soft-skills',
+          start: 'top 35%',
+          end: 'top 35%',
           scrub: 1.5,
         },
       })
@@ -37,7 +37,7 @@ export class SoftSkillsComponent implements AfterViewInit {
       stagger: 0.4,
       transform: 'rotate(-15deg)',
       scrollTrigger: {
-        trigger: '.soft-skills',
+        trigger: 'section.soft-skills',
         start: 'top 30%',
         end: 'top 30%',
         scrub: 3,
