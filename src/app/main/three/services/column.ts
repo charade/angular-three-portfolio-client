@@ -14,7 +14,7 @@ export class ColumnModelService {
     new GLTFLoader().load(THREE_ENUMS.MODELS.COLUMN, ({ scene: _scene }) => {
       // _scene.position.set(150, -5, -300);
       _scene.scale.set(0.07, 0.07, 0.07);
-      _scene.position.set(20, -0.1, 48);
+      _scene.position.set(20, -0.04, 48);
       this.#position = _scene.position;
 
       _scene.rotation.y = Math.PI / 3;

@@ -178,15 +178,12 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
           trigger: 'section.projects',
           start: 'top 75%',
           end: 'top 70%',
-          scrub: 1.5,
+          scrub: 2,
         },
       })
       .to(this.#camera.position, {
         z: 100 - this.#columnService.getPosition().z,
         x: 13,
-      })
-      .to(this.#camera.rotation, {
-        z: 0.1,
       });
   }
 
@@ -200,7 +197,6 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
           scrub: 1.5,
         },
       })
-      .to(this.#camera.rotation, { z: 0 })
-      .to(this.#camera.position, { z: '+=0.5' });
+      .to(this.#camera.position, { x: '+=3', z: '-=2' });
   }
 }
