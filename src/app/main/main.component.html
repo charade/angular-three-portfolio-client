@@ -28,7 +28,7 @@
 
 <app-scroll-progressbar
   [animationTimeLine]="animationTimeLine"
-  [loadingComplete]="loadingComplete()"
+  [loadingComplete]="modelsLoadingComplete()"
 />
 
 <div class="main-wrapper">
@@ -38,7 +38,10 @@
       (progressChange)="onLoadingThinkerModel($event)"
       (onLoadModelsComplete)="onLoadModelsComplete($event)"
     />
-    <app-intro />
+    <app-intro
+      [animateTimeline]="animationTimeLine"
+      [modelsLoadingComplete]="modelsLoadingComplete()"
+    />
     <soft-skills />
     <hard-skills />
     <projects />

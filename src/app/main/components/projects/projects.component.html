@@ -2,19 +2,7 @@
   class="projects-container"
   [ngClass]="{ 'large-screen': isDeviceM() && !isDeviceXL() }"
 >
-  <div class="project">
-    <h4>project1</h4>
-  </div>
-  <div class="project">
-    <h4>project2</h4>
-  </div>
-  <div class="project">
-    <h4>project3</h4>
-  </div>
-  <div class="project">
-    <h4>project4</h4>
-  </div>
-  <div class="project">
-    <h4>project4</h4>
+  <div *ngFor="let project of ProjectUtils.list" class="project">
+    <h4>{{ project }}</h4>
   </div>
 </div>

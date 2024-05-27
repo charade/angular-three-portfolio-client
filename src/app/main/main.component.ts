@@ -51,7 +51,7 @@ import { ContactComponent } from './components/contact/contact.component';
 })
 export class MainComponent {
   loadingProgress: WritableSignal<number> = signal(0);
-  loadingComplete: WritableSignal<boolean> = signal(false);
+  modelsLoadingComplete: WritableSignal<boolean> = signal(false);
 
   IconEnum = IconEnum;
   animationTimeLine = gsap.timeline();
@@ -69,6 +69,6 @@ export class MainComponent {
         .to('.loader-container', { width: 0, duration: 0.5 });
     }
 
-    this.loadingComplete.set(true);
+    this.modelsLoadingComplete.set(true);
   }
 }

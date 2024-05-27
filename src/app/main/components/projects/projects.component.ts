@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import gsap from 'gsap';
 import { MediaBreakPointsObserver } from 'src/app/shared-components/media-breakpoints-observer';
-
+import { ProjectsUtils } from './utils';
 @Component({
   selector: 'projects',
   standalone: true,
@@ -14,6 +14,8 @@ export class ProjectsComponent
   extends MediaBreakPointsObserver
   implements AfterViewInit
 {
+  ProjectUtils = ProjectsUtils;
+
   ngAfterViewInit(): void {
     gsap
       .timeline({
