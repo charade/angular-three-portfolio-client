@@ -12,9 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { OverlayUtils } from './overlay-utils';
 
-export const OverlayRefToken = new InjectionToken<OverlayRef>(
-  'overlay_ref_token'
-);
+export const OVERLAY_REF_TOKEN = new InjectionToken<OverlayRef>('overlay_ref');
 
 @Injectable()
 export class OverlayService {
@@ -25,16 +23,17 @@ export class OverlayService {
 
   open(
     content: ComponentType<any>,
-    origin: HTMLElement,
-    viewContainer: ViewContainerRef
+    viewContainer: ViewContainerRef,
+    data?: { [k: string]: any },
+    size?: { width: string; height: string }
   ) {
     this.#currentOverlayRef = this.#overlay.create(
-      OverlayUtils.getDefaultConfig(this.#overlay, origin)
+      OverlayUtils.getDefaultConfig(this.#overlay, size?.width, size?.height)
     );
 
     const injector = Injector.create({
       providers: [
-        { provide: OverlayRefToken, useValue: this.#currentOverlayRef },
+        { provide: OVERLAY_REF_TOKEN, useValue: this.#currentOverlayRef },
       ],
     });
 

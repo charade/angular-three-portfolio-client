@@ -1,0 +1,16 @@
+<h2 class="title">{{ title }}</h2>
+<div class="scroll-indication" *ngIf="images.length > 1">
+  <app-icon [iconName]="IconEnum.ArrowLeft" [clickable]="false" />
+  <span>scroll</span>
+  <app-icon [iconName]="IconEnum.ArrowRight" [clickable]="false" />
+</div>
+<div
+  class="caroussel-container"
+  [ngStyle]="{ overflowX: images.length > 1 ? 'scroll' : 'hidden' }"
+>
+  <div *ngFor="let image of images" class="image-container">
+    <img [src]="image" alt="" />
+  </div>
+</div>
+
+<p class="project-description">{{description}}</p>

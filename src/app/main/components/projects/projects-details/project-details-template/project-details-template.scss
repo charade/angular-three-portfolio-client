@@ -1,0 +1,62 @@
+:host {
+  display: block;
+  min-width: 34rem;
+
+  .title {
+    font-size: 2rem;
+    font-weight: 400;
+    font-family: "DancingScript-Variable";
+    color: #ffffffb7;
+    text-align: center;
+    margin: 0.75rem 0;
+  }
+
+  .scroll-indication {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a5a5a5b5;
+    font-size: 1.25rem;
+
+    & > * {
+      margin: 0 0.5rem;
+    }
+
+    span {
+      font-family: RobotoLight;
+    }
+  }
+
+  .caroussel-container {
+    height: 23rem;
+    width: 100%;
+    display: flex;
+    overflow-y: hidden;
+    padding-top: 1rem;
+
+    & > * {
+      margin-right: 0.25rem;
+    }
+
+    .image-container {
+      min-width: 100%;
+      min-height: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background-color: #000000bd;
+      }
+    }
+  }
+
+  .project-description {
+    font-size: 1.75rem;
+    width: 97%;
+    color: #fffffff1;
+    font-family: RobotoThin;
+    line-height: 2.25rem;
+    padding: 0.25rem 0.25rem 0 0.5rem;
+  }
+}

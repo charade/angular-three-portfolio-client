@@ -1,8 +1,9 @@
 <div
+  #projectsDetailsOrigin
   class="projects-container"
   [ngClass]="{ 'large-screen': isDeviceM() && !isDeviceXL() }"
 >
   <div *ngFor="let project of ProjectUtils.list" class="project">
-    <h4>{{ project }}</h4>
+    <h4 (click)="onOpenProjectDetails(project)"><span>></span>{{ project }}</h4>
   </div>
 </div>

@@ -1,8 +1,15 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  ViewContainerRef,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import gsap from 'gsap';
 import { MediaBreakPointsObserver } from 'src/app/shared-components/media-breakpoints-observer';
 import { ProjectsUtils } from './utils';
+import { OverlayService } from 'src/app/main/services/overlay/overlay.service';
 @Component({
   selector: 'projects',
   standalone: true,
@@ -15,6 +22,9 @@ export class ProjectsComponent
   implements AfterViewInit
 {
   ProjectUtils = ProjectsUtils;
+
+  #overlayService = inject(OverlayService);
+  #viewContainerRef = inject(ViewContainerRef);
 
   ngAfterViewInit(): void {
     gsap
@@ -40,5 +50,13 @@ export class ProjectsComponent
         scrub: 2,
       },
     });
+  }
+
+  onOpenProjectDetails(project: ProjectsUtils.ProjectNameType): void {
+    this.#overlayService.open(
+      ProjectsUtils.getProjectDetails.value(project),
+      this.#viewContainerRef,
+      { title: project }
+    );
   }
 }
