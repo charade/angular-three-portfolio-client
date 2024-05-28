@@ -57,7 +57,7 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     this.#scene.position.x = -0.4;
     this.#renderer.shadowMap.enabled = true;
     this.#renderer.shadowMap.type = PCFSoftShadowMap;
-    this.#renderer.setClearColor('rgb(255, 250, 243)');
+    this.#renderer.setClearColor('#fff');
     this.#mountCamera();
     this.#mountLights();
     this.#addGround();
@@ -115,8 +115,9 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   #addGround() {
     const planeGeometry = new PlaneGeometry(2000, 2000);
     const planeMaterial = new MeshPhysicalMaterial({
-      emissiveIntensity: 0.02,
-      emissive: new Color(0xffffff),
+      emissiveIntensity: 0.58,
+      emissive: new Color('rgb(255, 251, 245)'),
+      color: 'rgb(255, 251, 245)',
     });
 
     const ground = new Mesh(planeGeometry, planeMaterial);

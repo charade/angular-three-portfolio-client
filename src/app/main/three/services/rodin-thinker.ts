@@ -7,9 +7,6 @@ import {
 import { THREE_ENUMS } from 'src/app/common-utils/enums/three.enum';
 import { PerspectiveCamera, Scene, Vector2, WebGLRenderer } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
 
 @Injectable()
 export class RodinThinkerModelService {
@@ -23,7 +20,7 @@ export class RodinThinkerModelService {
     new GLTFLoader().load(
       THREE_ENUMS.MODELS.THINKER,
       ({ scene: _scene }) => {
-        _scene.position.set(1, -0.5, -4.5);
+        _scene.position.set(1, -0.5, -3.5);
         scene.add(_scene);
 
         _scene.traverse((node) => {
@@ -33,19 +30,8 @@ export class RodinThinkerModelService {
           }
         });
 
-        const effectComposer = new EffectComposer(renderer);
-        const renderScene = new RenderPass(scene, camera);
-        const bloom = new UnrealBloomPass(
-          new Vector2(window.innerWidth, window.innerHeight),
-          0.2,
-          0.1,
-          0.1
-        );
-        effectComposer.addPass(renderScene);
-        effectComposer.addPass(bloom);
-
         renderer.setAnimationLoop(() => {
-          effectComposer.render();
+          renderer.render(scene, camera);
           onLoadModelsComplete.emit(true); // set model loading fully complete
         });
       },

@@ -14,28 +14,15 @@
     align-items: flex-end;
     z-index: 40;
 
-    // social meda divider
-    &::before {
-      position: absolute;
-      content: "";
-      width: 2rem;
-      height: 3rem;
-      border-left: 1px dashed rgba(246, 92, 92, 0.891);
-      right: 0.5rem;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
     a {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 2rem 0;
-      max-width: 2.75rem;
-      opacity: 0.6;
-      border: 1px solid #fff;
+      margin: 1rem 0;
+      max-width: 2rem;
+      opacity: 0.8;
+      border: 1px solid #0000007c;
       border-radius: 50%;
-      box-shadow: 0 0 5px rgb(255, 5, 5);
       padding: 1rem;
 
       & > * {
