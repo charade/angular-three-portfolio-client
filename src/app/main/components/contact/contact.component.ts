@@ -30,6 +30,7 @@ export class ContactComponent
           scrub: 2,
         },
       })
+      .from('.contact-container', { display: 'none' })
       .from('.outro-container h2:first-child', {
         y: -30,
         opacity: 0,
