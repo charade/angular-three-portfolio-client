@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppIconComponent } from '../../../../../shared-components/icon/icon.component';
 import { IconEnum } from '../../../../../shared-components/icon/icon.enums';
+import { OVERLAY_DATA_TOKEN } from 'src/app/main/services/overlay/overlay.service';
 
 @Component({
   selector: 'project-details-template',
@@ -11,9 +12,11 @@ import { IconEnum } from '../../../../../shared-components/icon/icon.enums';
   styleUrls: ['./project-details-template.scss'],
 })
 export class ProjectDetailsTemplateComponent {
-  @Input() title: string;
   @Input() images: string[];
   @Input() description: string;
   @Input() link: string;
+
+  overlayData = inject(OVERLAY_DATA_TOKEN);
+
   IconEnum = IconEnum;
 }

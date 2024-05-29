@@ -56,7 +56,10 @@ export class ProjectsComponent
     this.#overlayService.open(
       ProjectsUtils.getProjectDetails.value(project),
       this.#viewContainerRef,
-      { title: project }
+      {
+        title: project,
+        projectLink: ProjectsUtils.getProjectLink.value(project),
+      }
     );
   }
 }

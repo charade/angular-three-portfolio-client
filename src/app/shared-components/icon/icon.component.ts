@@ -13,7 +13,6 @@ import { IconEnum } from './icon.enums';
 export class AppIconComponent {
   @Input({ required: true }) iconName: IconEnum;
   @Input() strokeColor: string = '';
-  @Input() clickable = true;
   @Output() action = new EventEmitter<HTMLElement>();
   IconEnum = IconEnum;
 }

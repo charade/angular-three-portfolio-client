@@ -38,10 +38,10 @@ export namespace ProjectsUtils {
     ['Siteflow', SiteflowDetailsComponent],
   ]);
 
-  export const getProjectLinks = new CustomMap<ProjectNameType, string>([
-    ['Cryptrends', ''],
-    ['Flex-date', ''],
+  export const getProjectLink = new CustomMap<ProjectNameType, string>([
+    ['Cryptrends', 'https://cryptrends-9168e.web.app/'],
+    ['Flex-date', 'https://flex-date.web.app/'],
     ['Memo', ''],
-    ['Siteflow', ''],
+    ['Siteflow', 'https://www.siteflow.com/fr/'],
   ]);
 }

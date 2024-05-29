@@ -11,9 +11,13 @@ import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { OverlayUtils } from './overlay-utils';
+import { ProjectsUtils } from '../../components/projects/utils';
 
-export const OVERLAY_REF_TOKEN = new InjectionToken<OverlayRef>('overlay_ref');
-
+export const OVERLAY_DATA_TOKEN = new InjectionToken<{
+  title: ProjectsUtils.ProjectNameType;
+  projectLink: string;
+  overlayRef: OverlayRef;
+}>('overflay_data');
 @Injectable()
 export class OverlayService {
   #overlay = inject(Overlay);
@@ -24,7 +28,7 @@ export class OverlayService {
   open(
     content: ComponentType<any>,
     viewContainer: ViewContainerRef,
-    data?: { [k: string]: any },
+    data: { title: ProjectsUtils.ProjectNameType; projectLink: string },
     size?: { width: string; height: string }
   ) {
     this.#currentOverlayRef = this.#overlay.create(
@@ -33,7 +37,10 @@ export class OverlayService {
 
     const injector = Injector.create({
       providers: [
-        { provide: OVERLAY_REF_TOKEN, useValue: this.#currentOverlayRef },
+        {
+          provide: OVERLAY_DATA_TOKEN,
+          useValue: { ...data, overlayRef: this.#currentOverlayRef },
+        },
       ],
     });
 

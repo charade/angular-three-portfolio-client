@@ -4,7 +4,7 @@ export namespace OverlayUtils {
   export const getDefaultConfig = (
     overlay: Overlay,
     width = '34rem',
-    height = '61rem'
+    height = '57rem'
   ): OverlayConfig => ({
     width,
     height,

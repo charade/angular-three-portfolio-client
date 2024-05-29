@@ -4,6 +4,8 @@ import {
   faArrowLeft,
   faArrowRight,
   faArrowUp,
+  faArrowUpRightFromSquare,
+  faClose,
   faDiamond,
 } from '@fortawesome/free-solid-svg-icons';
 import { CustomMap } from 'src/app/common-utils/structures';
@@ -14,6 +16,8 @@ export enum IconEnum {
   ArrowLeft,
   ArrowRight,
   Diamond,
+  ExternalLink,
+  Close,
 }
 
 export namespace IconEnum {
@@ -23,5 +27,7 @@ export namespace IconEnum {
     [IconEnum.ArrowLeft, faArrowLeft],
     [IconEnum.ArrowRight, faArrowRight],
     [IconEnum.Diamond, faDiamond],
+    [IconEnum.ExternalLink, faArrowUpRightFromSquare],
+    [IconEnum.Close, faClose],
   ]);
 }
