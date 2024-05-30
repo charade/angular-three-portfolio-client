@@ -11,7 +11,8 @@ import { FilesPathsEnum } from 'src/app/common-utils/enums/translate-files-path.
 import { MainComponent } from './main.component';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { OverlayService } from './services/overlay/overlay.service';
+import { OverlayService } from '../services/overlay/overlay.service';
+import { MessageService } from '../services/message.service';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,6 +33,7 @@ export const skillsRoutes: Routes = [
   ],
   providers: [
     OverlayService,
+    MessageService,
     {
       provide: TRANSLATE_FILES_LOADER,
       useValue: [FilesPathsEnum.Skills],

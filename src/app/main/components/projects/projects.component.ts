@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import gsap from 'gsap';
 import { MediaBreakPointsObserver } from 'src/app/shared-components/media-breakpoints-observer';
 import { ProjectsUtils } from './utils';
-import { OverlayService } from 'src/app/main/services/overlay/overlay.service';
+import { OverlayService } from 'src/app/services/overlay/overlay.service';
 @Component({
   selector: 'projects',
   standalone: true,

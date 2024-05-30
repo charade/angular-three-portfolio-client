@@ -1,9 +1,11 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import gsap from 'gsap';
 import { JsonPipe, NgClass, NgIf } from '@angular/common';
 import { MediaBreakPointsObserver } from 'src/app/shared-components/media-breakpoints-observer';
+import { MessageService } from 'src/app/services/message.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'contact',
@@ -17,7 +19,9 @@ export class ContactComponent
   implements AfterViewInit
 {
   email = '';
-  message = '';
+  text = '';
+
+  #messageService = inject(MessageService);
 
   ngAfterViewInit(): void {
     gsap
@@ -42,9 +46,16 @@ export class ContactComponent
       .from('form', { opacity: 0 });
   }
 
-  onsubmit(form: NgForm, v: any) {
+  onsubmit(form: NgForm) {
     if (form.valid) {
+      this.#messageService
+        .sendMessage({ email: this.email, text: this.text })
+        .pipe(
+          map(() => {
+            form.resetForm();
+          })
+        )
+        .subscribe();
     }
-    console.log(form.value, v);
   }
 }

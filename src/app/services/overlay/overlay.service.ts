@@ -11,7 +11,7 @@ import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { OverlayUtils } from './overlay-utils';
-import { ProjectsUtils } from '../../components/projects/utils';
+import { ProjectsUtils } from 'src/app/main/components/projects/utils';
 
 export const OVERLAY_DATA_TOKEN = new InjectionToken<{
   title: ProjectsUtils.ProjectNameType;
