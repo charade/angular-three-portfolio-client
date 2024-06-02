@@ -1,11 +1,20 @@
-import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  WritableSignal,
+  inject,
+  signal,
+} from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import gsap from 'gsap';
 import { JsonPipe, NgClass, NgIf } from '@angular/common';
 import { MediaBreakPointsObserver } from 'src/app/shared-components/media-breakpoints-observer';
 import { MessageService } from 'src/app/services/message.service';
-import { map } from 'rxjs';
+import { EMPTY, catchError, finalize, map } from 'rxjs';
+import { IconEnum } from 'src/app/shared-components/icon/icon.enums';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToasterTypeEnum } from './utils';
 
 @Component({
   selector: 'contact',
@@ -20,6 +29,7 @@ export class ContactComponent
 {
   email = '';
   text = '';
+  IconEnum = IconEnum;
 
   #messageService = inject(MessageService);
 
@@ -52,10 +62,50 @@ export class ContactComponent
         .sendMessage({ email: this.email, text: this.text })
         .pipe(
           map(() => {
+            this.#displayMessageSubmitionToaster(
+              'message successfully sent',
+              200
+            );
             form.resetForm();
+          }),
+          catchError((error: HttpErrorResponse) => {
+            this.#displayMessageSubmitionToaster(
+              error.status === 400
+                ? 'Your email is not valid'
+                : 'Oops a server error occurred'
+            );
+            return EMPTY;
           })
         )
         .subscribe();
     }
+  }
+
+  #displayMessageSubmitionToaster(
+    message: string,
+    responseStatus?: number
+  ): void {
+    const toasterContainer = document.querySelector(
+      '.message-toaster-container'
+    );
+
+    toasterContainer.textContent = message;
+    toasterContainer.classList.add(
+      responseStatus === 200 ? ToasterTypeEnum.SUCCESS : ToasterTypeEnum.ERROR
+    );
+
+    gsap
+      .timeline()
+      .from(toasterContainer, { display: 'none' })
+      .to(toasterContainer, {
+        immediateRender: false,
+        opacity: 1,
+        duration: 0.5,
+      })
+      .to(toasterContainer, {
+        immediateRender: false,
+        delay: 2.75,
+        opacity: 0,
+      });
   }
 }

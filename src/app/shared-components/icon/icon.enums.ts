@@ -5,6 +5,8 @@ import {
   faArrowRight,
   faArrowUp,
   faArrowUpRightFromSquare,
+  faCheck,
+  faCheckCircle,
   faClose,
   faDiamond,
 } from '@fortawesome/free-solid-svg-icons';
@@ -18,6 +20,7 @@ export enum IconEnum {
   Diamond,
   ExternalLink,
   Close,
+  CheckMark,
 }
 
 export namespace IconEnum {
@@ -29,5 +32,6 @@ export namespace IconEnum {
     [IconEnum.Diamond, faDiamond],
     [IconEnum.ExternalLink, faArrowUpRightFromSquare],
     [IconEnum.Close, faClose],
+    [IconEnum.CheckMark, faCheckCircle],
   ]);
 }

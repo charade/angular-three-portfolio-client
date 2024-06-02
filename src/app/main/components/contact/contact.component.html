@@ -1,3 +1,5 @@
+<div class="message-toaster-container"></div>
+
 <div
   class="contact-container"
   [ngClass]="{
@@ -18,7 +20,7 @@
       type="email"
       name="email"
       required
-      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
       [placeholder]="'main.email.placeholder' | translate"
     />
     <span
