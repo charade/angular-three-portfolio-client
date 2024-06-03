@@ -42,7 +42,7 @@ export class RodinThinkerModelService {
       },
       (event) => {
         const progress = Math.floor((event.loaded / event.total) * 100);
-        console.log(progress);
+        console.log(event.loaded, event.total);
         progressChange.emit(progress);
       }
     );
