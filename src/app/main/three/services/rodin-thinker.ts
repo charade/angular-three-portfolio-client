@@ -41,7 +41,8 @@ export class RodinThinkerModelService {
         });
       },
       (event) => {
-        const progress = Math.floor((event.loaded * 100) / event.total);
+        const progress = Math.floor((event.loaded / event.total) * 100);
+        console.log(progress);
         progressChange.emit(progress);
       }
     );
