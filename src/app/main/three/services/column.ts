@@ -6,6 +6,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 @Injectable()
 export class ColumnModelService {
   #position = new Vector3(0, 0, 0);
+
   getPosition() {
     return this.#position;
   }
@@ -20,10 +21,6 @@ export class ColumnModelService {
       _scene.rotation.y = Math.PI / 3;
       scene.add(_scene);
 
-      _scene.traverse((node) => {
-        node.castShadow = true;
-        node.receiveShadow = true;
-      });
       renderer.setAnimationLoop(() => renderer.render(scene, camera));
     });
   }

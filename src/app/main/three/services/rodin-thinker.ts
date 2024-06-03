@@ -5,7 +5,13 @@ import {
   signal,
 } from '@angular/core';
 import { THREE_ENUMS } from 'src/app/common-utils/enums/three.enum';
-import { PerspectiveCamera, Scene, Vector2, WebGLRenderer } from 'three';
+import {
+  PerspectiveCamera,
+  Scene,
+  Vector2,
+  Vector3,
+  WebGLRenderer,
+} from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 @Injectable()
@@ -20,9 +26,8 @@ export class RodinThinkerModelService {
     new GLTFLoader().load(
       THREE_ENUMS.MODELS.THINKER,
       ({ scene: _scene }) => {
-        _scene.position.set(1, -0.5, -3.5);
+        _scene.position.set(1, -0.5, -3.7);
         scene.add(_scene);
-
         _scene.traverse((node) => {
           if (node.type === 'Mesh') {
             node.castShadow = true;

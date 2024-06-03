@@ -22,6 +22,11 @@ import {
   Vector2,
   WebGLRenderer,
   Color,
+  SpotLight,
+  SpotLightHelper,
+  PointLight,
+  PointLightHelper,
+  DirectionalLightHelper,
 } from 'three';
 
 import { RodinThinkerModelService } from './services/rodin-thinker';
@@ -144,6 +149,18 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
 
     this.#scene.add(ambientLight);
     this.#scene.add(shadowLight_1);
+
+    //column model light
+
+    const columnShadowLight = new DirectionalLight(0xfff, 2);
+
+    columnShadowLight.position.set(
+      this.#columnService.getPosition().x - 1,
+      this.#columnService.getPosition().y,
+      this.#columnService.getPosition().z - 1
+    );
+
+    this.#scene.add(columnShadowLight);
   }
 
   #configRenderer() {
