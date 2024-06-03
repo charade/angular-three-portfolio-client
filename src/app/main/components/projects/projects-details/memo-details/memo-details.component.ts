@@ -20,5 +20,5 @@ export class MemoDetailsComponent {
   ];
 
   readonly description =
-    'A mobile app for saving memories. Attaching a memory to a location, with comments. Memories are grouped into categories, this way user can remember a place linking it to a feeling. First user select a location, then attach create memory by adding a category and a comment. Once saved he can check the memories list and check their details.';
+    'An Ionic7/Angular17 mobile app for saving memories. Attaching a memory to a location, with comments. Memories are grouped into categories, this way user can remember a place linking it to a feeling. First user select a location, then attach create memory by adding a category and a comment. Once saved he can check the memories list and check their details.';
 }

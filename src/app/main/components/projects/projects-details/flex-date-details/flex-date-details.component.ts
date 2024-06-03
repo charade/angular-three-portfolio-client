@@ -17,5 +17,5 @@ export class FlexDateDetailsComponent {
   ];
 
   readonly description =
-    'This open design input date component give to users the opportunity to take advantage of dayjs library flexibility. But also includes a translator to get your calendar in your chosen languages. Users can customize the date format.';
+    "This open design input date component give to users the opportunity to take advantage of dayjs library flexibility. But also includes a translator to get your calendar in your chosen languages. Users can customize the date format. It's implemented with Angular 16";
 }
