@@ -16,5 +16,5 @@ export class CryptrendsDetailsComponent {
   ];
 
   readonly description =
-    'Powered by angular 17, i did this project to better understand the world of cryptocurrencies. It allows to track the trends depending on the selected currency. User can check the fluctuation of a crypto as a graph on a details page over the last 30 days.';
+    'Powered by Angular 17, i did this project to better understand the world of cryptocurrencies. It allows to track the trends depending on the selected currency. User can check the fluctuation of a crypto as a graph on a details page over the last 30 days.';
 }
