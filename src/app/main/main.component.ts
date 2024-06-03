@@ -7,7 +7,6 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { AsyncPipe, NgClass } from '@angular/common';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { ScrollProgressbar } from './components/scroll-progressbar/scroll-progressbar.component';
 import { CanvasComponent } from './three/canvas.component';

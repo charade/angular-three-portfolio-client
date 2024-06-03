@@ -1,17 +1,6 @@
-import {
-  EventEmitter,
-  Injectable,
-  WritableSignal,
-  signal,
-} from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { THREE_ENUMS } from 'src/app/common-utils/enums/three.enum';
-import {
-  PerspectiveCamera,
-  Scene,
-  Vector2,
-  Vector3,
-  WebGLRenderer,
-} from 'three';
+import { PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 @Injectable()
@@ -42,7 +31,6 @@ export class RodinThinkerModelService {
       },
       (event) => {
         const progress = Math.floor((event.loaded / event.total) * 100);
-        console.log(event);
         progressChange.emit(progress);
       }
     );

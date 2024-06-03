@@ -1,17 +1,11 @@
-import {
-  AfterViewInit,
-  Component,
-  WritableSignal,
-  inject,
-  signal,
-} from '@angular/core';
+import { AfterViewInit, Component, inject } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import gsap from 'gsap';
 import { JsonPipe, NgClass, NgIf } from '@angular/common';
 import { MediaBreakPointsObserver } from 'src/app/shared-components/media-breakpoints-observer';
 import { MessageService } from 'src/app/services/message.service';
-import { EMPTY, catchError, finalize, map } from 'rxjs';
+import { EMPTY, catchError, map } from 'rxjs';
 import { IconEnum } from 'src/app/shared-components/icon/icon.enums';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToasterTypeEnum } from './utils';

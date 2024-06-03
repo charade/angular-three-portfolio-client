@@ -1,7 +1,6 @@
 import {
   AfterViewInit,
   Component,
-  Input,
   ViewContainerRef,
   inject,
 } from '@angular/core';

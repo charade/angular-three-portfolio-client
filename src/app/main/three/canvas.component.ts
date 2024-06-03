@@ -22,11 +22,6 @@ import {
   Vector2,
   WebGLRenderer,
   Color,
-  SpotLight,
-  SpotLightHelper,
-  PointLight,
-  PointLightHelper,
-  DirectionalLightHelper,
 } from 'three';
 
 import { RodinThinkerModelService } from './services/rodin-thinker';
