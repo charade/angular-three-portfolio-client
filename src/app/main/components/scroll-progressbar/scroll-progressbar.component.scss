@@ -59,12 +59,13 @@
 
     h4 {
       position: absolute;
-      font-size: 1.9rem;
-      font-family: DancingScript-Variable;
+      font-size: 1.5rem;
+      font-family: RobotoThin;
       left: 2.25rem;
-      font-weight: 200;
+      font-weight: 300;
       width: 13rem;
       color: #33333377;
+      transition: font-size 0.2s ease-in;
 
       &.entry {
         top: -0.75rem;
@@ -91,5 +92,6 @@
   }
 }
 .current {
-  color: rgb(162, 12, 12) !important;
+  color: rgb(119, 7, 7) !important;
+  font-size: 1.75rem;
 }
