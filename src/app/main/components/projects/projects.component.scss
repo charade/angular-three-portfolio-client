@@ -4,7 +4,7 @@
   .projects-container {
     position: fixed;
     left: 40%;
-    top: 16rem;
+    top: 5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,9 +18,13 @@
       padding-bottom: 0;
       margin: 1rem 0;
 
+      a {
+        text-decoration: none;
+      }
+
       h4 {
         cursor: pointer;
-        font-size: 2rem;
+        font-size: 2.5rem;
         font-family: DancingScript-Variable;
         color: rgb(113, 13, 13);
 
@@ -53,7 +57,7 @@
 
       .project {
         width: 30rem;
-        margin: 2rem 0;
+        margin: 1.75rem 0;
       }
     }
   }

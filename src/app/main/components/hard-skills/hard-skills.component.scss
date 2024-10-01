@@ -18,10 +18,11 @@
 
     h3 {
       color: rgb(134, 8, 8);
-      font-size: 2rem;
-      font-family: DancingScript-Variable;
+      font-size: 2.5rem;
+      font-family: "Khand-medium";
       transform-style: preserve-3d;
       transform-origin: top right;
+      margin: 0;
     }
 
     .separator {
@@ -38,7 +39,8 @@
 
       li {
         font-size: 1.5rem;
-        font-family: RobotoThin;
+        font-family: sans-serif;
+        font-weight: 300;
         margin: 0.5rem 0;
       }
     }

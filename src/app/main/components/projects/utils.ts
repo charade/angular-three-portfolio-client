@@ -20,11 +20,13 @@ export namespace ProjectsUtils {
     | 'Cryptrends'
     | 'Flex-date'
     | 'Memo'
-    | 'Siteflow';
+    | 'Siteflow'
+    | 'Manifest';
 
   export const list: ProjectNameType[] = [
     'Cryptrends',
     'Flex-date',
+    'Manifest',
     'Memo',
     'Siteflow',
   ];

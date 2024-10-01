@@ -4,6 +4,14 @@
   [ngClass]="{ 'large-screen': isDeviceM() && !isDeviceXL() }"
 >
   <div *ngFor="let project of ProjectUtils.list" class="project">
-    <h4 (click)="onOpenProjectDetails(project)"><span>></span>{{ project }}</h4>
+    <a
+      *ngIf="project === 'Manifest'"
+      href="https://github.com/charade/manifest-beta"
+      target="_blank"
+      ><h4><span>></span>{{ project }}</h4></a
+    >
+    <h4 *ngIf="project !== 'Manifest'" (click)="onOpenProjectDetails(project)">
+      <span>></span>{{ project }}
+    </h4>
   </div>
 </div>

@@ -4,7 +4,7 @@ import {
   ViewContainerRef,
   inject,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import gsap from 'gsap';
 import { MediaBreakPointsObserver } from 'src/app/shared-components/media-breakpoints-observer';
 import { ProjectsUtils } from './utils';
@@ -12,7 +12,7 @@ import { OverlayService } from 'src/app/services/overlay/overlay.service';
 @Component({
   selector: 'projects',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgTemplateOutlet],
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
 })
