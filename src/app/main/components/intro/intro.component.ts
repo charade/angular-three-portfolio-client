@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import gsap from 'gsap';
-import { IntroUtils } from './utils';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -19,8 +18,6 @@ export class IntroComponent implements AfterViewInit {
       this.#enteringIntroSectionSocialMediaAnimation();
     }
   }
-
-  IntroUtils = IntroUtils;
 
   ngAfterViewInit(): void {
     this.#exitingIntroCatchPhraseAnimation();
