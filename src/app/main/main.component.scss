@@ -45,7 +45,7 @@
 
   .scroll-mention-container {
     position: fixed;
-    top: 45%;
+    top: 35%;
     left: -0.5rem;
     z-index: 40;
     height: 6rem;
@@ -53,6 +53,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: all-scroll;
 
     & > * {
       color: rgb(161, 8, 8);
@@ -61,13 +62,15 @@
     }
 
     ul {
-      font-family: Italiana;
+      font-family: "Khand-medium";
       padding: 0;
       padding-left: 0.5rem;
       list-style: none;
 
       li {
+        font-size: 1.5rem;
         text-align: center;
+        line-height: 2.5rem;
       }
     }
   }
@@ -89,6 +92,18 @@
       section {
         position: relative;
         height: 100vh;
+      }
+    }
+  }
+}
+
+@media screen and (width >= 1025px) {
+  .scroll-mention-container {
+    top: 34% !important;
+
+    ul {
+      li {
+        font-size: 1.5rem !important;
       }
     }
   }

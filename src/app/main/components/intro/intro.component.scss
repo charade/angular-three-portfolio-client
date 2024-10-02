@@ -1,55 +1,59 @@
 :host {
-  & > * {
-    position: absolute;
-    left: 1.75rem;
-  }
-
-  .social-medias-container {
-    position: absolute;
-    top: 33%;
-    width: 95vw;
-    left: 95% !important;
+  .intro-container {
     display: flex;
+    left: 1.75rem;
     flex-direction: column;
-    align-items: flex-end;
-    z-index: 40;
+    position: absolute;
 
-    a {
+    .social-medias-container {
+      position: absolute;
+      top: 33%;
+      width: 95vw;
+      left: 95% !important;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 1rem 0;
-      max-width: 2rem;
-      opacity: 0.8;
+      flex-direction: column;
+      align-items: flex-end;
+      z-index: 40;
 
-      border-top: 1px solid #504f4f7c;
-      border-left: 1px solid rgb(241, 86, 86);
-      border-bottom: 1px solid rgb(249, 59, 59);
-      border-radius: 50%;
-      padding: 1rem;
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem 0;
+        max-width: 2rem;
+        opacity: 0.8;
 
-      & > * {
-        max-width: 100%;
+        border-top: 1px solid #504f4f7c;
+        border-left: 1px solid rgb(241, 86, 86);
+        border-bottom: 1px solid rgb(249, 59, 59);
+        border-radius: 50%;
+        padding: 1rem;
+
+        & > * {
+          max-width: 100%;
+        }
       }
     }
-  }
 
-  h1 {
-    top: 1rem;
-    font-size: 4rem;
-    font-family: "Khand-semi-bold";
-    line-height: 4.25rem;
-    width: 32rem;
-    text-wrap: wrap;
-    color: #b11313;
-  }
+    h1 {
+      top: 1rem;
+      font-size: 4rem;
+      font-family: "Khand-semi-bold";
+      line-height: 4.25rem;
+      width: 32rem;
+      height: 8rem;
+      text-wrap: wrap;
+      color: #b11313;
+    }
 
-  h2 {
-    top: 16rem;
-    font-size: 2rem;
-    font-family: sans-serif;
-    font-weight: 200;
-    width: 32rem;
-    text-wrap: wrap;
+    h2 {
+      top: 16rem;
+      margin-left: 4rem;
+      font-size: 2rem;
+      font-family: sans-serif;
+      font-weight: 200;
+      width: 32rem;
+      text-wrap: wrap;
+    }
   }
 }

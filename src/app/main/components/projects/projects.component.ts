@@ -31,8 +31,8 @@ export class ProjectsComponent
         immediateRender: false,
         scrollTrigger: {
           trigger: 'section.projects',
-          start: 'top 65%',
-          end: 'top 65%',
+          start: 'top 50%',
+          end: 'top 50%',
           scrub: 2,
         },
       })
